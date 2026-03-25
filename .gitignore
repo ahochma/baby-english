@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.DS_Store
+
+# Xcode derived data (auto-generated, not needed in repo)
+ios/App/App.xcodeproj/xcuserdata/
+ios/App/App.xcodeproj/project.xcworkspace/xcuserdata/
+ios/.xcode.env.local
