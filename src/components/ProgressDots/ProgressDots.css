@@ -1,0 +1,39 @@
+.progress-dots {
+  position: fixed;
+  bottom: clamp(12px, 3vmin, 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(6px, 1.5vmin, 10px);
+  z-index: 10;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  padding: clamp(6px, 1.5vmin, 10px) clamp(12px, 3vmin, 20px);
+  border-radius: 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.progress-dot {
+  width: clamp(8px, 2vmin, 14px);
+  height: clamp(8px, 2vmin, 14px);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.progress-dot--done {
+  background: rgba(0,0,0,0.3);
+}
+
+.progress-dot--active {
+  background: #333;
+  transform: scale(1.4);
+  animation: progressPop 0.3s ease forwards;
+}
+
+.progress-badge {
+  font-size: clamp(1rem, 3vmin, 1.4rem);
+  font-weight: 800;
+  color: #333;
+  letter-spacing: 0.05em;
+}

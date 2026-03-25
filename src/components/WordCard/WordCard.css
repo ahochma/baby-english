@@ -1,0 +1,55 @@
+.word-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vmin, 20px);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: bounceIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: transform 0.1s;
+}
+
+.word-card:active {
+  animation: pulseOnTap 0.2s ease forwards;
+}
+
+.word-card__emoji {
+  font-size: clamp(120px, 35vmin, 260px);
+  line-height: 1;
+  animation: emojiPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 0.05s;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+}
+
+.word-card__label {
+  font-size: clamp(2.8rem, 9vmin, 6.5rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+  animation: wordSlideUp 0.4s ease both;
+  animation-delay: 0.15s;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.word-card__tap-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  animation: wordSlideUp 0.4s ease both;
+  animation-delay: 0.25s;
+}
+
+.tap-hint__icon {
+  font-size: clamp(1.2rem, 3.5vmin, 2rem);
+}
+
+.tap-hint__text {
+  font-size: clamp(0.9rem, 2.5vmin, 1.4rem);
+  font-weight: 700;
+}

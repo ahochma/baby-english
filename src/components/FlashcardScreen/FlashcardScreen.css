@@ -1,0 +1,20 @@
+.flashcard-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.35s ease;
+  animation: screenFadeIn 0.3s ease forwards;
+}
+
+.flashcard-screen__card-wrapper {
+  width: min(90vw, 90vh);
+  height: min(90vw, 90vh);
+  max-width: 680px;
+  max-height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,24 @@
+.back-button {
+  position: fixed;
+  top: clamp(10px, 2.5vmin, 20px);
+  left: clamp(10px, 2.5vmin, 20px);
+  width: clamp(52px, 9vmin, 72px);
+  height: clamp(52px, 9vmin, 72px);
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  font-size: clamp(1.4rem, 4.5vmin, 2.4rem);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  z-index: 20;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.back-button:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
