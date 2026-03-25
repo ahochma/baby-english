@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { WordCard } from '../WordCard/WordCard';
 import { LetterCard } from '../LetterCard/LetterCard';
 import { NavButton } from '../NavButton/NavButton';
@@ -30,15 +30,6 @@ export function FlashcardScreen({ categoryId, onBack }) {
       setCurrentIndex(i => i - 1);
     }
   }, [currentIndex]);
-
-  // Auto-play audio when word changes
-  useEffect(() => {
-    // Small delay so the animation starts first
-    const timer = setTimeout(() => {
-      playAudio(currentWord, categoryId);
-    }, 200);
-    return () => clearTimeout(timer);
-  }, [currentIndex, categoryId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Swipe support
   useSwipe(screenRef, {

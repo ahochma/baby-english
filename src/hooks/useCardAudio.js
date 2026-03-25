@@ -25,6 +25,7 @@ export function useCardAudio() {
       : `/sounds/words/${word.id}.m4a`;
 
     const wordAudio = new Audio(audioFile);
+    wordAudio.preload = 'auto';
     wordAudioRef.current = wordAudio;
 
     wordAudio.play().then(() => {
