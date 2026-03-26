@@ -43,7 +43,6 @@ struct WordItem: Identifiable {
     let emoji: String
     let bg: Color
     let textColor: Color
-    var funPhrase: String? = nil
 }
 
 struct Category: Identifiable {
@@ -64,31 +63,31 @@ let ALL_CATEGORIES: [Category] = [
     Category(id: "vehicles", label: "Vehicles", emoji: "🚒",
              gradientStart: Color(hex: "#EF5350"), gradientEnd: Color(hex: "#B71C1C"),
              words: [
-                WordItem(id:"firetruck",  label:"Fire Truck",  emoji:"🚒", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C"), funPhrase:"Fire Truck! Wee-woo wee-woo!"),
-                WordItem(id:"helicopter", label:"Helicopter",  emoji:"🚁", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1"), funPhrase:"Helicopter! Chop chop chop!"),
-                WordItem(id:"truck",      label:"Truck",       emoji:"🚚", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), funPhrase:"Truck! Honk honk!"),
-                WordItem(id:"ambulance",  label:"Ambulance",   emoji:"🚑", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Ambulance! Nee-naw nee-naw!"),
-                WordItem(id:"policecar",  label:"Police Car",  emoji:"🚓", bg:Color(hex:"#E8EAF6"), textColor:Color(hex:"#1A237E"), funPhrase:"Police Car! Woo woo woo!"),
-                WordItem(id:"tractor",    label:"Tractor",     emoji:"🚜", bg:Color(hex:"#F1F8E9"), textColor:Color(hex:"#33691E"), funPhrase:"Tractor! Vroom vroom!"),
-                WordItem(id:"train",      label:"Train",       emoji:"🚂", bg:Color(hex:"#EFEBE9"), textColor:Color(hex:"#3E2723"), funPhrase:"Train! Choo choo!"),
-                WordItem(id:"rocket",     label:"Rocket",      emoji:"🚀", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92"), funPhrase:"Rocket! Three, two, one, blast off!"),
-                WordItem(id:"airplane",   label:"Airplane",    emoji:"✈️",  bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064"), funPhrase:"Airplane! Whoooosh!"),
-                WordItem(id:"bus",        label:"Bus",         emoji:"🚌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), funPhrase:"Bus! Beep beep!"),
+                WordItem(id:"firetruck",  label:"Fire Truck",  emoji:"🚒", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C")),
+                WordItem(id:"helicopter", label:"Helicopter",  emoji:"🚁", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1")),
+                WordItem(id:"truck",      label:"Truck",       emoji:"🚚", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
+                WordItem(id:"ambulance",  label:"Ambulance",   emoji:"🚑", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
+                WordItem(id:"policecar",  label:"Police Car",  emoji:"🚓", bg:Color(hex:"#E8EAF6"), textColor:Color(hex:"#1A237E")),
+                WordItem(id:"tractor",    label:"Tractor",     emoji:"🚜", bg:Color(hex:"#F1F8E9"), textColor:Color(hex:"#33691E")),
+                WordItem(id:"train",      label:"Train",       emoji:"🚂", bg:Color(hex:"#EFEBE9"), textColor:Color(hex:"#3E2723")),
+                WordItem(id:"rocket",     label:"Rocket",      emoji:"🚀", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92")),
+                WordItem(id:"airplane",   label:"Airplane",    emoji:"✈️",  bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064")),
+                WordItem(id:"bus",        label:"Bus",         emoji:"🚌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17")),
              ],
              stickerPool: ["🚒","🚁","🚚","🚑","🚓","🚜","🚂","🚀","✈️","🚌","🏎️","⛵"]),
     Category(id: "animals", label: "Animals", emoji: "🐾",
              gradientStart: Color(hex: "#66BB6A"), gradientEnd: Color(hex: "#2E7D32"),
              words: [
-                WordItem(id:"dog",   label:"Dog",      emoji:"🐶", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#5D4037"), funPhrase:"Dog! Woof woof!"),
-                WordItem(id:"cat",   label:"Cat",      emoji:"🐱", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Cat! Meow meow!"),
-                WordItem(id:"bird",  label:"Bird",     emoji:"🐦", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1"), funPhrase:"Bird! Tweet tweet!"),
-                WordItem(id:"fish",  label:"Fish",     emoji:"🐟", bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064"), funPhrase:"Fish! Splash splash!"),
-                WordItem(id:"cow",   label:"Cow",      emoji:"🐮", bg:Color(hex:"#F3E5F5"), textColor:Color(hex:"#4A148C"), funPhrase:"Cow! Moo moo!"),
-                WordItem(id:"duck",  label:"Duck",     emoji:"🦆", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), funPhrase:"Duck! Quack quack!"),
-                WordItem(id:"elephant",label:"Elephant",emoji:"🐘",bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92"), funPhrase:"Elephant! Toot toot!"),
-                WordItem(id:"lion",  label:"Lion",     emoji:"🦁", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), funPhrase:"Lion! Rawr!"),
-                WordItem(id:"frog",  label:"Frog",     emoji:"🐸", bg:Color(hex:"#E8F5E9"), textColor:Color(hex:"#1B5E20"), funPhrase:"Frog! Ribbit ribbit!"),
-                WordItem(id:"rabbit",label:"Rabbit",   emoji:"🐰", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Rabbit! Hop hop!"),
+                WordItem(id:"dog",   label:"Dog",      emoji:"🐶", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#5D4037")),
+                WordItem(id:"cat",   label:"Cat",      emoji:"🐱", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
+                WordItem(id:"bird",  label:"Bird",     emoji:"🐦", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1")),
+                WordItem(id:"fish",  label:"Fish",     emoji:"🐟", bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064")),
+                WordItem(id:"cow",   label:"Cow",      emoji:"🐮", bg:Color(hex:"#F3E5F5"), textColor:Color(hex:"#4A148C")),
+                WordItem(id:"duck",  label:"Duck",     emoji:"🦆", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17")),
+                WordItem(id:"elephant",label:"Elephant",emoji:"🐘",bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92")),
+                WordItem(id:"lion",  label:"Lion",     emoji:"🦁", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
+                WordItem(id:"frog",  label:"Frog",     emoji:"🐸", bg:Color(hex:"#E8F5E9"), textColor:Color(hex:"#1B5E20")),
+                WordItem(id:"rabbit",label:"Rabbit",   emoji:"🐰", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
              ],
              stickerPool: ["🐶","🐱","🐦","🐟","🐮","🦆","🐘","🦁","🐸","🐰","🦊","🐻"]),
     Category(id: "colors", label: "Colors", emoji: "🎨",
@@ -109,15 +108,15 @@ let ALL_CATEGORIES: [Category] = [
     Category(id: "food", label: "Food", emoji: "🍎",
              gradientStart: Color(hex: "#FF7043"), gradientEnd: Color(hex: "#BF360C"),
              words: [
-                WordItem(id:"apple",     label:"Apple",      emoji:"🍎", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C"), funPhrase:"Apple! Yum yum!"),
-                WordItem(id:"banana",    label:"Banana",     emoji:"🍌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), funPhrase:"Banana! Yummy!"),
-                WordItem(id:"milk",      label:"Milk",       emoji:"🥛", bg:Color(hex:"#F5F5F5"), textColor:Color(hex:"#333333"), funPhrase:"Milk! Glug glug!"),
+                WordItem(id:"apple",     label:"Apple",      emoji:"🍎", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C")),
+                WordItem(id:"banana",    label:"Banana",     emoji:"🍌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17")),
+                WordItem(id:"milk",      label:"Milk",       emoji:"🥛", bg:Color(hex:"#F5F5F5"), textColor:Color(hex:"#333333")),
                 WordItem(id:"bread",     label:"Bread",      emoji:"🍞", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#E65100")),
                 WordItem(id:"egg",       label:"Egg",        emoji:"🥚", bg:Color(hex:"#FFF9C4"), textColor:Color(hex:"#F57F17")),
                 WordItem(id:"orange2",   label:"Orange",     emoji:"🍊", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
-                WordItem(id:"strawberry",label:"Strawberry", emoji:"🍓", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Strawberry! So sweet!"),
-                WordItem(id:"carrot",    label:"Carrot",     emoji:"🥕", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), funPhrase:"Carrot! Crunch crunch!"),
-                WordItem(id:"cake",      label:"Cake",       emoji:"🎂", bg:Color(hex:"#F8BBD0"), textColor:Color(hex:"#880E4F"), funPhrase:"Cake! Happy birthday!"),
+                WordItem(id:"strawberry",label:"Strawberry", emoji:"🍓", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
+                WordItem(id:"carrot",    label:"Carrot",     emoji:"🥕", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
+                WordItem(id:"cake",      label:"Cake",       emoji:"🎂", bg:Color(hex:"#F8BBD0"), textColor:Color(hex:"#880E4F")),
                 WordItem(id:"grapes",    label:"Grapes",     emoji:"🍇", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#4A148C")),
              ],
              stickerPool: ["🍎","🍌","🥛","🍞","🥚","🍊","🍓","🥕","🎂","🍇","🍕","🍪"]),
@@ -129,37 +128,16 @@ let ALL_CATEGORIES: [Category] = [
 
 class AudioManager {
     static let shared = AudioManager()
-    private let synthesizer = AVSpeechSynthesizer()
-    private let voice: AVSpeechSynthesisVoice?
+    private var player: AVAudioPlayer?
 
-    private init() {
-        // Try premium voices first for natural-sounding English
-        let premiumIDs = [
-            "com.apple.voice.premium.en-US.Ava",
-            "com.apple.voice.premium.en-US.Zoe",
-            "com.apple.voice.premium.en-US.Samantha",
-            "com.apple.voice.enhanced.en-US.Ava",
-            "com.apple.voice.enhanced.en-US.Samantha",
-        ]
-        var found: AVSpeechSynthesisVoice? = nil
-        for id in premiumIDs {
-            if let v = AVSpeechSynthesisVoice(identifier: id) {
-                found = v
-                break
-            }
+    func play(_ audioId: String) {
+        guard let url = Bundle.main.url(forResource: audioId, withExtension: "mp3") else {
+            return
         }
-        self.voice = found ?? AVSpeechSynthesisVoice(language: "en-US")
-    }
-
-    func speak(_ text: String) {
-        synthesizer.stopSpeaking(at: .immediate)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = voice
-        utterance.rate = 0.35
-        utterance.pitchMultiplier = 1.2
-        utterance.volume = 1.0
-        utterance.preUtteranceDelay = 0.1
-        synthesizer.speak(utterance)
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        } catch {}
     }
 }
 
@@ -520,8 +498,7 @@ struct FlashcardView: View {
     }
 
     private func speakCurrent() {
-        let text = currentWord.funPhrase ?? currentWord.label
-        AudioManager.shared.speak(text)
+        AudioManager.shared.play(currentWord.id)
     }
 
     private func startLongPress() {
@@ -618,7 +595,7 @@ struct CelebrationView: View {
                 }
             }
             animateStars()
-            AudioManager.shared.speak("Yay! Great job! You earned a sticker!")
+            AudioManager.shared.play("celebration")
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 onDone()
             }
