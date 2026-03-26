@@ -43,8 +43,7 @@ struct WordItem: Identifiable {
     let emoji: String
     let bg: Color
     let textColor: Color
-    var letter: String? = nil
-    var word: String? = nil
+    var funPhrase: String? = nil
 }
 
 struct Category: Identifiable {
@@ -54,57 +53,44 @@ struct Category: Identifiable {
     let gradientStart: Color
     let gradientEnd: Color
     let words: [WordItem]
-    var type: String = "word"
+    let stickerPool: [String]
 }
 
-let letterColors: [(bg: Color, text: Color)] = [
-    (Color(hex: "#FF5252"), .white), (Color(hex: "#FF7043"), .white),
-    (Color(hex: "#FFA726"), .white), (Color(hex: "#FFCA28"), Color(hex: "#333333")),
-    (Color(hex: "#D4E157"), Color(hex: "#333333")), (Color(hex: "#66BB6A"), .white),
-    (Color(hex: "#26A69A"), .white), (Color(hex: "#42A5F5"), .white),
-    (Color(hex: "#5C6BC0"), .white), (Color(hex: "#AB47BC"), .white),
-    (Color(hex: "#EC407A"), .white), (Color(hex: "#EF5350"), .white),
-    (Color(hex: "#FF8A65"), .white), (Color(hex: "#FFF176"), Color(hex: "#333333")),
-    (Color(hex: "#AED581"), Color(hex: "#333333")), (Color(hex: "#4DB6AC"), .white),
-    (Color(hex: "#4FC3F7"), .white), (Color(hex: "#7986CB"), .white),
-    (Color(hex: "#CE93D8"), Color(hex: "#333333")), (Color(hex: "#F48FB1"), Color(hex: "#333333")),
-    (Color(hex: "#FFAB91"), Color(hex: "#333333")), (Color(hex: "#A5D6A7"), Color(hex: "#333333")),
-    (Color(hex: "#80DEEA"), Color(hex: "#333333")), (Color(hex: "#9FA8DA"), .white),
-    (Color(hex: "#FFF59D"), Color(hex: "#333333")), (Color(hex: "#80CBC4"), Color(hex: "#333333")),
-]
-
-let abcData: [(letter: String, word: String, emoji: String)] = [
-    ("A","Apple","🍎"),("B","Ball","🏀"),("C","Cat","🐱"),("D","Dog","🐶"),
-    ("E","Egg","🥚"),("F","Fish","🐟"),("G","Grapes","🍇"),("H","Hat","🎩"),
-    ("I","Ice Cream","🍦"),("J","Juice","🧃"),("K","Kite","🪁"),("L","Lion","🦁"),
-    ("M","Moon","🌙"),("N","Nest","🪺"),("O","Orange","🍊"),("P","Pig","🐷"),
-    ("Q","Queen","👸"),("R","Rabbit","🐰"),("S","Star","⭐"),("T","Tiger","🐯"),
-    ("U","Umbrella","☂️"),("V","Violin","🎻"),("W","Watermelon","🍉"),
-    ("X","X-ray","🩻"),("Y","Yo-yo","🪀"),("Z","Zebra","🦓"),
-]
+// ─────────────────────────────────────────────
+// MARK: - Categories Data
+// ─────────────────────────────────────────────
 
 let ALL_CATEGORIES: [Category] = [
-    Category(id: "abc", label: "ABC", emoji: "🔤",
-             gradientStart: Color(hex: "#42A5F5"), gradientEnd: Color(hex: "#0D47A1"),
-             words: abcData.enumerated().map { i, d in
-                 WordItem(id: d.letter.lowercased(), label: d.letter, emoji: d.emoji,
-                          bg: letterColors[i].bg, textColor: letterColors[i].text,
-                          letter: d.letter, word: d.word)
-             }, type: "letter"),
+    Category(id: "vehicles", label: "Vehicles", emoji: "🚒",
+             gradientStart: Color(hex: "#EF5350"), gradientEnd: Color(hex: "#B71C1C"),
+             words: [
+                WordItem(id:"firetruck",  label:"Fire Truck",  emoji:"🚒", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C"), funPhrase:"Fire Truck! Wee-woo wee-woo!"),
+                WordItem(id:"helicopter", label:"Helicopter",  emoji:"🚁", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1"), funPhrase:"Helicopter! Chop chop chop!"),
+                WordItem(id:"truck",      label:"Truck",       emoji:"🚚", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), funPhrase:"Truck! Honk honk!"),
+                WordItem(id:"ambulance",  label:"Ambulance",   emoji:"🚑", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Ambulance! Nee-naw nee-naw!"),
+                WordItem(id:"policecar",  label:"Police Car",  emoji:"🚓", bg:Color(hex:"#E8EAF6"), textColor:Color(hex:"#1A237E"), funPhrase:"Police Car! Woo woo woo!"),
+                WordItem(id:"tractor",    label:"Tractor",     emoji:"🚜", bg:Color(hex:"#F1F8E9"), textColor:Color(hex:"#33691E"), funPhrase:"Tractor! Vroom vroom!"),
+                WordItem(id:"train",      label:"Train",       emoji:"🚂", bg:Color(hex:"#EFEBE9"), textColor:Color(hex:"#3E2723"), funPhrase:"Train! Choo choo!"),
+                WordItem(id:"rocket",     label:"Rocket",      emoji:"🚀", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92"), funPhrase:"Rocket! Three, two, one, blast off!"),
+                WordItem(id:"airplane",   label:"Airplane",    emoji:"✈️",  bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064"), funPhrase:"Airplane! Whoooosh!"),
+                WordItem(id:"bus",        label:"Bus",         emoji:"🚌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), funPhrase:"Bus! Beep beep!"),
+             ],
+             stickerPool: ["🚒","🚁","🚚","🚑","🚓","🚜","🚂","🚀","✈️","🚌","🏎️","⛵"]),
     Category(id: "animals", label: "Animals", emoji: "🐾",
              gradientStart: Color(hex: "#66BB6A"), gradientEnd: Color(hex: "#2E7D32"),
              words: [
-                WordItem(id:"dog",   label:"Dog",      emoji:"🐶", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#5D4037")),
-                WordItem(id:"cat",   label:"Cat",      emoji:"🐱", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
-                WordItem(id:"bird",  label:"Bird",     emoji:"🐦", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1")),
-                WordItem(id:"fish",  label:"Fish",     emoji:"🐟", bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064")),
-                WordItem(id:"cow",   label:"Cow",      emoji:"🐮", bg:Color(hex:"#F3E5F5"), textColor:Color(hex:"#4A148C")),
-                WordItem(id:"duck",  label:"Duck",     emoji:"🦆", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17")),
-                WordItem(id:"elephant",label:"Elephant",emoji:"🐘",bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92")),
-                WordItem(id:"lion",  label:"Lion",     emoji:"🦁", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
-                WordItem(id:"frog",  label:"Frog",     emoji:"🐸", bg:Color(hex:"#E8F5E9"), textColor:Color(hex:"#1B5E20")),
-                WordItem(id:"rabbit",label:"Rabbit",   emoji:"🐰", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
-             ]),
+                WordItem(id:"dog",   label:"Dog",      emoji:"🐶", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#5D4037"), funPhrase:"Dog! Woof woof!"),
+                WordItem(id:"cat",   label:"Cat",      emoji:"🐱", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Cat! Meow meow!"),
+                WordItem(id:"bird",  label:"Bird",     emoji:"🐦", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1"), funPhrase:"Bird! Tweet tweet!"),
+                WordItem(id:"fish",  label:"Fish",     emoji:"🐟", bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064"), funPhrase:"Fish! Splash splash!"),
+                WordItem(id:"cow",   label:"Cow",      emoji:"🐮", bg:Color(hex:"#F3E5F5"), textColor:Color(hex:"#4A148C"), funPhrase:"Cow! Moo moo!"),
+                WordItem(id:"duck",  label:"Duck",     emoji:"🦆", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), funPhrase:"Duck! Quack quack!"),
+                WordItem(id:"elephant",label:"Elephant",emoji:"🐘",bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92"), funPhrase:"Elephant! Toot toot!"),
+                WordItem(id:"lion",  label:"Lion",     emoji:"🦁", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), funPhrase:"Lion! Rawr!"),
+                WordItem(id:"frog",  label:"Frog",     emoji:"🐸", bg:Color(hex:"#E8F5E9"), textColor:Color(hex:"#1B5E20"), funPhrase:"Frog! Ribbit ribbit!"),
+                WordItem(id:"rabbit",label:"Rabbit",   emoji:"🐰", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Rabbit! Hop hop!"),
+             ],
+             stickerPool: ["🐶","🐱","🐦","🐟","🐮","🦆","🐘","🦁","🐸","🐰","🦊","🐻"]),
     Category(id: "colors", label: "Colors", emoji: "🎨",
              gradientStart: Color(hex: "#BA68C8"), gradientEnd: Color(hex: "#6A1B9A"),
              words: [
@@ -118,21 +104,23 @@ let ALL_CATEGORIES: [Category] = [
                 WordItem(id:"white", label:"White",  emoji:"⬜", bg:Color(hex:"#F5F5F5"), textColor:Color(hex:"#333333")),
                 WordItem(id:"black", label:"Black",  emoji:"⬛", bg:Color(hex:"#424242"), textColor:.white),
                 WordItem(id:"brown", label:"Brown",  emoji:"🟤", bg:Color(hex:"#8D6E63"), textColor:.white),
-             ]),
+             ],
+             stickerPool: ["🔴","🔵","🟢","🟡","🟠","🟣","🩷","⬜","⬛","🟤","🌈","🎨"]),
     Category(id: "food", label: "Food", emoji: "🍎",
              gradientStart: Color(hex: "#FF7043"), gradientEnd: Color(hex: "#BF360C"),
              words: [
-                WordItem(id:"apple",     label:"Apple",      emoji:"🍎", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C")),
-                WordItem(id:"banana",    label:"Banana",     emoji:"🍌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17")),
-                WordItem(id:"milk",      label:"Milk",       emoji:"🥛", bg:Color(hex:"#F5F5F5"), textColor:Color(hex:"#333333")),
+                WordItem(id:"apple",     label:"Apple",      emoji:"🍎", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C"), funPhrase:"Apple! Yum yum!"),
+                WordItem(id:"banana",    label:"Banana",     emoji:"🍌", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), funPhrase:"Banana! Yummy!"),
+                WordItem(id:"milk",      label:"Milk",       emoji:"🥛", bg:Color(hex:"#F5F5F5"), textColor:Color(hex:"#333333"), funPhrase:"Milk! Glug glug!"),
                 WordItem(id:"bread",     label:"Bread",      emoji:"🍞", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#E65100")),
                 WordItem(id:"egg",       label:"Egg",        emoji:"🥚", bg:Color(hex:"#FFF9C4"), textColor:Color(hex:"#F57F17")),
                 WordItem(id:"orange2",   label:"Orange",     emoji:"🍊", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
-                WordItem(id:"strawberry",label:"Strawberry", emoji:"🍓", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
-                WordItem(id:"carrot",    label:"Carrot",     emoji:"🥕", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
-                WordItem(id:"cake",      label:"Cake",       emoji:"🎂", bg:Color(hex:"#F8BBD0"), textColor:Color(hex:"#880E4F")),
+                WordItem(id:"strawberry",label:"Strawberry", emoji:"🍓", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), funPhrase:"Strawberry! So sweet!"),
+                WordItem(id:"carrot",    label:"Carrot",     emoji:"🥕", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), funPhrase:"Carrot! Crunch crunch!"),
+                WordItem(id:"cake",      label:"Cake",       emoji:"🎂", bg:Color(hex:"#F8BBD0"), textColor:Color(hex:"#880E4F"), funPhrase:"Cake! Happy birthday!"),
                 WordItem(id:"grapes",    label:"Grapes",     emoji:"🍇", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#4A148C")),
-             ]),
+             ],
+             stickerPool: ["🍎","🍌","🥛","🍞","🥚","🍊","🍓","🥕","🎂","🍇","🍕","🍪"]),
 ]
 
 // ─────────────────────────────────────────────
@@ -142,15 +130,88 @@ let ALL_CATEGORIES: [Category] = [
 class AudioManager {
     static let shared = AudioManager()
     private let synthesizer = AVSpeechSynthesizer()
+    private let voice: AVSpeechSynthesisVoice?
+
+    private init() {
+        // Try premium voices first for natural-sounding English
+        let premiumIDs = [
+            "com.apple.voice.premium.en-US.Ava",
+            "com.apple.voice.premium.en-US.Zoe",
+            "com.apple.voice.premium.en-US.Samantha",
+            "com.apple.voice.enhanced.en-US.Ava",
+            "com.apple.voice.enhanced.en-US.Samantha",
+        ]
+        var found: AVSpeechSynthesisVoice? = nil
+        for id in premiumIDs {
+            if let v = AVSpeechSynthesisVoice(identifier: id) {
+                found = v
+                break
+            }
+        }
+        self.voice = found ?? AVSpeechSynthesisVoice(language: "en-US")
+    }
 
     func speak(_ text: String) {
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 0.38
-        utterance.pitchMultiplier = 1.15
+        utterance.voice = voice
+        utterance.rate = 0.35
+        utterance.pitchMultiplier = 1.2
         utterance.volume = 1.0
+        utterance.preUtteranceDelay = 0.1
         synthesizer.speak(utterance)
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Sticker Store
+// ─────────────────────────────────────────────
+
+class StickerStore: ObservableObject {
+    static let shared = StickerStore()
+
+    @Published var stickers: [String] {
+        didSet { save() }
+    }
+    @Published var streak: Int {
+        didSet { UserDefaults.standard.set(streak, forKey: "streak") }
+    }
+
+    private let lastPlayedKey = "lastPlayedDate"
+    private let stickersKey = "earnedStickers"
+    private let streakKey = "streak"
+
+    private init() {
+        self.stickers = (UserDefaults.standard.array(forKey: "earnedStickers") as? [String]) ?? []
+        self.streak = UserDefaults.standard.integer(forKey: "streak")
+        updateStreak()
+    }
+
+    private func save() {
+        UserDefaults.standard.set(stickers, forKey: stickersKey)
+    }
+
+    func addSticker(from pool: [String]) -> String {
+        let sticker = pool.randomElement() ?? "⭐"
+        stickers.append(sticker)
+        return sticker
+    }
+
+    func updateStreak() {
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: Date())
+        if let last = UserDefaults.standard.object(forKey: lastPlayedKey) as? Date {
+            let lastDay = cal.startOfDay(for: last)
+            let diff = cal.dateComponents([.day], from: lastDay, to: today).day ?? 0
+            if diff == 1 {
+                streak += 1
+            } else if diff > 1 {
+                streak = 1
+            }
+        } else {
+            streak = 1
+        }
+        UserDefaults.standard.set(today, forKey: lastPlayedKey)
     }
 }
 
@@ -174,14 +235,28 @@ extension Color {
 // MARK: - Content View
 // ─────────────────────────────────────────────
 
+enum AppScreen {
+    case home
+    case category(Category)
+    case stickerBoard
+}
+
 struct ContentView: View {
-    @State private var selectedCategory: Category? = nil
+    @StateObject private var stickerStore = StickerStore.shared
+    @State private var screen: AppScreen = .home
 
     var body: some View {
-        if let category = selectedCategory {
-            FlashcardView(category: category, onBack: { selectedCategory = nil })
-        } else {
-            HomeView(onSelectCategory: { selectedCategory = $0 })
+        switch screen {
+        case .home:
+            HomeView(
+                stickerStore: stickerStore,
+                onSelectCategory: { screen = .category($0) },
+                onShowStickers: { screen = .stickerBoard }
+            )
+        case .category(let cat):
+            FlashcardView(category: cat, stickerStore: stickerStore, onBack: { screen = .home })
+        case .stickerBoard:
+            StickerBoardView(stickerStore: stickerStore, onBack: { screen = .home })
         }
     }
 }
@@ -191,7 +266,9 @@ struct ContentView: View {
 // ─────────────────────────────────────────────
 
 struct HomeView: View {
+    @ObservedObject var stickerStore: StickerStore
     let onSelectCategory: (Category) -> Void
+    let onShowStickers: () -> Void
 
     var body: some View {
         ZStack {
@@ -200,16 +277,25 @@ struct HomeView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Title
+                // Title + streak
                 VStack(spacing: 6) {
                     Text("🌟")
                         .font(.system(size: 70))
                     Text("Baby English")
                         .font(.system(size: 46, weight: .black, design: .rounded))
                         .foregroundColor(Color(hex: "#1A237E"))
+                    if stickerStore.streak > 1 {
+                        HStack(spacing: 4) {
+                            Text("🔥")
+                                .font(.system(size: 22))
+                            Text("\(stickerStore.streak) days")
+                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                .foregroundColor(Color(hex: "#E65100"))
+                        }
+                    }
                 }
                 .padding(.top, 50)
-                .padding(.bottom, 32)
+                .padding(.bottom, 24)
 
                 // Category Grid
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
@@ -220,6 +306,36 @@ struct HomeView: View {
                 .padding(.horizontal, 20)
 
                 Spacer()
+
+                // Sticker board button
+                Button(action: onShowStickers) {
+                    HStack(spacing: 10) {
+                        Text("🏆")
+                            .font(.system(size: 32))
+                        Text("My Stickers")
+                            .font(.system(size: 24, weight: .black, design: .rounded))
+                            .foregroundColor(.white)
+                        if !stickerStore.stickers.isEmpty {
+                            Text("\(stickerStore.stickers.count)")
+                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                .foregroundColor(Color(hex: "#F57F17"))
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 4)
+                                .background(Color.white)
+                                .clipShape(Capsule())
+                        }
+                    }
+                    .padding(.horizontal, 32)
+                    .padding(.vertical, 16)
+                    .background(
+                        LinearGradient(colors: [Color(hex: "#FFB300"), Color(hex: "#FF8F00")],
+                                       startPoint: .leading, endPoint: .trailing)
+                    )
+                    .clipShape(Capsule())
+                    .shadow(color: Color(hex: "#FF8F00").opacity(0.4), radius: 10, x: 0, y: 5)
+                }
+                .buttonStyle(CategoryCardButtonStyle())
+                .padding(.bottom, 40)
             }
         }
     }
@@ -258,7 +374,6 @@ struct CategoryCard: View {
         }
         .buttonStyle(CategoryCardButtonStyle())
         .onAppear {
-            // Gentle pulse to attract attention
             withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
                 emojiScale = 1.1
             }
@@ -272,6 +387,7 @@ struct CategoryCard: View {
 
 struct FlashcardView: View {
     let category: Category
+    @ObservedObject var stickerStore: StickerStore
     let onBack: () -> Void
 
     @State private var currentIndex = 0
@@ -286,50 +402,25 @@ struct FlashcardView: View {
     var body: some View {
         ZStack {
             if showCelebration {
-                CelebrationView(onDone: onBack)
+                CelebrationView(category: category, stickerStore: stickerStore, onDone: onBack)
             } else {
-                // Full-screen background
                 currentWord.bg.ignoresSafeArea()
 
-                // Full-screen tap area
                 Color.clear
                     .contentShape(Rectangle())
                     .onTapGesture { handleTap() }
                     .ignoresSafeArea()
 
-                // Card content centered
                 VStack(spacing: 0) {
                     Spacer()
 
-                    if category.type == "letter", let letter = currentWord.letter, let word = currentWord.word {
-                        // Letter card
-                        VStack(spacing: 12) {
-                            Text(currentWord.emoji)
-                                .font(.system(size: 120))
-                                .scaleEffect(emojiScale)
-                            HStack(alignment: .bottom, spacing: 10) {
-                                Text(letter)
-                                    .font(.system(size: 160, weight: .black, design: .rounded))
-                                    .foregroundColor(currentWord.textColor)
-                                Text(letter.lowercased())
-                                    .font(.system(size: 110, weight: .bold, design: .rounded))
-                                    .foregroundColor(currentWord.textColor.opacity(0.65))
-                                    .padding(.bottom, 12)
-                            }
-                            Text(word)
-                                .font(.system(size: 48, weight: .black, design: .rounded))
-                                .foregroundColor(currentWord.textColor)
-                        }
-                    } else {
-                        // Word card
-                        VStack(spacing: 16) {
-                            Text(currentWord.emoji)
-                                .font(.system(size: 180))
-                                .scaleEffect(emojiScale)
-                            Text(currentWord.label)
-                                .font(.system(size: 68, weight: .black, design: .rounded))
-                                .foregroundColor(currentWord.textColor)
-                        }
+                    VStack(spacing: 16) {
+                        Text(currentWord.emoji)
+                            .font(.system(size: 180))
+                            .scaleEffect(emojiScale)
+                        Text(currentWord.label)
+                            .font(.system(size: 68, weight: .black, design: .rounded))
+                            .foregroundColor(currentWord.textColor)
                     }
 
                     Spacer()
@@ -356,12 +447,9 @@ struct FlashcardView: View {
                     HStack {
                         Spacer()
                         ZStack {
-                            // Background circle
                             Circle()
                                 .fill(Color.white.opacity(0.25))
                                 .frame(width: 64, height: 64)
-
-                            // Progress ring (fills as user holds)
                             Circle()
                                 .trim(from: 0, to: longPressProgress)
                                 .stroke(currentWord.textColor.opacity(0.8),
@@ -369,7 +457,6 @@ struct FlashcardView: View {
                                 .frame(width: 56, height: 56)
                                 .rotationEffect(.degrees(-90))
                                 .animation(.linear(duration: 0.05), value: longPressProgress)
-
                             Text("🏠")
                                 .font(.system(size: 30))
                         }
@@ -398,8 +485,10 @@ struct FlashcardView: View {
         }
     }
 
-    // ── Tap: advance card or celebrate ──
     private func handleTap() {
+        let impact = UIImpactFeedbackGenerator(style: .light)
+        impact.impactOccurred()
+
         if currentIndex < category.words.count - 1 {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                 currentIndex += 1
@@ -411,18 +500,15 @@ struct FlashcardView: View {
                 speakCurrent()
             }
         } else {
-            // Last card — celebrate!
             withAnimation(.spring()) { showCelebration = true }
         }
     }
 
-    // ── Animate card bouncing in ──
     private func animateCardIn() {
         cardScale = 0.4
         withAnimation(.spring(response: 0.45, dampingFraction: 0.55)) {
             cardScale = 1.0
         }
-        // Emoji secondary bounce
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.4)) {
                 emojiScale = 1.18
@@ -433,13 +519,11 @@ struct FlashcardView: View {
         }
     }
 
-    // ── Speak current word ──
     private func speakCurrent() {
-        let text = currentWord.word ?? currentWord.label
+        let text = currentWord.funPhrase ?? currentWord.label
         AudioManager.shared.speak(text)
     }
 
-    // ── Long press home logic ──
     private func startLongPress() {
         longPressProgress = 0
         animateLongPress()
@@ -453,7 +537,7 @@ struct FlashcardView: View {
             onBack()
             return
         }
-        longPressProgress += 0.033  // ~30 steps over ~1s
+        longPressProgress += 0.033
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.033) {
             animateLongPress()
         }
@@ -470,15 +554,19 @@ struct FlashcardView: View {
 // ─────────────────────────────────────────────
 
 struct CelebrationView: View {
+    let category: Category
+    @ObservedObject var stickerStore: StickerStore
     let onDone: () -> Void
+
     @State private var scale: CGFloat = 0.3
+    @State private var stickerScale: CGFloat = 0.0
+    @State private var earnedSticker: String = ""
     @State private var stars: [StarParticle] = (0..<20).map { _ in StarParticle() }
 
     var body: some View {
         ZStack {
             Color(hex: "#FFF9C4").ignoresSafeArea()
 
-            // Flying stars
             ForEach(stars) { star in
                 Text(star.emoji)
                     .font(.system(size: star.size))
@@ -489,7 +577,7 @@ struct CelebrationView: View {
 
             VStack(spacing: 24) {
                 Text("🎉")
-                    .font(.system(size: 140))
+                    .font(.system(size: 120))
                     .scaleEffect(scale)
 
                 Text("Yay!")
@@ -497,18 +585,41 @@ struct CelebrationView: View {
                     .foregroundColor(Color(hex: "#F57F17"))
                     .scaleEffect(scale)
 
+                // Earned sticker reveal
+                if !earnedSticker.isEmpty {
+                    VStack(spacing: 8) {
+                        Text("You earned a sticker!")
+                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .foregroundColor(Color(hex: "#5D4037"))
+                        Text(earnedSticker)
+                            .font(.system(size: 100))
+                            .scaleEffect(stickerScale)
+                    }
+                }
+
                 Text("🌟🌟🌟")
-                    .font(.system(size: 60))
+                    .font(.system(size: 50))
                     .scaleEffect(scale)
             }
         }
         .onAppear {
+            let impact = UINotificationFeedbackGenerator()
+            impact.notificationOccurred(.success)
+
+            earnedSticker = stickerStore.addSticker(from: category.stickerPool)
+
             withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
                 scale = 1.0
             }
+            // Sticker reveal with delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.4)) {
+                    stickerScale = 1.0
+                }
+            }
             animateStars()
-            // Auto-return after 3 seconds
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            AudioManager.shared.speak("Yay! Great job! You earned a sticker!")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 onDone()
             }
         }
@@ -536,4 +647,85 @@ struct StarParticle: Identifiable {
     var opacity: Double = 1.0
     var rotation: Double = Double.random(in: -45...45)
     let emoji: String = ["⭐", "🌟", "✨", "💫", "🎊"].randomElement()!
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Sticker Board
+// ─────────────────────────────────────────────
+
+struct StickerBoardView: View {
+    @ObservedObject var stickerStore: StickerStore
+    let onBack: () -> Void
+    @State private var appeared = false
+
+    private let totalSlots = 24
+
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [Color(hex: "#FFF8E1"), Color(hex: "#FFECB3")],
+                           startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                // Header
+                HStack {
+                    Button(action: onBack) {
+                        HStack(spacing: 6) {
+                            Text("🏠")
+                                .font(.system(size: 28))
+                            Text("Back")
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
+                                .foregroundColor(Color(hex: "#5D4037"))
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(Color.white.opacity(0.6))
+                        .clipShape(Capsule())
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 60)
+
+                Text("🏆 My Stickers")
+                    .font(.system(size: 38, weight: .black, design: .rounded))
+                    .foregroundColor(Color(hex: "#E65100"))
+
+                Text("\(stickerStore.stickers.count) collected")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundColor(Color(hex: "#8D6E63"))
+
+                // Sticker grid
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 4), spacing: 12) {
+                    ForEach(0..<totalSlots, id: \.self) { i in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color.white)
+                                .shadow(color: Color.black.opacity(0.06), radius: 4, x: 0, y: 2)
+
+                            if i < stickerStore.stickers.count {
+                                Text(stickerStore.stickers[i])
+                                    .font(.system(size: 44))
+                                    .scaleEffect(appeared ? 1.0 : 0.3)
+                                    .animation(
+                                        .spring(response: 0.4, dampingFraction: 0.5)
+                                            .delay(Double(i) * 0.05),
+                                        value: appeared
+                                    )
+                            } else {
+                                Text("?")
+                                    .font(.system(size: 36, weight: .bold, design: .rounded))
+                                    .foregroundColor(Color(hex: "#E0E0E0"))
+                            }
+                        }
+                        .frame(height: 72)
+                    }
+                }
+                .padding(.horizontal, 20)
+
+                Spacer()
+            }
+        }
+        .onAppear { appeared = true }
+    }
 }
