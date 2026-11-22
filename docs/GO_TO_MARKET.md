@@ -35,7 +35,7 @@ Israel without paid ads, because the Hebrew App Store has almost no polished
 - [ ] Instagram + TikTok Reels: 3 short videos (a kid playing Find it! with Pip cheering). Hashtags: #אנגליתלילדים #פעוטות #תינוקות #מילהראשונה.
 
 ### Week 2: credibility (target +300)
-- [ ] Reach out to 10 Israeli kids' English teachers / private tutors / speech therapists on Instagram. Offer a free promo code (App Store Connect gives you 100 per version) in return for an honest story post.
+- [ ] Reach out to 10 Israeli kids' English teachers / private tutors / speech therapists on Instagram. Offer a free unlock via an offer code (App Store Connect → your in-app purchase → Offer Codes) in return for an honest story post.
 - [ ] Reach out to 5 parenting micro-influencers (5k–50k followers) with the same offer.
 - [ ] Reply to every App Store review personally.
 

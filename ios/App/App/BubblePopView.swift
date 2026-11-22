@@ -220,9 +220,16 @@ struct BubblePopView: View {
         return word
     }
 
+    @State private var lastDemoPop = Date()
+
     private func tick() {
         guard !showCelebration else { return }
         let now = Date()
+        if DemoMode.isOn, now.timeIntervalSince(lastDemoPop) > 2.2,
+           let b = bubbles.first(where: { (area.height * 0.3...area.height * 0.7).contains(position(of: $0, at: now).y) }) {
+            lastDemoPop = now
+            handleTouch(at: position(of: b, at: now), unit: layoutUnit(area))
+        }
         bubbles.removeAll { position(of: $0, at: now).y < -$0.diameter }
         bursts.removeAll { now.timeIntervalSince($0.born) > 1.0 }
         let interval = bubbles.count < 2 ? 0.6 : 1.4

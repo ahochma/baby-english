@@ -16,6 +16,26 @@ enum L10n {
 }
 
 // ─────────────────────────────────────────────
+// MARK: - Demo mode (DEBUG only: store screenshots & preview video)
+// ─────────────────────────────────────────────
+
+/// `-startScreen bubbles|findit|stickers|cards` opens a screen directly and
+/// `-demoMode` lets the games play themselves. Compiled out of Release builds.
+enum DemoMode {
+    #if DEBUG
+    static let args = ProcessInfo.processInfo.arguments
+    static let isOn = args.contains("-demoMode")
+    static var startScreen: String? {
+        guard let i = args.firstIndex(of: "-startScreen"), i + 1 < args.count else { return nil }
+        return args[i + 1]
+    }
+    #else
+    static let isOn = false
+    static let startScreen: String? = nil
+    #endif
+}
+
+// ─────────────────────────────────────────────
 // MARK: - Colors
 // ─────────────────────────────────────────────
 

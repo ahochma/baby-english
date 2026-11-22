@@ -4,3 +4,6 @@
 ios/App/App.xcodeproj/xcuserdata/
 ios/App/App.xcodeproj/project.xcworkspace/xcuserdata/
 ios/.xcode.env.local
+
+# raw simulator captures (regenerate with demo mode)
+marketing/raw/

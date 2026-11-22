@@ -46,6 +46,8 @@ Attach the IAP to the first version submission ("In-App Purchases" section on th
 
 ## 4. Listing copy
 
+> All listing text and the captioned screenshots are ready to upload in `fastlane/` (`fastlane deliver`, or paste the text files by hand). The copy below is the same text for reference.
+
 ### English
 - **Name:** Baby English: First Words
 - **Subtitle:** English words & games, ages 3–6

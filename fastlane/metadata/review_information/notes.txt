@@ -1,0 +1,5 @@
+Baby English is a Kids Category app (ages 5 and under).
+- The parental gate is a multiplication question with a number pad. It appears before the paywall, the Parent Zone, restore purchase and the external Terms link.
+- To reach the purchase: tap any card with a lock (e.g. "Vehicles"), solve the gate, and you'll see the "Unlock Everything" non-consumable in-app purchase.
+- The app collects no data and contains no third-party SDKs, ads or analytics.
+- Audio plays in silent mode on purpose (category .playback) because parents keep phones on silent.

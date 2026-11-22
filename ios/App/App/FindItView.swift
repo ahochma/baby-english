@@ -194,6 +194,12 @@ struct FindItView: View {
 
     private func sayTarget() {
         guard let target else { return }
+        if DemoMode.isOn && !solved {
+            let round = roundID
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                if round == roundID, let t = self.target { choose(t) }
+            }
+        }
         AudioManager.shared.play(target.id)
         listening = true
         DispatchQueue.main.asyncAfter(deadline: .now() + max(0.6, AudioManager.shared.duration(of: target.id))) {

@@ -31,7 +31,15 @@ enum ParentRoute: String, Identifiable {
 struct RootView: View {
     @ObservedObject private var stickers = StickerStore.shared
     @ObservedObject private var store = PurchaseManager.shared
-    @State private var screen: Screen = .home
+    @State private var screen: Screen = {
+        switch DemoMode.startScreen {
+        case "bubbles": return .bubbles
+        case "findit": return .findIt
+        case "stickers": return .stickers
+        case "cards": return .flashcards(ALL_CATEGORIES[0])
+        default: return .home
+        }
+    }()
     @State private var parentRoute: ParentRoute?
     @State private var lastNavigation = Date.distantPast
 
