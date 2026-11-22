@@ -8,6 +8,8 @@ struct CelebrationView: View {
     let stickerPool: [String]
     @ObservedObject var stickerStore: StickerStore
     var autoDismissAfter: Double = 5.0
+    /// Opening Pip's daily gift instead of finishing a round.
+    var isDailyGift = false
     let onDone: () -> Void
 
     @State private var titleIn = false
@@ -75,7 +77,11 @@ struct CelebrationView: View {
     }
 
     private func start() {
-        sticker = stickerStore.addSticker(from: stickerPool)
+        if isDailyGift {
+            sticker = stickerStore.claimDailyGift() ?? StickerStore.giftPool[0]
+        } else {
+            sticker = stickerStore.addSticker(from: stickerPool)
+        }
         Haptics.success()
         AudioManager.shared.play("celebration")
         withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) { titleIn = true }

@@ -1,0 +1,32 @@
+name: iOS build & tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run tests
+        run: ./scripts/ci_test.sh
+      - name: Release build (demo mode must compile out)
+        run: |
+          cd ios/App
+          xcodebuild build -project App.xcodeproj -scheme App -configuration Release \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO | grep -E "error:|\*\* BUILD" || true
+          test ${PIPESTATUS[0]} -eq 0
+      - name: Upload log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: ios/App/xcodebuild.log

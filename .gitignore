@@ -9,3 +9,5 @@ ios/.xcode.env.local
 marketing/raw/
 __pycache__/
 scripts/.env
+ios/App/build/
+ios/App/xcodebuild.log

@@ -4,12 +4,18 @@ import SwiftUI
 // MARK: - Data Model
 // ─────────────────────────────────────────────
 
+/// How Find it! asks for a word: "Where is the dog?", "Where are the eyes?", "Where is number three?"
+enum PromptKind: Hashable {
+    case the, plural, number
+}
+
 struct WordItem: Identifiable, Hashable {
     let id: String
     let label: String
     let emoji: String
     let bg: Color
     let textColor: Color
+    var prompt: PromptKind = .the
 }
 
 struct Category: Identifiable, Hashable {
@@ -95,6 +101,36 @@ let ALL_CATEGORIES: [Category] = [
                 WordItem(id:"brown", label:"Brown",  emoji:"🟤", bg:Color(hex:"#8D6E63"), textColor:.white),
              ],
              stickerPool: ["🔴","🔵","🟢","🟡","🟠","🟣","🩷","⬜","⬛","🟤","🌈","🎨"]),
+    Category(id: "body", label: "My Body", emoji: "👂",
+             gradientStart: Color(hex: "#F48FB1"), gradientEnd: Color(hex: "#C2185B"),
+             words: [
+                WordItem(id:"eyes",   label:"Eyes",   emoji:"👀", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1"), prompt: .plural),
+                WordItem(id:"nose",   label:"Nose",   emoji:"👃", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
+                WordItem(id:"mouth",  label:"Mouth",  emoji:"👄", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
+                WordItem(id:"ear",    label:"Ear",    emoji:"👂", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#5D4037")),
+                WordItem(id:"hand",   label:"Hand",   emoji:"✋", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17")),
+                WordItem(id:"foot",   label:"Foot",   emoji:"🦶", bg:Color(hex:"#F3E5F5"), textColor:Color(hex:"#4A148C")),
+                WordItem(id:"tooth",  label:"Tooth",  emoji:"🦷", bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064")),
+                WordItem(id:"tongue", label:"Tongue", emoji:"👅", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C")),
+                WordItem(id:"leg",    label:"Leg",    emoji:"🦵", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92")),
+                WordItem(id:"arm",    label:"Arm",    emoji:"💪", bg:Color(hex:"#E8F5E9"), textColor:Color(hex:"#1B5E20")),
+             ],
+             stickerPool: ["👀","👃","👄","👂","✋","🦶","🦷","👅","🦵","💪","🫶","👏"]),
+    Category(id: "numbers", label: "Numbers", emoji: "🔢",
+             gradientStart: Color(hex: "#4DD0E1"), gradientEnd: Color(hex: "#00838F"),
+             words: [
+                WordItem(id:"one",   label:"One",   emoji:"1️⃣", bg:Color(hex:"#E3F2FD"), textColor:Color(hex:"#0D47A1"), prompt: .number),
+                WordItem(id:"two",   label:"Two",   emoji:"2️⃣", bg:Color(hex:"#E8F5E9"), textColor:Color(hex:"#1B5E20"), prompt: .number),
+                WordItem(id:"three", label:"Three", emoji:"3️⃣", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100"), prompt: .number),
+                WordItem(id:"four",  label:"Four",  emoji:"4️⃣", bg:Color(hex:"#F3E5F5"), textColor:Color(hex:"#4A148C"), prompt: .number),
+                WordItem(id:"five",  label:"Five",  emoji:"5️⃣", bg:Color(hex:"#FFFDE7"), textColor:Color(hex:"#F57F17"), prompt: .number),
+                WordItem(id:"six",   label:"Six",   emoji:"6️⃣", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F"), prompt: .number),
+                WordItem(id:"seven", label:"Seven", emoji:"7️⃣", bg:Color(hex:"#E0F7FA"), textColor:Color(hex:"#006064"), prompt: .number),
+                WordItem(id:"eight", label:"Eight", emoji:"8️⃣", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#311B92"), prompt: .number),
+                WordItem(id:"nine",  label:"Nine",  emoji:"9️⃣", bg:Color(hex:"#FFEBEE"), textColor:Color(hex:"#B71C1C"), prompt: .number),
+                WordItem(id:"ten",   label:"Ten",   emoji:"🔟", bg:Color(hex:"#FFF8E1"), textColor:Color(hex:"#5D4037"), prompt: .number),
+             ],
+             stickerPool: ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟","💯","🔢"]),
 ]
 
 let ALL_WORDS: [WordItem] = ALL_CATEGORIES.flatMap { $0.words }

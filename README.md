@@ -21,8 +21,9 @@
 | 🫧 | **Bubbles**: floating bubbles carry pictures; popping says the word. Any touch makes a splash, so there's no way to fail | 3+ |
 | 🔍 | **Find it!**: hear a word, find the picture. Starts with 2 choices, adapts up to 4, and guides the child after two misses | 3+ |
 | 🏆 | **Stickers & celebrations**: every finished round earns a sticker | all |
+| 🎁 | **Daily surprise**: once a day Pip leaves a gift with a special sticker | all |
 | 🔒 | **Parent Zone** (behind a parental gate): progress, settings, restore, privacy, tips | parents |
-| 💳 | **One-time unlock** (StoreKit 2): Animals and all games are free; one purchase unlocks Vehicles, Food & Colors | parents |
+| 💳 | **One-time unlock** (StoreKit 2): Animals and all games are free; one purchase unlocks Vehicles, Food, Colors, My Body & Numbers (60 words) | parents |
 
 ### Built for little kids (3–6)
 - Chunky toy-style buttons that press down like real ones, soft rounded shapes, sky-and-hills scenery

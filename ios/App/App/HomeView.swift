@@ -16,6 +16,7 @@ struct HomeView: View {
     @State private var appeared = false
     @State private var mascotMood: MascotMood = .idle
     @State private var mascotHop = false
+    @State private var showGift = false
 
     var body: some View {
         GeometryReader { geo in
@@ -28,7 +29,7 @@ struct HomeView: View {
             let stickerH = 62 * u
             let fullH = geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom
             let rest = max(200, fullH - topPad - bottomPad - headerH - stickerH - spacing * 3)
-            let gamesH = min(rest * (wide ? 0.36 : 0.27), 180 * u)
+            let gamesH = min(rest * (wide ? 0.3 : 0.22), 170 * u)
             let catsH = rest - gamesH
 
             ZStack {
@@ -40,7 +41,7 @@ struct HomeView: View {
                         .frame(height: headerH)
 
                     // Word worlds
-                    let columns = wide ? 4 : 2
+                    let columns = wide ? 3 : 2
                     let rows = ALL_CATEGORIES.chunked(columns)
                     let rowH = (catsH - spacing * CGFloat(rows.count - 1)) / CGFloat(rows.count)
                     VStack(spacing: spacing) {
@@ -81,6 +82,14 @@ struct HomeView: View {
                 .padding(.bottom, bottomPad)
                 .frame(maxWidth: wide ? 1100 : 700)
                 .frame(maxWidth: .infinity)
+
+                if showGift {
+                    CelebrationView(stickerPool: StickerStore.giftPool, stickerStore: stickers,
+                                    autoDismissAfter: 4.5, isDailyGift: true,
+                                    onDone: { withAnimation { showGift = false } })
+                        .transition(.opacity.combined(with: .scale(scale: 1.05)))
+                        .zIndex(10)
+                }
             }
             .ignoresSafeArea()
         }
@@ -89,9 +98,13 @@ struct HomeView: View {
 
     private func header(u: CGFloat) -> some View {
         HStack(alignment: .center, spacing: 0) {
-            // Streak (for parents) — fixed width so the title stays centered
+            // Daily gift for the child (or the parents' streak once it's opened)
             Group {
-                if stickers.streak > 1 {
+                if stickers.giftAvailable && !showGift {
+                    GiftButton(unit: u) {
+                        withAnimation(.spring(response: 0.45, dampingFraction: 0.7)) { showGift = true }
+                    }
+                } else if stickers.streak > 1 {
                     HStack(spacing: 3) {
                         Text("🔥").font(.system(size: 17 * u))
                         Text("\(stickers.streak)")
@@ -255,6 +268,36 @@ struct GameCard: View {
             }
         }
         .accessibilityLabel(title)
+    }
+}
+
+/// A wobbling present with sparkles. One tap opens today's surprise sticker.
+struct GiftButton: View {
+    let unit: CGFloat
+    let onOpen: () -> Void
+    @State private var wobble = false
+
+    var body: some View {
+        Text("🎁")
+            .font(.system(size: 36 * unit))
+            .rotationEffect(.degrees(wobble ? 10 : -10))
+            .scaleEffect(wobble ? 1.1 : 0.95)
+            .overlay(alignment: .topTrailing) {
+                Text("✨").font(.system(size: 16 * unit)).offset(x: 8, y: -6)
+                    .opacity(wobble ? 1 : 0.3)
+            }
+            .frame(width: 56 * unit, height: 56 * unit)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                Haptics.tap()
+                AudioManager.shared.play(.sparkle, volume: 0.6)
+                onOpen()
+            }
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) { wobble = true }
+            }
+            .accessibilityLabel(L10n.t("Surprise gift", "הפתעה"))
+            .accessibilityAddTraits(.isButton)
     }
 }
 

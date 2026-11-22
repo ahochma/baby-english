@@ -18,7 +18,7 @@ Israel without paid ads, because the Hebrew App Store has almost no polished
 
 - **Generous free tier**: Animals plus all 3 games. The child gets attached first and the parent sees value before any ask.
 - **Natural upsell moment**: the locked cards are visible and colorful. When the child taps one, the parent hands over the phone, and the gate leads straight to the paywall.
-- **Parent Zone progress** ("10 / 40 words heard") makes the remaining 30 words feel like the obvious next step.
+- **Parent Zone progress** ("10 / 60 words heard") makes the remaining 50 words feel like the obvious next step.
 - **Review prompt** only fires for engaged parents (10+ words, 2+ stickers), behind the gate.
 - **Honest paywall**: one-time, no subscription, Family Sharing. These are the top objections Israeli parents raise about kids' apps.
 

@@ -170,7 +170,13 @@ enum Voice {
     }
 
     static func whereIs(_ w: WordItem) -> [String] {
-        bilingual ? ["he_where_is", w.id] : ["where_is", w.id]
+        switch (w.prompt, bilingual) {
+        case (.number, false): return ["where_is_number", w.id]
+        case (.number, true):  return ["he_where_is_number", w.id]
+        case (.plural, false): return ["where_are", w.id]
+        case (_, true):        return ["he_where_is", w.id]   // "איפה ה…" works for both
+        case (.the, false):    return ["where_is", w.id]
+        }
     }
 
     static func praise() -> String {
@@ -241,12 +247,25 @@ final class StickerStore: ObservableObject {
     @Published private(set) var gamesFinished: Int {
         didSet { UserDefaults.standard.set(gamesFinished, forKey: gamesKey) }
     }
+    /// The day Pip's daily surprise was last opened.
+    @Published private(set) var lastGiftDay: Date? {
+        didSet { UserDefaults.standard.set(lastGiftDay, forKey: giftKey) }
+    }
+
+    /// Special stickers that only come from the daily gift, so it feels like a treat.
+    static let giftPool = ["🦄", "🌈", "🐉", "🦋", "🍦", "🎈", "🪁", "🧸", "🎠", "🐳", "🦖", "🌻", "🍭", "🚂"]
+
+    var giftAvailable: Bool {
+        guard let last = lastGiftDay else { return true }
+        return !Calendar.current.isDateInToday(last)
+    }
 
     private let lastPlayedKey = "lastPlayedDate"
     private let stickersKey = "earnedStickers"
     private let streakKey = "streak"
     private let heardKey = "heardWords"
     private let gamesKey = "gamesFinished"
+    private let giftKey = "lastGiftDay"
 
     private init() {
         let d = UserDefaults.standard
@@ -254,6 +273,7 @@ final class StickerStore: ObservableObject {
         streak = d.integer(forKey: streakKey)
         heardWords = Set((d.array(forKey: heardKey) as? [String]) ?? [])
         gamesFinished = d.integer(forKey: gamesKey)
+        lastGiftDay = d.object(forKey: giftKey) as? Date
         updateStreak()
     }
 
@@ -265,6 +285,18 @@ final class StickerStore: ObservableObject {
         let sticker = (fresh.isEmpty ? pool : fresh).randomElement() ?? "⭐"
         stickers.append(sticker)
         gamesFinished += 1
+        return sticker
+    }
+
+    /// Opens today's gift. Returns the sticker, or nil if it was already opened today.
+    @discardableResult
+    func claimDailyGift() -> String? {
+        guard giftAvailable else { return nil }
+        let owned = Set(stickers)
+        let fresh = Self.giftPool.filter { !owned.contains($0) }
+        let sticker = (fresh.isEmpty ? Self.giftPool : fresh).randomElement() ?? "🦄"
+        stickers.append(sticker)
+        lastGiftDay = Date()
         return sticker
     }
 

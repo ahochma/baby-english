@@ -124,6 +124,49 @@
 		755E6AF619F15229AD3DCA73 /* yay_pip.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0E59BB893EFC216863606A02 /* yay_pip.m4a */; };
 		04E42ECBFA237A0172FA0F7D /* you_did_it.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B6E6E97004A1235D60620970 /* you_did_it.m4a */; };
 		D40CCA85F0F54F30445A3577 /* VoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18A0A5ABCCA95BF8E2F8559 /* VoiceTests.swift */; };
+		A39B55DDC263FF52EEED0A8F /* arm.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4C7E1E89733C37A390538536 /* arm.m4a */; };
+		6C0E44F863C7CC6705EB0337 /* ear.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 23F209DA36F7CC87A6E1722E /* ear.m4a */; };
+		C04D72539A28CC209F85864F /* eight.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 167BD00AC6A0F230E7349DC3 /* eight.m4a */; };
+		05F4D3989BD20DF6912929F9 /* eyes.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4A97D5AD29CCFC0FEFF05B1A /* eyes.m4a */; };
+		3827917CA40105270945A47D /* five.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EBB9E4C0C5436EED657D6D71 /* five.m4a */; };
+		1B522DA8FC92FA3C5A91E5F6 /* foot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 33FD542A3E4878E5DE37CAD2 /* foot.m4a */; };
+		F2916ADB937761CF7D7AF268 /* four.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8EE0C3518151FE6E62B3A988 /* four.m4a */; };
+		B3D1EB1E21A1EB61E67E7C8B /* hand.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 450DBF22BD3C45BA34A0B108 /* hand.m4a */; };
+		F7ACF4FC693193FF465FB221 /* he_arm.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CB6F6B3EE5B04C9C8F044 /* he_arm.m4a */; };
+		9E458D17BAE496798E99A8C7 /* he_ear.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2764991EE421AB03F787E071 /* he_ear.m4a */; };
+		D2CD97CE7C4C916D4847D53F /* he_eight.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EEA18292BE26FE589E0539C5 /* he_eight.m4a */; };
+		4165B9E58DC7BC288A4475AA /* he_eyes.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22CCE89CF2AC1B1CF6ADDDE6 /* he_eyes.m4a */; };
+		A66E60B37DA450BE26EF93C6 /* he_five.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 712FFB938AE6DAE88C3FD2E8 /* he_five.m4a */; };
+		DBA57D03FE78155DCC50FBB4 /* he_foot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FC1468C96500D2995BE9DF74 /* he_foot.m4a */; };
+		4B8624A0D88FA13E36D04833 /* he_four.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3E54BBAFA191B63B40F07DAF /* he_four.m4a */; };
+		86048F3146C1CB39374DB4FF /* he_hand.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CE547819B3A5EC8841103BD /* he_hand.m4a */; };
+		FFEE50CB100B83637EF235A6 /* he_leg.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 758F71B9FD10BB4E146CE428 /* he_leg.m4a */; };
+		FF1893B82642D06CF9A530EA /* he_mouth.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 822B5AD8066B450A75273E0E /* he_mouth.m4a */; };
+		3921280D8DB06F6E3167DEC8 /* he_nine.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E6D3B6D8E8EAEB2FC3728520 /* he_nine.m4a */; };
+		57C433940B88A6B7496357D8 /* he_nose.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 83EF05069E433B556B60724C /* he_nose.m4a */; };
+		95F4295504DF317EC77ABF55 /* he_one.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3DB092589B797C3C91E13F9B /* he_one.m4a */; };
+		EA41DC17F5D3748FB5CDE807 /* he_seven.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0C6F5911EE59D946AB55F7D6 /* he_seven.m4a */; };
+		B3C6413D8C84D9909049DBA9 /* he_six.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 20314CFCA5ED077438CB3552 /* he_six.m4a */; };
+		2D37ABAB520CA01D6F467481 /* he_ten.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E996885B3EE3FEC106C6B1FD /* he_ten.m4a */; };
+		7B311AD2520D68F4DAD32143 /* he_three.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DDD09B86BC33B34CE6CC203E /* he_three.m4a */; };
+		8EC8757CC7C8EA4DB6E599D4 /* he_tongue.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3D78F43F93FCEF73CDD20D26 /* he_tongue.m4a */; };
+		56481A2C32C34EE52E4D9203 /* he_tooth.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 094418A6FBD0E9C0AEB0C2C9 /* he_tooth.m4a */; };
+		0CF6896C5C132AFB58B8D2D1 /* he_two.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D159E0EFB46A5351CBD3B7D3 /* he_two.m4a */; };
+		C2BA355E3194DF906695677F /* he_where_is_number.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D56097CE2A6C12594F82B0D8 /* he_where_is_number.m4a */; };
+		62148FD7A84E398B56EB749C /* leg.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E6ADB90A32D9040718AE5E8B /* leg.m4a */; };
+		7EA6FCB8543E8317D96DCADE /* mouth.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 984BD4B4E7F2A64B92A7D4A0 /* mouth.m4a */; };
+		E3580D63CBECBE3C9EB0D159 /* nine.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 60373124B063C9416E715FDF /* nine.m4a */; };
+		DD802FE43FC41E6B6751829E /* nose.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 82DDFAF59F38EDFEA67B0F93 /* nose.m4a */; };
+		27AD4C3FDC80C44314F24CD3 /* one.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E6E6AFE02CBB4C63756A4593 /* one.m4a */; };
+		7D9719677A53D11B23710C6E /* seven.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63BB620962857E11C235F371 /* seven.m4a */; };
+		867431D744C3D820EA3B9A39 /* six.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B94F99E256524F475829761B /* six.m4a */; };
+		91E80C65F13A36ECBD502DCC /* ten.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 06AAEA4265AF0FA79EF01899 /* ten.m4a */; };
+		9DD7F0B1BABAB9A5A7AB4972 /* three.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6269FBD164D4AF48B5AA56DF /* three.m4a */; };
+		1992FAC7D41B6CB407786439 /* tongue.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5D4EEF4FD7E99918DEACAC5E /* tongue.m4a */; };
+		2324E0703A0AF7EF223424BB /* tooth.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2F1B9012B419368F17385341 /* tooth.m4a */; };
+		629514086BAD556FFB8D4BB4 /* two.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8E28049E04158934491B2877 /* two.m4a */; };
+		A3AD2643A7C7D36D0998F8A1 /* where_are.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E6B7E30D5BE21E9ED3C0442C /* where_are.m4a */; };
+		D01097A01E950AEBB8BEE185 /* where_is_number.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 252036B1F23EDF4756ECC049 /* where_is_number.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +300,49 @@
 		0E59BB893EFC216863606A02 /* yay_pip.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "yay_pip.m4a"; sourceTree = "<group>"; };
 		B6E6E97004A1235D60620970 /* you_did_it.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "you_did_it.m4a"; sourceTree = "<group>"; };
 		E18A0A5ABCCA95BF8E2F8559 /* VoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTests.swift; sourceTree = "<group>"; };
+		4C7E1E89733C37A390538536 /* arm.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm.m4a"; sourceTree = "<group>"; };
+		23F209DA36F7CC87A6E1722E /* ear.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ear.m4a"; sourceTree = "<group>"; };
+		167BD00AC6A0F230E7349DC3 /* eight.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "eight.m4a"; sourceTree = "<group>"; };
+		4A97D5AD29CCFC0FEFF05B1A /* eyes.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "eyes.m4a"; sourceTree = "<group>"; };
+		EBB9E4C0C5436EED657D6D71 /* five.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "five.m4a"; sourceTree = "<group>"; };
+		33FD542A3E4878E5DE37CAD2 /* foot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "foot.m4a"; sourceTree = "<group>"; };
+		8EE0C3518151FE6E62B3A988 /* four.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "four.m4a"; sourceTree = "<group>"; };
+		450DBF22BD3C45BA34A0B108 /* hand.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "hand.m4a"; sourceTree = "<group>"; };
+		0A9CB6F6B3EE5B04C9C8F044 /* he_arm.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_arm.m4a"; sourceTree = "<group>"; };
+		2764991EE421AB03F787E071 /* he_ear.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_ear.m4a"; sourceTree = "<group>"; };
+		EEA18292BE26FE589E0539C5 /* he_eight.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_eight.m4a"; sourceTree = "<group>"; };
+		22CCE89CF2AC1B1CF6ADDDE6 /* he_eyes.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_eyes.m4a"; sourceTree = "<group>"; };
+		712FFB938AE6DAE88C3FD2E8 /* he_five.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_five.m4a"; sourceTree = "<group>"; };
+		FC1468C96500D2995BE9DF74 /* he_foot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_foot.m4a"; sourceTree = "<group>"; };
+		3E54BBAFA191B63B40F07DAF /* he_four.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_four.m4a"; sourceTree = "<group>"; };
+		4CE547819B3A5EC8841103BD /* he_hand.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_hand.m4a"; sourceTree = "<group>"; };
+		758F71B9FD10BB4E146CE428 /* he_leg.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_leg.m4a"; sourceTree = "<group>"; };
+		822B5AD8066B450A75273E0E /* he_mouth.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_mouth.m4a"; sourceTree = "<group>"; };
+		E6D3B6D8E8EAEB2FC3728520 /* he_nine.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_nine.m4a"; sourceTree = "<group>"; };
+		83EF05069E433B556B60724C /* he_nose.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_nose.m4a"; sourceTree = "<group>"; };
+		3DB092589B797C3C91E13F9B /* he_one.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_one.m4a"; sourceTree = "<group>"; };
+		0C6F5911EE59D946AB55F7D6 /* he_seven.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_seven.m4a"; sourceTree = "<group>"; };
+		20314CFCA5ED077438CB3552 /* he_six.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_six.m4a"; sourceTree = "<group>"; };
+		E996885B3EE3FEC106C6B1FD /* he_ten.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_ten.m4a"; sourceTree = "<group>"; };
+		DDD09B86BC33B34CE6CC203E /* he_three.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_three.m4a"; sourceTree = "<group>"; };
+		3D78F43F93FCEF73CDD20D26 /* he_tongue.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_tongue.m4a"; sourceTree = "<group>"; };
+		094418A6FBD0E9C0AEB0C2C9 /* he_tooth.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_tooth.m4a"; sourceTree = "<group>"; };
+		D159E0EFB46A5351CBD3B7D3 /* he_two.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_two.m4a"; sourceTree = "<group>"; };
+		D56097CE2A6C12594F82B0D8 /* he_where_is_number.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_where_is_number.m4a"; sourceTree = "<group>"; };
+		E6ADB90A32D9040718AE5E8B /* leg.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "leg.m4a"; sourceTree = "<group>"; };
+		984BD4B4E7F2A64B92A7D4A0 /* mouth.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mouth.m4a"; sourceTree = "<group>"; };
+		60373124B063C9416E715FDF /* nine.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nine.m4a"; sourceTree = "<group>"; };
+		82DDFAF59F38EDFEA67B0F93 /* nose.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nose.m4a"; sourceTree = "<group>"; };
+		E6E6AFE02CBB4C63756A4593 /* one.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "one.m4a"; sourceTree = "<group>"; };
+		63BB620962857E11C235F371 /* seven.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "seven.m4a"; sourceTree = "<group>"; };
+		B94F99E256524F475829761B /* six.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "six.m4a"; sourceTree = "<group>"; };
+		06AAEA4265AF0FA79EF01899 /* ten.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ten.m4a"; sourceTree = "<group>"; };
+		6269FBD164D4AF48B5AA56DF /* three.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "three.m4a"; sourceTree = "<group>"; };
+		5D4EEF4FD7E99918DEACAC5E /* tongue.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tongue.m4a"; sourceTree = "<group>"; };
+		2F1B9012B419368F17385341 /* tooth.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tooth.m4a"; sourceTree = "<group>"; };
+		8E28049E04158934491B2877 /* two.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "two.m4a"; sourceTree = "<group>"; };
+		E6B7E30D5BE21E9ED3C0442C /* where_are.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "where_are.m4a"; sourceTree = "<group>"; };
+		252036B1F23EDF4756ECC049 /* where_is_number.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "where_is_number.m4a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +454,49 @@
 				0F8B21F776A82CA20BBA96FE /* truck.mp3 */,
 				ED3F9BF2C2923F7B4E5CF781 /* white.mp3 */,
 				B0106FD3A87AB6F5669255C3 /* yellow.mp3 */,
+				4C7E1E89733C37A390538536 /* arm.m4a */,
+				23F209DA36F7CC87A6E1722E /* ear.m4a */,
+				167BD00AC6A0F230E7349DC3 /* eight.m4a */,
+				4A97D5AD29CCFC0FEFF05B1A /* eyes.m4a */,
+				EBB9E4C0C5436EED657D6D71 /* five.m4a */,
+				33FD542A3E4878E5DE37CAD2 /* foot.m4a */,
+				8EE0C3518151FE6E62B3A988 /* four.m4a */,
+				450DBF22BD3C45BA34A0B108 /* hand.m4a */,
+				0A9CB6F6B3EE5B04C9C8F044 /* he_arm.m4a */,
+				2764991EE421AB03F787E071 /* he_ear.m4a */,
+				EEA18292BE26FE589E0539C5 /* he_eight.m4a */,
+				22CCE89CF2AC1B1CF6ADDDE6 /* he_eyes.m4a */,
+				712FFB938AE6DAE88C3FD2E8 /* he_five.m4a */,
+				FC1468C96500D2995BE9DF74 /* he_foot.m4a */,
+				3E54BBAFA191B63B40F07DAF /* he_four.m4a */,
+				4CE547819B3A5EC8841103BD /* he_hand.m4a */,
+				758F71B9FD10BB4E146CE428 /* he_leg.m4a */,
+				822B5AD8066B450A75273E0E /* he_mouth.m4a */,
+				E6D3B6D8E8EAEB2FC3728520 /* he_nine.m4a */,
+				83EF05069E433B556B60724C /* he_nose.m4a */,
+				3DB092589B797C3C91E13F9B /* he_one.m4a */,
+				0C6F5911EE59D946AB55F7D6 /* he_seven.m4a */,
+				20314CFCA5ED077438CB3552 /* he_six.m4a */,
+				E996885B3EE3FEC106C6B1FD /* he_ten.m4a */,
+				DDD09B86BC33B34CE6CC203E /* he_three.m4a */,
+				3D78F43F93FCEF73CDD20D26 /* he_tongue.m4a */,
+				094418A6FBD0E9C0AEB0C2C9 /* he_tooth.m4a */,
+				D159E0EFB46A5351CBD3B7D3 /* he_two.m4a */,
+				D56097CE2A6C12594F82B0D8 /* he_where_is_number.m4a */,
+				E6ADB90A32D9040718AE5E8B /* leg.m4a */,
+				984BD4B4E7F2A64B92A7D4A0 /* mouth.m4a */,
+				60373124B063C9416E715FDF /* nine.m4a */,
+				82DDFAF59F38EDFEA67B0F93 /* nose.m4a */,
+				E6E6AFE02CBB4C63756A4593 /* one.m4a */,
+				63BB620962857E11C235F371 /* seven.m4a */,
+				B94F99E256524F475829761B /* six.m4a */,
+				06AAEA4265AF0FA79EF01899 /* ten.m4a */,
+				6269FBD164D4AF48B5AA56DF /* three.m4a */,
+				5D4EEF4FD7E99918DEACAC5E /* tongue.m4a */,
+				2F1B9012B419368F17385341 /* tooth.m4a */,
+				8E28049E04158934491B2877 /* two.m4a */,
+				E6B7E30D5BE21E9ED3C0442C /* where_are.m4a */,
+				252036B1F23EDF4756ECC049 /* where_is_number.m4a */,
 				1B428F3E50E86C2C5F2CA963 /* great_job.m4a */,
 				D49FC08FBF54A2989D5E52E2 /* he_airplane.m4a */,
 				2A1804225F969F1A6E7C618C /* he_ambulance.m4a */,
@@ -561,6 +690,49 @@
 				528AC60128121F0B6E54AE4D /* truck.mp3 in Resources */,
 				F18278E5474BBFE7927406D8 /* white.mp3 in Resources */,
 				45B4F3C6A309215FFF3E4E9C /* yellow.mp3 in Resources */,
+				A39B55DDC263FF52EEED0A8F /* arm.m4a in Resources */,
+				6C0E44F863C7CC6705EB0337 /* ear.m4a in Resources */,
+				C04D72539A28CC209F85864F /* eight.m4a in Resources */,
+				05F4D3989BD20DF6912929F9 /* eyes.m4a in Resources */,
+				3827917CA40105270945A47D /* five.m4a in Resources */,
+				1B522DA8FC92FA3C5A91E5F6 /* foot.m4a in Resources */,
+				F2916ADB937761CF7D7AF268 /* four.m4a in Resources */,
+				B3D1EB1E21A1EB61E67E7C8B /* hand.m4a in Resources */,
+				F7ACF4FC693193FF465FB221 /* he_arm.m4a in Resources */,
+				9E458D17BAE496798E99A8C7 /* he_ear.m4a in Resources */,
+				D2CD97CE7C4C916D4847D53F /* he_eight.m4a in Resources */,
+				4165B9E58DC7BC288A4475AA /* he_eyes.m4a in Resources */,
+				A66E60B37DA450BE26EF93C6 /* he_five.m4a in Resources */,
+				DBA57D03FE78155DCC50FBB4 /* he_foot.m4a in Resources */,
+				4B8624A0D88FA13E36D04833 /* he_four.m4a in Resources */,
+				86048F3146C1CB39374DB4FF /* he_hand.m4a in Resources */,
+				FFEE50CB100B83637EF235A6 /* he_leg.m4a in Resources */,
+				FF1893B82642D06CF9A530EA /* he_mouth.m4a in Resources */,
+				3921280D8DB06F6E3167DEC8 /* he_nine.m4a in Resources */,
+				57C433940B88A6B7496357D8 /* he_nose.m4a in Resources */,
+				95F4295504DF317EC77ABF55 /* he_one.m4a in Resources */,
+				EA41DC17F5D3748FB5CDE807 /* he_seven.m4a in Resources */,
+				B3C6413D8C84D9909049DBA9 /* he_six.m4a in Resources */,
+				2D37ABAB520CA01D6F467481 /* he_ten.m4a in Resources */,
+				7B311AD2520D68F4DAD32143 /* he_three.m4a in Resources */,
+				8EC8757CC7C8EA4DB6E599D4 /* he_tongue.m4a in Resources */,
+				56481A2C32C34EE52E4D9203 /* he_tooth.m4a in Resources */,
+				0CF6896C5C132AFB58B8D2D1 /* he_two.m4a in Resources */,
+				C2BA355E3194DF906695677F /* he_where_is_number.m4a in Resources */,
+				62148FD7A84E398B56EB749C /* leg.m4a in Resources */,
+				7EA6FCB8543E8317D96DCADE /* mouth.m4a in Resources */,
+				E3580D63CBECBE3C9EB0D159 /* nine.m4a in Resources */,
+				DD802FE43FC41E6B6751829E /* nose.m4a in Resources */,
+				27AD4C3FDC80C44314F24CD3 /* one.m4a in Resources */,
+				7D9719677A53D11B23710C6E /* seven.m4a in Resources */,
+				867431D744C3D820EA3B9A39 /* six.m4a in Resources */,
+				91E80C65F13A36ECBD502DCC /* ten.m4a in Resources */,
+				9DD7F0B1BABAB9A5A7AB4972 /* three.m4a in Resources */,
+				1992FAC7D41B6CB407786439 /* tongue.m4a in Resources */,
+				2324E0703A0AF7EF223424BB /* tooth.m4a in Resources */,
+				629514086BAD556FFB8D4BB4 /* two.m4a in Resources */,
+				A3AD2643A7C7D36D0998F8A1 /* where_are.m4a in Resources */,
+				D01097A01E950AEBB8BEE185 /* where_is_number.m4a in Resources */,
 				7EEB8A1EC9332A30A983694D /* great_job.m4a in Resources */,
 				5310F88053FC3FCDCEAB11B9 /* he_airplane.m4a in Resources */,
 				A3C6439EDC106B45DFB81DF8 /* he_ambulance.m4a in Resources */,

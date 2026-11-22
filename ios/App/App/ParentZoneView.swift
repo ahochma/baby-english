@@ -94,7 +94,7 @@ struct ParentZoneView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(L10n.t("Unlock all \(ALL_WORDS.count) words", "פתחו את כל \(ALL_WORDS.count) המילים"))
                         .font(.system(size: 17, weight: .heavy, design: .rounded))
-                    Text(L10n.t("Vehicles, Food & Colors · one-time purchase", "כלי תחבורה, אוכל וצבעים · רכישה חד-פעמית"))
+                    Text(L10n.t("\(ALL_CATEGORIES.count - 1) more worlds · one-time purchase", "עוד \(ALL_CATEGORIES.count - 1) עולמות · רכישה חד-פעמית"))
                         .font(.system(size: 13, weight: .medium, design: .rounded))
                         .opacity(0.85)
                 }

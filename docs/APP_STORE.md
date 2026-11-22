@@ -76,7 +76,7 @@ Attach the IAP to the first version submission ("In-App Purchases" section on th
 > • Everything grown-up sits behind a parental gate
 >
 > FREE TO TRY
-> The Animals world and every game are free forever. One small, one-time purchase unlocks Vehicles, Food and Colors. No subscription. Family Sharing included.
+> The Animals world and every game are free forever. One small, one-time purchase unlocks five more worlds: Vehicles, Food, Colors, My Body and Numbers (60 words in all). No subscription. Family Sharing included.
 
 ### עברית (Hebrew localization; add "Hebrew" in App Store Connect)
 - **שם:** Baby English: מילים ראשונות
@@ -105,7 +105,7 @@ Attach the IAP to the first version submission ("In-App Purchases" section on th
 > • כל מה שמיועד למבוגרים נמצא מאחורי שער הורים
 >
 > אפשר לנסות בחינם
-> עולם החיות וכל המשחקים חינמיים לתמיד. רכישה קטנה וחד-פעמית פותחת את כלי התחבורה, האוכל והצבעים. בלי מנוי. כולל שיתוף משפחתי.
+> עולם החיות וכל המשחקים חינמיים לתמיד. רכישה קטנה וחד-פעמית פותחת עוד חמישה עולמות: כלי תחבורה, אוכל, צבעים, הגוף שלי ומספרים (60 מילים בסך הכול). בלי מנוי. כולל שיתוף משפחתי.
 
 ## 5. Pricing
 
