@@ -11,3 +11,4 @@ __pycache__/
 scripts/.env
 ios/App/build/
 ios/App/xcodebuild.log
+scripts/brand/out/
