@@ -7,3 +7,4 @@ ios/.xcode.env.local
 
 # raw simulator captures (regenerate with demo mode)
 marketing/raw/
+__pycache__/
