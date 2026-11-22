@@ -414,6 +414,8 @@ struct ChunkyButton<Label: View>: View {
 struct CharacterBadge: View {
     let emoji: String
     var ring: Color = .white
+    /// When this word has a drawn character, show it instead of the emoji.
+    var word: WordItem? = nil
     @State private var bob = false
 
     var body: some View {
@@ -425,8 +427,13 @@ struct CharacterBadge: View {
                                          startRadius: 0, endRadius: d))
                     .shadow(color: .black.opacity(0.12), radius: d * 0.05, y: d * 0.04)
                 Circle().strokeBorder(ring.opacity(0.9), lineWidth: max(3, d * 0.045))
-                Text(emoji)
-                    .font(.system(size: d * 0.56))
+                Group {
+                    if let word, CharacterLibrary.has(word.id) {
+                        WordArt(word: word).frame(width: d * 0.78, height: d * 0.78)
+                    } else {
+                        Text(emoji).font(.system(size: d * 0.56))
+                    }
+                }
                     .scaleEffect(x: bob ? 1.04 : 0.97, y: bob ? 0.97 : 1.04, anchor: .bottom)
                     .offset(y: bob ? 0 : -d * 0.02)
             }

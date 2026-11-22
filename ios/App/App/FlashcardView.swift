@@ -97,12 +97,14 @@ struct FlashcardView: View {
                     .strokeBorder(word.textColor.opacity(0.12), lineWidth: 10 * u)
                     .frame(width: stage, height: stage)
                 // little ground shadow under the character
-                Ellipse()
-                    .fill(word.textColor.opacity(0.12))
-                    .frame(width: stage * (emojiBounce ? 0.38 : 0.46), height: stage * 0.06)
-                    .offset(y: stage * 0.33)
-                Text(word.emoji)
-                    .font(.system(size: stage * 0.56))
+                if !CharacterLibrary.has(word.id) {   // drawn characters bring their own shadow
+                    Ellipse()
+                        .fill(word.textColor.opacity(0.12))
+                        .frame(width: stage * (emojiBounce ? 0.38 : 0.46), height: stage * 0.06)
+                        .offset(y: stage * 0.33)
+                }
+                WordArt(word: word, mood: emojiBounce ? .happy : .idle)
+                    .frame(width: stage * 0.68, height: stage * 0.68)
                     .scaleEffect(x: emojiBounce ? 0.92 : 1, y: emojiBounce ? 1.14 : 1, anchor: .bottom)
                     .offset(y: emojiBounce ? -stage * 0.06 : 0)
                     .rotationEffect(.degrees(emojiBounce ? -4 : 0))

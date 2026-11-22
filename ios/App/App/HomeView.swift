@@ -207,7 +207,8 @@ struct CategoryCard: View {
                      action: onTap) {
             GeometryReader { g in
                 VStack(spacing: 6 * unit) {
-                    CharacterBadge(emoji: category.emoji, ring: .white)
+                    CharacterBadge(emoji: category.emoji, ring: .white,
+                                   word: category.words.first { $0.emoji == category.emoji })
                         .frame(height: g.size.height * 0.6)
                     Text(category.label)
                         .font(.system(size: min(25 * unit, g.size.height * 0.15), weight: .black, design: .rounded))

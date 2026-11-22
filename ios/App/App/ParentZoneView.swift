@@ -106,7 +106,7 @@ struct ParentZoneView: View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 92), spacing: 8)], alignment: .leading, spacing: 8) {
             ForEach(words) { w in
                 HStack(spacing: 4) {
-                    Text(w.emoji).font(.system(size: 16))
+                    WordArt(word: w).frame(width: 24, height: 24)
                     Text(w.label).font(.parent(13, .semibold)).lineLimit(1).minimumScaleFactor(0.7)
                 }
                 .foregroundColor(Palette.parentInk)

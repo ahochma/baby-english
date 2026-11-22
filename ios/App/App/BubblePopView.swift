@@ -27,7 +27,7 @@ private struct Burst: Identifiable {
     let id = UUID()
     let at: CGPoint
     let born: Date
-    let emoji: String?
+    let word: WordItem?
     let tint: Color
     let big: Bool
 }
@@ -70,8 +70,8 @@ struct BubblePopView: View {
                         ForEach(bubbles) { b in
                             ZStack {
                                 SoapBubble(tint: b.tint)
-                                Text(b.word.emoji)
-                                    .font(.system(size: b.diameter * 0.5))
+                                WordArt(word: b.word)
+                                    .frame(width: b.diameter * 0.64, height: b.diameter * 0.64)
                                     .rotationEffect(.degrees(sin(now.timeIntervalSince(b.born) * 1.3 + b.phase) * 8))
                             }
                             .frame(width: b.diameter, height: b.diameter)
@@ -95,7 +95,7 @@ struct BubblePopView: View {
                     Spacer()
                     if let banner {
                         HStack(spacing: 14 * u) {
-                            Text(banner.word.emoji).font(.system(size: 54 * u))
+                            WordArt(word: banner.word, mood: .happy).frame(width: 62 * u, height: 62 * u)
                             Text(banner.word.label)
                                 .font(.system(size: 46 * u, weight: .black, design: .rounded))
                                 .foregroundColor(Palette.ink)
@@ -254,7 +254,7 @@ struct BubblePopView: View {
         if let hit {
             let bubble = hit.0, pos = hit.1
             bubbles.removeAll { $0.id == bubble.id }
-            bursts.append(Burst(at: pos, born: now, emoji: bubble.word.emoji, tint: bubble.tint, big: true))
+            bursts.append(Burst(at: pos, born: now, word: bubble.word, tint: bubble.tint, big: true))
             AudioManager.shared.play(.pop, volume: 0.8)
             Haptics.pop()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
@@ -277,7 +277,7 @@ struct BubblePopView: View {
             }
         } else {
             // Even "missing" is rewarded with a tiny splash.
-            bursts.append(Burst(at: point, born: now, emoji: nil, tint: tints.randomElement()!, big: false))
+            bursts.append(Burst(at: point, born: now, word: nil, tint: tints.randomElement()!, big: false))
             AudioManager.shared.play(.tap, volume: 0.25)
             if bursts.count > 24 { bursts.removeFirst(bursts.count - 24) }
         }
@@ -307,9 +307,9 @@ private struct BurstView: View {
                            height: (burst.big ? 14 : 8) * unit * (1 - p * 0.7))
                     .offset(x: cos(a) * radius, y: sin(a) * radius)
             }
-            if let e = burst.emoji {
-                Text(e)
-                    .font(.system(size: 70 * unit))
+            if let w = burst.word {
+                WordArt(word: w, mood: .happy)
+                    .frame(width: 90 * unit, height: 90 * unit)
                     .scaleEffect(1 + ease * 0.7)
                     .opacity(1 - p)
             }

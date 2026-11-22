@@ -295,8 +295,9 @@ struct ChoiceCard: View {
                     RoundedRectangle(cornerRadius: 34 * unit, style: .continuous)
                         .strokeBorder(phase == .correct ? Color(hex: "#66BB6A") : (hint && glow ? Color(hex: "#FFCA28") : Color.clear),
                                       lineWidth: 7 * unit)
-                    Text(word.emoji)
-                        .font(.system(size: min(g.size.width, g.size.height) * 0.58))
+                    WordArt(word: word, mood: phase == .correct ? .happy : .idle)
+                        .frame(width: min(g.size.width, g.size.height) * 0.72,
+                               height: min(g.size.width, g.size.height) * 0.72)
                     if phase == .correct {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 40 * unit))
