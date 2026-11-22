@@ -107,7 +107,9 @@ struct Mascot: View {
         }
         .aspectRatio(1, contentMode: .fit)
         .onAppear {
-            withAnimation(.easeInOut(duration: 1.4).repeatForever(autoreverses: true)) { breathe = true }
+            if !Motion.reduced {
+                withAnimation(.easeInOut(duration: 1.4).repeatForever(autoreverses: true)) { breathe = true }
+            }
             updateFlap()
         }
         .onChange(of: mood) { _ in updateFlap() }
@@ -123,7 +125,7 @@ struct Mascot: View {
     }
 
     private func updateFlap() {
-        if mood == .cheer {
+        if mood == .cheer && !Motion.reduced {
             withAnimation(.easeInOut(duration: 0.22).repeatForever(autoreverses: true)) { flap = true }
         } else {
             withAnimation(.easeOut(duration: 0.2)) { flap = false }

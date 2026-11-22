@@ -294,6 +294,7 @@ struct GiftButton: View {
                 onOpen()
             }
             .onAppear {
+                if Motion.reduced { wobble = true; return }
                 withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) { wobble = true }
             }
             .accessibilityLabel(L10n.t("Surprise gift", "הפתעה"))

@@ -31,6 +31,13 @@ struct FlashcardView: View {
                     .contentShape(Rectangle())
                     .ignoresSafeArea()
                     .onTapGesture { advance() }
+                    .accessibilityElement()
+                    .accessibilityLabel(word.label)
+                    .accessibilityHint(L10n.t("Double-tap for the next word", "הקישו פעמיים למילה הבאה"))
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityAction { advance() }
+                    .accessibilityAction(named: L10n.t("Previous word", "המילה הקודמת")) { goBack() }
+                    .accessibilityAction(named: L10n.t("Say it again", "להשמיע שוב")) { AudioManager.shared.say(Voice.word(word)) }
                     .gesture(
                         DragGesture(minimumDistance: 40)
                             .onEnded { v in
@@ -47,6 +54,7 @@ struct FlashcardView: View {
                             insertion: .move(edge: direction).combined(with: .scale(scale: 0.6)).combined(with: .opacity),
                             removal: .move(edge: direction == .trailing ? .leading : .trailing).combined(with: .opacity)))
                         .allowsHitTesting(false)
+                        .accessibilityHidden(true)
                     Spacer(minLength: 0)
                     progressDots(u: u)
                         .padding(.bottom, max(geo.safeAreaInsets.bottom, 16) + 18)

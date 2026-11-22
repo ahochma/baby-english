@@ -172,7 +172,7 @@ struct FindItView: View {
         idleWork?.cancel()
         guard words.count >= 2 else { return }
         let fresh = words.filter { !recentTargets.contains($0.id) }
-        let t = (fresh.isEmpty ? words : fresh).randomElement()!
+        let t = stickerStore.pickForPractice(from: fresh.isEmpty ? words : fresh)!
         recentTargets.append(t.id)
         if recentTargets.count > 3 { recentTargets.removeFirst() }
 
@@ -222,6 +222,7 @@ struct FindItView: View {
     private func choose(_ w: WordItem) {
         guard !solved, !showCelebration, let target else { return }
         if w.id == target.id {
+            stickerStore.recordCorrect(target.id, firstTry: missesThisRound == 0)
             idleWork?.cancel()
             Haptics.success()
             AudioManager.shared.play(.chime, volume: 0.6)
@@ -251,6 +252,7 @@ struct FindItView: View {
             }
         } else {
             missesThisRound += 1
+            if missesThisRound == 1 { stickerStore.recordMiss(target.id) }
             Haptics.tap()
             AudioManager.shared.play(.boing, volume: 0.35)
             withAnimation(.linear(duration: 0.45)) { shakes[w.id, default: 0] += 1 }

@@ -32,8 +32,10 @@ struct CelebrationView: View {
                     .opacity(0.35)
                     .position(x: geo.size.width / 2, y: geo.size.height * 0.52)
 
-                ConfettiView()
-                    .ignoresSafeArea()
+                if !Motion.reduced {
+                    ConfettiView()
+                        .ignoresSafeArea()
+                }
 
                 VStack(spacing: 18 * u) {
                     Mascot(mood: .cheer)
@@ -115,6 +117,7 @@ struct SunburstView: View {
         .mask(RadialGradient(colors: [.white, .clear], center: .center, startRadius: 40, endRadius: 420))
         .rotationEffect(.degrees(spin ? 360 : 0))
         .onAppear {
+            guard !Motion.reduced else { return }
             withAnimation(.linear(duration: 30).repeatForever(autoreverses: false)) { spin = true }
         }
         .allowsHitTesting(false)

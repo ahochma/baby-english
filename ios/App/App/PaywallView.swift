@@ -123,8 +123,8 @@ struct PaywallView: View {
                                  "כל המילים בתוך משחקי הבועות ו-Find it!"), u: u)
             benefit("🗣️", L10n.t("A clear English voice for every word, with optional Hebrew hints",
                                  "קול באנגלית ברור לכל מילה, עם רמז בעברית לבחירתכם"), u: u)
-            benefit("🛡️", L10n.t("No ads. No tracking. No subscription.",
-                                 "בלי פרסומות. בלי מעקב. בלי מנוי."), u: u)
+            benefit("🛡️", L10n.t("No ads, no tracking, no account or email needed",
+                                 "בלי פרסומות, בלי מעקב, בלי חשבון ובלי אימייל"), u: u)
             benefit("👨‍👩‍👧", L10n.t("Family Sharing — every device in your family",
                                    "שיתוף משפחתי — לכל המכשירים במשפחה"), u: u)
         }
@@ -170,8 +170,8 @@ struct PaywallView: View {
             .frame(height: 66 * u)
             .opacity(store.isPurchasing ? 0.8 : 1)
 
-            Text(L10n.t("One-time purchase. No subscription, nothing renews.",
-                        "רכישה חד-פעמית. ללא מנוי, שום דבר לא מתחדש."))
+            Text(L10n.t("Pay once. No subscription, no trial that turns into charges, nothing ever renews.",
+                        "משלמים פעם אחת. בלי מנוי, בלי תקופת ניסיון שהופכת לחיוב, שום דבר לא מתחדש."))
                 .font(.system(size: 13 * u, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.parentInk.opacity(0.55))
                 .multilineTextAlignment(.center)
@@ -282,8 +282,8 @@ struct PrivacyPolicyView: View {
 
     private func section(_ title: String, _ body: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.system(size: 17, weight: .bold, design: .rounded))
-            Text(body).font(.system(size: 15, design: .rounded)).foregroundColor(Palette.parentInk.opacity(0.8))
+            Text(title).font(.parent(17, .bold))
+            Text(body).font(.parent(15)).foregroundColor(Palette.parentInk.opacity(0.8))
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

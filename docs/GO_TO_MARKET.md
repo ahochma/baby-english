@@ -22,6 +22,10 @@ Israel without paid ads, because the Hebrew App Store has almost no polished
 - **Review prompt** only fires for engaged parents (10+ words, 2+ stickers), behind the gate.
 - **Honest paywall**: one-time, no subscription, Family Sharing. These are the top objections Israeli parents raise about kids' apps.
 
+## Positioning: the anti-subscription kids' app
+
+Competitor reviews (e.g. 1-star reviews on popular kids' English apps) are dominated by: surprise monthly charges, trials that convert into payments, subscriptions that can't be cancelled, and data/email concerns. Baby English has none of these. Lead every post, screenshot and reply with it: **"Pay once. No subscription. No account."**
+
 ## Four-week launch plan
 
 ### Week 0: before release

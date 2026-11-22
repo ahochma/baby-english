@@ -231,8 +231,24 @@ final class SettingsStore: ObservableObject {
 // MARK: - Progress (stickers, streak, words heard)
 // ─────────────────────────────────────────────
 
+/// What Find it! has learned about one word.
+struct WordStat: Codable, Equatable {
+    var correctStreak = 0   // first-try wins in a row
+    var firstTryWins = 0
+    var misses = 0
+}
+
 final class StickerStore: ObservableObject {
     static let shared = StickerStore()
+
+    /// Per-word results from Find it!, used for smart repetition and parent progress.
+    @Published private(set) var wordStats: [String: WordStat] {
+        didSet {
+            if let data = try? JSONEncoder().encode(wordStats) {
+                UserDefaults.standard.set(data, forKey: statsKey)
+            }
+        }
+    }
 
     @Published private(set) var stickers: [String] {
         didSet { UserDefaults.standard.set(stickers, forKey: stickersKey) }
@@ -266,6 +282,7 @@ final class StickerStore: ObservableObject {
     private let heardKey = "heardWords"
     private let gamesKey = "gamesFinished"
     private let giftKey = "lastGiftDay"
+    private let statsKey = "wordStats"
 
     private init() {
         let d = UserDefaults.standard
@@ -274,6 +291,7 @@ final class StickerStore: ObservableObject {
         heardWords = Set((d.array(forKey: heardKey) as? [String]) ?? [])
         gamesFinished = d.integer(forKey: gamesKey)
         lastGiftDay = d.object(forKey: giftKey) as? Date
+        wordStats = (d.data(forKey: statsKey)).flatMap { try? JSONDecoder().decode([String: WordStat].self, from: $0) } ?? [:]
         updateStreak()
     }
 
@@ -298,6 +316,63 @@ final class StickerStore: ObservableObject {
         stickers.append(sticker)
         lastGiftDay = Date()
         return sticker
+    }
+
+    // MARK: Smart repetition
+
+    /// A word counts as known after two first-try wins in a row in Find it!.
+    static let knownStreak = 2
+
+    func isKnown(_ wordId: String) -> Bool {
+        (wordStats[wordId]?.correctStreak ?? 0) >= Self.knownStreak
+    }
+
+    /// Practicing = missed at least once and not yet known again.
+    func isPracticing(_ wordId: String) -> Bool {
+        guard let s = wordStats[wordId] else { return false }
+        return s.misses > 0 && s.correctStreak < Self.knownStreak
+    }
+
+    /// Correct answer. A first-try win builds the streak; a win after misses doesn't.
+    func recordCorrect(_ wordId: String, firstTry: Bool) {
+        var s = wordStats[wordId] ?? WordStat()
+        if firstTry {
+            s.correctStreak += 1
+            s.firstTryWins += 1
+        } else {
+            s.correctStreak = 0
+        }
+        wordStats[wordId] = s
+    }
+
+    /// The child tapped a wrong picture while this word was being asked.
+    func recordMiss(_ wordId: String) {
+        var s = wordStats[wordId] ?? WordStat()
+        s.misses += 1
+        s.correctStreak = 0
+        wordStats[wordId] = s
+    }
+
+    /// How likely a word is to be asked next: struggling words come back
+    /// often, new words get a fair chance, known words are rare reviews.
+    func practiceWeight(_ wordId: String) -> Double {
+        guard let s = wordStats[wordId] else { return 1.5 }
+        if s.correctStreak >= Self.knownStreak { return 0.35 }
+        if s.misses > 0 { return 1 + Double(min(s.misses, 4)) * 0.75 }
+        return 1
+    }
+
+    /// Weighted random pick, used by Find it!.
+    func pickForPractice(from words: [WordItem]) -> WordItem? {
+        let weights = words.map { practiceWeight($0.id) }
+        let total = weights.reduce(0, +)
+        guard total > 0 else { return words.randomElement() }
+        var r = Double.random(in: 0..<total)
+        for (w, weight) in zip(words, weights) {
+            r -= weight
+            if r < 0 { return w }
+        }
+        return words.last
     }
 
     func markHeard(_ wordId: String) {

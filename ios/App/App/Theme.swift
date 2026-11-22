@@ -62,6 +62,24 @@ enum Palette {
 }
 
 // ─────────────────────────────────────────────
+// MARK: - Accessibility helpers
+// ─────────────────────────────────────────────
+
+extension Font {
+    /// Rounded font for grown-up screens that scales with the user's text size
+    /// setting (Dynamic Type). Kid screens keep fixed, huge sizes on purpose.
+    static func parent(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
+        .system(size: UIFontMetrics.default.scaledValue(for: size), weight: weight, design: .rounded)
+    }
+}
+
+/// Continuous decorative motion (bobbing, drifting clouds, spinning sun) is
+/// switched off when the device asks for reduced motion.
+enum Motion {
+    static var reduced: Bool { UIAccessibility.isReduceMotionEnabled }
+}
+
+// ─────────────────────────────────────────────
 // MARK: - Sizing
 // ─────────────────────────────────────────────
 
@@ -415,6 +433,7 @@ struct CharacterBadge: View {
             .position(x: g.size.width / 2, y: g.size.height / 2)
         }
         .onAppear {
+            guard !Motion.reduced else { return }
             withAnimation(.easeInOut(duration: Double.random(in: 1.1...1.6)).repeatForever(autoreverses: true)) { bob = true }
         }
     }
@@ -446,8 +465,8 @@ struct Scenery: View {
                         .position(x: w * 0.9, y: h * 0.035)
                 }
 
-                TimelineView(.animation(minimumInterval: 1 / 30)) { tl in
-                    let t = tl.date.timeIntervalSince(start)
+                TimelineView(.animation(minimumInterval: 1 / 30, paused: Motion.reduced)) { tl in
+                    let t = Motion.reduced ? 0 : tl.date.timeIntervalSince(start)
                     ZStack {
                         cloud(t: t, speed: 9, y: 0.16, scale: 1.0, phase: 0.1, w: w, h: h)
                         cloud(t: t, speed: 6, y: 0.30, scale: 0.7, phase: 0.55, w: w, h: h)
@@ -506,6 +525,7 @@ struct SunView: View {
             .frame(width: d, height: d)
         }
         .onAppear {
+            guard !Motion.reduced else { return }
             withAnimation(.linear(duration: 40).repeatForever(autoreverses: false)) { spin = true }
         }
     }

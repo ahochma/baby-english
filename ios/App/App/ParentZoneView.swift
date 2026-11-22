@@ -50,23 +50,48 @@ struct ParentZoneView: View {
     // MARK: Cards
 
     private var progressCard: some View {
-        let heard = progress.heardWords.count
         let total = ALL_WORDS.count
+        let known = ALL_WORDS.filter { progress.isKnown($0.id) }
+        let practicing = ALL_WORDS.filter { progress.isPracticing($0.id) }
+        let heard = progress.heardWords.count
         return card {
             VStack(alignment: .leading, spacing: 14) {
                 Label(L10n.t("Your child's progress", "ההתקדמות של הילד/ה"), systemImage: "chart.bar.fill")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.parent(17, .bold))
                     .foregroundColor(Palette.parentInk)
+
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
-                        Text(L10n.t("Words heard", "מילים שנשמעו"))
+                        Text(L10n.t("Words your child knows", "מילים שהילד/ה כבר יודע/ת"))
                         Spacer()
-                        Text("\(heard) / \(total)").bold()
+                        Text("\(known.count) / \(total)").bold()
                     }
-                    .font(.system(size: 15, design: .rounded))
-                    ProgressView(value: Double(heard), total: Double(total))
-                        .tint(Palette.accent)
+                    .font(.parent(15))
+                    ProgressView(value: Double(known.count), total: Double(total))
+                        .tint(Color(hex: "#43A047"))
+                    Text(L10n.t("Heard so far: \(heard) / \(total)", "נשמעו עד עכשיו: \(heard) / \(total)"))
+                        .font(.parent(13))
+                        .foregroundColor(Palette.parentInk.opacity(0.55))
                 }
+                .accessibilityElement(children: .combine)
+
+                if known.isEmpty {
+                    Text(L10n.t("Play Find it! together: a word counts as known after 2 right answers in a row.",
+                                "שחקו יחד ב-Find it!: מילה נחשבת ידועה אחרי 2 תשובות נכונות ברצף."))
+                        .font(.parent(13))
+                        .foregroundColor(Palette.parentInk.opacity(0.65))
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    wordChips(known, color: Color(hex: "#43A047"))
+                }
+
+                if !practicing.isEmpty {
+                    Text(L10n.t("Still practicing (asked more often):", "עדיין מתרגלים (יישאלו יותר):"))
+                        .font(.parent(13, .semibold))
+                        .foregroundColor(Palette.parentInk.opacity(0.7))
+                    wordChips(practicing, color: Color(hex: "#FB8C00"))
+                }
+
                 HStack(spacing: 12) {
                     stat("🏆", "\(progress.stickers.count)", L10n.t("stickers", "מדבקות"))
                     stat("🔥", "\(progress.streak)", L10n.t("day streak", "ימים ברצף"))
@@ -76,11 +101,29 @@ struct ParentZoneView: View {
         }
     }
 
+    private func wordChips(_ words: [WordItem], color: Color) -> some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 92), spacing: 8)], alignment: .leading, spacing: 8) {
+            ForEach(words) { w in
+                HStack(spacing: 4) {
+                    Text(w.emoji).font(.system(size: 16))
+                    Text(w.label).font(.parent(13, .semibold)).lineLimit(1).minimumScaleFactor(0.7)
+                }
+                .foregroundColor(Palette.parentInk)
+                .padding(.horizontal, 10).padding(.vertical, 6)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Capsule().fill(color.opacity(0.14)))
+                .overlay(Capsule().stroke(color.opacity(0.35), lineWidth: 1))
+                .environment(\.layoutDirection, .leftToRight)
+                .accessibilityElement(children: .combine)
+            }
+        }
+    }
+
     private func stat(_ icon: String, _ value: String, _ label: String) -> some View {
         VStack(spacing: 2) {
             Text(icon).font(.system(size: 22))
-            Text(value).font(.system(size: 20, weight: .heavy, design: .rounded)).foregroundColor(Palette.parentInk)
-            Text(label).font(.system(size: 12, weight: .medium, design: .rounded)).foregroundColor(Palette.parentInk.opacity(0.6))
+            Text(value).font(.parent(20, .heavy)).foregroundColor(Palette.parentInk)
+            Text(label).font(.parent(12, .medium)).foregroundColor(Palette.parentInk.opacity(0.6))
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 10)
@@ -93,9 +136,9 @@ struct ParentZoneView: View {
                 Text("🔓").font(.system(size: 32))
                 VStack(alignment: .leading, spacing: 3) {
                     Text(L10n.t("Unlock all \(ALL_WORDS.count) words", "פתחו את כל \(ALL_WORDS.count) המילים"))
-                        .font(.system(size: 17, weight: .heavy, design: .rounded))
+                        .font(.parent(17, .heavy))
                     Text(L10n.t("\(ALL_CATEGORIES.count - 1) more worlds · one-time purchase", "עוד \(ALL_CATEGORIES.count - 1) עולמות · רכישה חד-פעמית"))
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .font(.parent(13, .medium))
                         .opacity(0.85)
                 }
                 Spacer()
@@ -116,9 +159,9 @@ struct ParentZoneView: View {
                 Image(systemName: "checkmark.seal.fill").font(.system(size: 26)).foregroundColor(Color(hex: "#43A047"))
                 VStack(alignment: .leading, spacing: 2) {
                     Text(L10n.t("Full version unlocked", "הגרסה המלאה פתוחה"))
-                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .font(.parent(16, .bold))
                     Text(L10n.t("Thank you for your support!", "תודה על התמיכה!"))
-                        .font(.system(size: 13, design: .rounded)).foregroundColor(Palette.parentInk.opacity(0.6))
+                        .font(.parent(13)).foregroundColor(Palette.parentInk.opacity(0.6))
                 }
                 Spacer()
             }
@@ -132,7 +175,7 @@ struct ParentZoneView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Label(L10n.t("Hebrew → English", "עברית ← אנגלית"), systemImage: "character.bubble.fill")
                         Text(L10n.t("Says the Hebrew word first: “כלב… Dog!”", "אומר קודם את המילה בעברית: ״כלב… Dog!״"))
-                            .font(.system(size: 13, design: .rounded))
+                            .font(.parent(13))
                             .foregroundColor(Palette.parentInk.opacity(0.55))
                     }
                 }
@@ -162,7 +205,7 @@ struct ParentZoneView: View {
                 }
                 .padding(.vertical, 6)
             }
-            .font(.system(size: 16, weight: .medium, design: .rounded))
+            .font(.parent(16, .medium))
             .foregroundColor(Palette.parentInk)
         }
         .alert(L10n.t("Restore", "שחזור"),
@@ -176,7 +219,7 @@ struct ParentZoneView: View {
         card {
             VStack(alignment: .leading, spacing: 12) {
                 Label(L10n.t("Tips for parents", "טיפים להורים"), systemImage: "lightbulb.fill")
-                    .font(.system(size: 17, weight: .bold, design: .rounded))
+                    .font(.parent(17, .bold))
                 tip("🫧", L10n.t("Bubbles is a calm warm-up: every touch makes a sound and there's no way to fail.",
                                  "הבועות הן חימום רגוע: כל נגיעה משמיעה צליל, ואין דרך להיכשל."))
                 tip("🔍", L10n.t("Find it! starts with 2 pictures and grows to 4 as your child gets it right.",
@@ -195,7 +238,7 @@ struct ParentZoneView: View {
     private func tip(_ icon: String, _ text: String) -> some View {
         HStack(alignment: .top, spacing: 10) {
             Text(icon).font(.system(size: 18))
-            Text(text).font(.system(size: 14, design: .rounded)).foregroundColor(Palette.parentInk.opacity(0.8))
+            Text(text).font(.parent(14)).foregroundColor(Palette.parentInk.opacity(0.8))
                 .fixedSize(horizontal: false, vertical: true)
         }
     }
@@ -214,7 +257,7 @@ struct ParentZoneView: View {
                 }
                 .padding(.vertical, 6)
             }
-            .font(.system(size: 16, weight: .medium, design: .rounded))
+            .font(.parent(16, .medium))
             .foregroundColor(Palette.parentInk)
         }
     }
