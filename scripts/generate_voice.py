@@ -13,6 +13,8 @@ Both engines write ios/App/App/Audio/<id>.m4a, so running the ElevenLabs
 engine later simply overwrites the placeholders in place. The files are
 already in the Xcode project, so no project change is needed.
 
+The three ELEVENLABS_* values can also live in scripts/.env (gitignored).
+
 Examples:
   python3 scripts/generate_voice.py --engine say
   ELEVENLABS_API_KEY=... ELEVENLABS_VOICE_EN=... ELEVENLABS_VOICE_HE=... \\
@@ -23,6 +25,17 @@ import argparse, json, os, subprocess, sys, tempfile, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUDIO = os.path.join(ROOT, "ios", "App", "App", "Audio")
 LINES = json.load(open(os.path.join(ROOT, "scripts", "voice_lines.json")))
+ENV_FILE = os.path.join(ROOT, "scripts", ".env")   # gitignored; KEY=value lines
+
+def load_env_file():
+    """Read scripts/.env so the API key never has to be typed on the command line."""
+    if not os.path.exists(ENV_FILE):
+        return
+    for line in open(ENV_FILE):
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 def say(text, lang, out_base):
     voice = {"en": "Flo (English (US))", "he": "Carmit"}[lang]
@@ -50,6 +63,11 @@ def main():
     ap.add_argument("--engine", choices=["say", "elevenlabs"], required=True)
     ap.add_argument("--only", help="comma-separated ids to (re)generate")
     a = ap.parse_args()
+    load_env_file()
+    if a.engine == "elevenlabs":
+        missing = [k for k in ("ELEVENLABS_API_KEY", "ELEVENLABS_VOICE_EN", "ELEVENLABS_VOICE_HE") if not os.environ.get(k)]
+        if missing:
+            sys.exit("missing " + ", ".join(missing) + " (set them in scripts/.env, see scripts/.env.example)")
     only = set(a.only.split(",")) if a.only else None
     fn = say if a.engine == "say" else elevenlabs
     n = 0
