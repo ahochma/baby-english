@@ -32,6 +32,10 @@ Everything that can be prepared is already in the repo:
 - Post a teaser in 2–3 parent groups: "Building a small ad-free English app for 3–6 year olds, launching this week. Who wants the link first?" Collect a list of people who reply "me".
 - Prepare 3 Reels/TikToks from the TestFlight videos (or from the simulator: demo mode plays itself, see the end).
 
+### Tue 24 (while in review): trust & featuring
+- App Store Connect → **Featuring Nominations** → nominate the launch (Kids, Education). Mention: no ads, no subscription, no data, Hebrew→English mode.
+- Check whether **Common Sense Media** accepts title suggestions, and suggest Baby English. Their reviews carry a lot of weight with parents.
+
 ### Thu 26: launch day (target 25 downloads)
 - As soon as it's "Ready for Sale": put the link in `docs/index.html` (`APP_STORE_URL` at the top of the generator, or just replace the "Coming soon" button) and send it to **everyone who said "me"**.
 - Post the main launch post (below) in **3 groups**, staggered morning / noon / evening.
@@ -74,8 +78,10 @@ Fill the bracketed parts with real details only. Made-up testimonials hurt trust
 ### Short version (WhatsApp)
 > היי! השקנו אפליקציה קטנה לילדים 3–6 שמלמדת מילים ראשונות באנגלית עם משחקים. בלי פרסומות, חיות וכל המשחקים בחינם 🐣 [קישור] — אשמח אם תנסו ותספרו לי מה הילד/ה חשב/ה!
 
-### Teaser (Tue/Wed)
-> אנחנו משיקים השבוע אפליקציה קטנה וללא פרסומות ללימוד אנגלית לילדים בגילאי 3–6 🐣 מי רוצה לקבל את הקישור ראשון? תכתבו "אני" 👇
+### Teaser (Tue/Wed): ask for feedback, not downloads
+> בנינו אפליקציה קטנה, בלי פרסומות ובלי מנוי, ללימוד מילים ראשונות באנגלית לגילאי 3–6 🐣 מחפשים 10 הורים שינסו אותה השבוע עם הילדים ויגידו לנו בכנות מה עבד ומה לא. מי בפנים? 👇
+
+> Why this wording: indie developers report that "please give feedback" posts in small parent groups convert far better than ads or link drops (link drops on Reddit got upvotes but almost no downloads).
 
 ### Message to English teachers / tutors
 > היי [שם], ראיתי את העבודה שלך עם ילדים ואהבתי. בנינו אפליקציה קטנה וללא פרסומות לגילאי 3–6 שמלמדת 60 מילים ראשונות באנגלית עם משחקים. אשמח לתת לך קוד גישה מלא במתנה. אם תאהבי, אשמח שתשתפי עם ההורים. [קישור]

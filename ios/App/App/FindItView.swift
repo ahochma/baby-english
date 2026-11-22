@@ -64,7 +64,7 @@ struct FindItView: View {
                 .frame(maxWidth: 1000)
                 .frame(maxWidth: .infinity)
 
-                if solved {
+                if solved && !Motion.reduced {
                     ConfettiView(emojis: ["⭐", "🌟", "✨"], count: 18)
                         .ignoresSafeArea()
                 }

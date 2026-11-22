@@ -214,6 +214,11 @@ final class SettingsStore: ObservableObject {
             AudioManager.shared.updateMusic()
         }
     }
+    /// Calm mode: no confetti, no spinning or bobbing decorations. For children
+    /// who get over-excited, or for bedtime.
+    @Published var calmMode: Bool {
+        didSet { UserDefaults.standard.set(calmMode, forKey: "calmMode") }
+    }
     /// Say the Hebrew word before the English one. On by default for Hebrew devices.
     @Published var bilingualHebrew: Bool {
         didSet { UserDefaults.standard.set(bilingualHebrew, forKey: "bilingualHebrew") }
@@ -223,6 +228,7 @@ final class SettingsStore: ObservableObject {
         let d = UserDefaults.standard
         soundEffectsOn = d.object(forKey: "soundEffectsOn") as? Bool ?? true
         musicOn = d.object(forKey: "musicOn") as? Bool ?? true
+        calmMode = d.bool(forKey: "calmMode")
         bilingualHebrew = d.object(forKey: "bilingualHebrew") as? Bool ?? L10n.isHebrew
     }
 }

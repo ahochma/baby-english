@@ -26,6 +26,15 @@ Israel without paid ads, because the Hebrew App Store has almost no polished
 
 Competitor reviews (e.g. 1-star reviews on popular kids' English apps) are dominated by: surprise monthly charges, trials that convert into payments, subscriptions that can't be cancelled, and data/email concerns. Baby English has none of these. Lead every post, screenshot and reply with it: **"Pay once. No subscription. No account."**
 
+## What parents reward (research summary, Nov 2026)
+
+From roughly 340 Reddit app reviews, aggregated by GummySearch, plus indie-developer threads on Hacker News:
+- **Most recommended:** free/fair, **no ads, no tricks** (Khan Academy Kids); **visible learning** ("she learned to read"); **calm** design (Pok Pok, Endless Alphabet); good narration.
+- **Most hated:** ads, trials that turn into charges, subscriptions that are hard to cancel, "ask your parents" pester prompts.
+- **Pricing:** parents happily pay a one-time premium price when quality is obvious ($8.99 Endless Alphabet called "worth it").
+- **Indie marketing that worked:** friends-of-friends → small parent groups **asking for feedback**; Apple featuring nominations; teacher communities; each update as a news moment. Link drops in big subreddits did not convert.
+- **Honesty:** toddlers learn words best with a person, so frame the app as something to **play together**, never promise fluency.
+
 ## Four-week launch plan
 
 ### Week 0: before release

@@ -174,7 +174,20 @@ struct ParentZoneView: View {
                 Toggle(isOn: $settings.bilingualHebrew) {
                     VStack(alignment: .leading, spacing: 2) {
                         Label(L10n.t("Hebrew → English", "עברית ← אנגלית"), systemImage: "character.bubble.fill")
-                        Text(L10n.t("Says the Hebrew word first: “כלב… Dog!”", "אומר קודם את המילה בעברית: ״כלב… Dog!״"))
+                        Text(L10n.t("Says the Hebrew word first: “כלב… Dog!”. Works best when you play together and repeat.",
+                                    "אומר קודם את המילה בעברית: ״כלב… Dog!״. עובד הכי טוב כשמשחקים יחד וחוזרים על המילה."))
+                            .font(.parent(13))
+                            .foregroundColor(Palette.parentInk.opacity(0.55))
+                    }
+                }
+                .tint(Palette.accent)
+                .padding(.vertical, 6)
+                Divider().padding(.vertical, 6)
+                Toggle(isOn: $settings.calmMode) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Label(L10n.t("Calm mode", "מצב רגוע"), systemImage: "leaf.fill")
+                        Text(L10n.t("No confetti or bouncing decorations. Good for bedtime.",
+                                    "בלי קונפטי ובלי קישוטים קופצים. מתאים גם לפני השינה."))
                             .font(.parent(13))
                             .foregroundColor(Palette.parentInk.opacity(0.55))
                     }
@@ -224,8 +237,10 @@ struct ParentZoneView: View {
                                  "הבועות הן חימום רגוע: כל נגיעה משמיעה צליל, ואין דרך להיכשל."))
                 tip("🔍", L10n.t("Find it! starts with 2 pictures and grows to 4 as your child gets it right.",
                                  "Find it! מתחיל עם 2 תמונות ומתקדם עד 4 ככל שהילד מצליח."))
-                tip("🗣️", L10n.t("Say the word together with the app and point at the picture — that's when the magic happens.",
-                                 "אמרו את המילה יחד עם האפליקציה והצביעו על התמונה — שם קורה הקסם."))
+                tip("👨‍👧", L10n.t("Play together when you can. Young children learn words best from a person: point at the picture, say the word with the app, then use it later in the day (\"Look, a dog!\").",
+                                 "שחקו יחד כשאפשר. ילדים קטנים לומדים מילים הכי טוב מאדם: הצביעו על התמונה, אמרו את המילה יחד עם האפליקציה, ואחר כך השתמשו בה במהלך היום (״Look, a dog!״)."))
+                tip("⏱️", L10n.t("Short and often beats long: 5–10 minutes a day is plenty at this age.",
+                                 "קצר ולעתים קרובות עדיף על ארוך: 5–10 דקות ביום זה בדיוק מספיק בגיל הזה."))
                 tip("🏠", L10n.t("To leave a game, press and hold the house button for a moment.",
                                  "כדי לצאת ממשחק, לחצו לחיצה ארוכה על כפתור הבית."))
                 tip("🔒", L10n.t("Keep your child inside the app with Guided Access: Settings → Accessibility → Guided Access, then triple-click the side button.",

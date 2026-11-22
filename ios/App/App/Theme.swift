@@ -73,10 +73,11 @@ extension Font {
     }
 }
 
-/// Continuous decorative motion (bobbing, drifting clouds, spinning sun) is
-/// switched off when the device asks for reduced motion.
+/// Continuous decorative motion (bobbing, drifting clouds, spinning sun,
+/// confetti) is switched off when the device asks for reduced motion or a
+/// parent turns on Calm mode.
 enum Motion {
-    static var reduced: Bool { UIAccessibility.isReduceMotionEnabled }
+    static var reduced: Bool { UIAccessibility.isReduceMotionEnabled || SettingsStore.shared.calmMode }
 }
 
 // ─────────────────────────────────────────────
