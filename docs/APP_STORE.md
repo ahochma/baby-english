@@ -1,6 +1,6 @@
 # App Store submission kit
 
-Everything needed to take Baby English from this repo to "Ready for Sale".
+Everything needed to take Pip English from this repo to "Ready for Sale".
 Work through the checklist top to bottom.
 
 ---
@@ -49,7 +49,7 @@ Attach the IAP to the first version submission ("In-App Purchases" section on th
 > All listing text and the captioned screenshots are ready to upload in `fastlane/` (`fastlane deliver`, or paste the text files by hand). The copy below is the same text for reference.
 
 ### English
-- **Name:** Baby English: First Words
+- **Name:** Pip English: First Words
 - **Subtitle:** English words & games, ages 3–6
 - **Promotional text:** New: Bubbles for babies and Find it! for toddlers. Animals and all games are free.
 - **Keywords:** `toddler,baby,first words,flashcards,kids,learn english,preschool,abc,animals,colors,vehicles,esl`
@@ -79,7 +79,7 @@ Attach the IAP to the first version submission ("In-App Purchases" section on th
 > The Animals world and every game are free forever. One small, one-time purchase unlocks five more worlds: Vehicles, Food, Colors, My Body and Numbers (60 words in all). No subscription. Family Sharing included.
 
 ### עברית (Hebrew localization; add "Hebrew" in App Store Connect)
-- **שם:** Baby English: מילים ראשונות
+- **שם:** אנגלית עם פיפ: מילים ראשונות
 - **כותרת משנה:** אנגלית לילדים בגילאי 3–6
 - **מילות מפתח:** `אנגלית,תינוק,פעוט,מילים ראשונות,כרטיסיות,ילדים,גן,לימוד,חיות,צבעים,משחק,english`
 - **תיאור:**
@@ -130,7 +130,7 @@ App preview video (optional, big conversion win): a 15-second screen recording o
 
 ## 7. Notes for App Review (paste into "App Review Information → Notes")
 
-> Baby English is a Kids Category app (ages 5 and under).
+> Pip English is a Kids Category app (ages 5 and under).
 > • The parental gate is a multiplication question with a number pad. It appears before the paywall, the Parent Zone, restore purchase and the external Terms link.
 > • To reach the purchase: tap any card with a lock (e.g. "Vehicles"), solve the gate, and you'll see the "Unlock Everything" non-consumable IAP.
 > • The app collects no data, contains no third-party SDKs, no ads and no analytics.

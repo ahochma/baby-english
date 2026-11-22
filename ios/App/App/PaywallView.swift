@@ -105,7 +105,7 @@ struct PaywallView: View {
 
     private func titleBlock(u: CGFloat) -> some View {
         VStack(spacing: 8) {
-            Text(L10n.t("Unlock all of Baby English", "פתחו את כל Baby English"))
+            Text(L10n.t("Unlock all of Pip English", "פתחו את כל העולמות של פיפ"))
                 .font(.system(size: 28 * u, weight: .heavy, design: .rounded))
                 .multilineTextAlignment(.center)
                 .foregroundColor(Palette.parentInk)
@@ -250,11 +250,11 @@ struct PrivacyPolicyView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     section(L10n.t("The short version", "בקצרה"),
-                            L10n.t("Baby English collects no personal data. There are no accounts, no ads, no analytics and no tracking. Nothing your child does in the app ever leaves the device.",
-                                   "Baby English לא אוספת שום מידע אישי. אין חשבונות, אין פרסומות, אין אנליטיקה ואין מעקב. שום דבר שהילד עושה באפליקציה לא יוצא מהמכשיר."))
+                            L10n.t("Pip English collects no personal data. There are no accounts, no ads, no analytics and no tracking. Nothing your child does in the app ever leaves the device.",
+                                   "אנגלית עם פיפ לא אוספת שום מידע אישי. אין חשבונות, אין פרסומות, אין אנליטיקה ואין מעקב. שום דבר שהילד עושה באפליקציה לא יוצא מהמכשיר."))
                     section(L10n.t("What is stored on the device", "מה נשמר במכשיר"),
-                            L10n.t("Stickers earned, which words were heard, the play streak and your sound setting are saved only on this device so progress isn't lost. Deleting the app deletes them.",
-                                   "המדבקות שנאספו, המילים שנשמעו, רצף הימים והגדרת הצלילים נשמרים רק במכשיר הזה כדי שההתקדמות לא תאבד. מחיקת האפליקציה מוחקת אותם."))
+                            L10n.t("Stickers earned, which words were heard, how Find it! answers went (so hard words come back more often), the play streak and your settings are saved only on this device so progress isn't lost. Deleting the app deletes them.",
+                                   "המדבקות שנאספו, המילים שנשמעו, תוצאות Find it! (כדי שמילים קשות יחזרו יותר), רצף הימים וההגדרות נשמרים רק במכשיר הזה כדי שההתקדמות לא תאבד. מחיקת האפליקציה מוחקת אותם."))
                     section(L10n.t("Purchases", "רכישות"),
                             L10n.t("Purchases are handled entirely by Apple. We never see your name, email or payment details.",
                                    "הרכישות מטופלות במלואן על ידי Apple. אנחנו לא רואים את השם, האימייל או פרטי התשלום שלכם."))

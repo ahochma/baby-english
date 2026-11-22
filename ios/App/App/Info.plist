@@ -10,7 +10,7 @@
 		<string>he</string>
 	</array>
 	<key>CFBundleDisplayName</key>
-	<string>Baby English</string>
+	<string>Pip English</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

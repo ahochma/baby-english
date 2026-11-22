@@ -263,7 +263,7 @@ struct ParentZoneView: View {
             VStack(spacing: 0) {
                 row(L10n.t("Privacy policy", "מדיניות פרטיות"), "hand.raised.fill") { showPrivacy = true }
                 Divider().padding(.vertical, 6)
-                row(L10n.t("Rate Baby English", "דרגו את Baby English"), "star.fill") { requestReview() }
+                row(L10n.t("Rate Pip English", "דרגו את אנגלית עם פיפ"), "star.fill") { requestReview() }
                 Divider().padding(.vertical, 6)
                 HStack {
                     Label(L10n.t("Version", "גרסה"), systemImage: "info.circle")

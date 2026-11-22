@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐣 Baby English
+# 🐣 Pip English (אנגלית עם פיפ)
 
 **First English words for kids aged 3–6, with pictures, a clear voice, a friendly mascot and three games built for little hands.**
 

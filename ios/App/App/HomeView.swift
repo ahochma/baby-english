@@ -126,7 +126,7 @@ struct HomeView: View {
                     .frame(width: 62 * u, height: 62 * u)
                     .offset(y: mascotHop ? -14 * u : 0)
                     .onTapGesture(perform: hopMascot)
-                Text("Baby English")
+                Text("Pip English")
                     .font(.system(size: 31 * u, weight: .black, design: .rounded))
                     .foregroundColor(Palette.ink)
                     .shadow(color: .white.opacity(0.9), radius: 0, x: 0, y: 2.5)

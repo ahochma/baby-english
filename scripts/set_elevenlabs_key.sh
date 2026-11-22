@@ -4,7 +4,7 @@
 set -euo pipefail
 ENV_FILE="$(cd "$(dirname "$0")" && pwd)/.env"
 umask 077
-echo "Baby English: ElevenLabs setup"
+echo "Pip English: ElevenLabs setup"
 read -r -s -p "Paste your ElevenLabs API key (input hidden), then Enter: " KEY; echo
 [ -z "$KEY" ] && { echo "No key entered, nothing saved."; exit 1; }
 read -r -p "Voice ID for English (voice of the original word clips): " VEN

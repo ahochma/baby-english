@@ -34,7 +34,7 @@ Everything that can be prepared is already in the repo:
 
 ### Tue 24 (while in review): trust & featuring
 - App Store Connect → **Featuring Nominations** → nominate the launch (Kids, Education). Mention: no ads, no subscription, no data, Hebrew→English mode.
-- Check whether **Common Sense Media** accepts title suggestions, and suggest Baby English. Their reviews carry a lot of weight with parents.
+- Check whether **Common Sense Media** accepts title suggestions, and suggest Pip English. Their reviews carry a lot of weight with parents.
 
 ### Thu 26: launch day (target 25 downloads)
 - As soon as it's "Ready for Sale": put the link in `docs/index.html` (`APP_STORE_URL` at the top of the generator, or just replace the "Coming soon" button) and send it to **everyone who said "me"**.
@@ -61,7 +61,7 @@ Fill the bracketed parts with real details only. Made-up testimonials hurt trust
 > 🐣 השקנו אפליקציה קטנה ללימוד אנגלית לילדים בגילאי 3–6!
 >
 > [משפט אישי אמיתי שלכם: למה בניתם את זה. למשל מה קרה בבית שגרם לכם להתחיל]
-> אז בנינו את **Baby English**:
+> אז בנינו את **אנגלית עם פיפ** (Pip English):
 > 🫧 מפוצצים בועות ושומעים מילים
 > 🔍 Find it! – שומעים מילה ומוצאים את התמונה
 > 🃏 כרטיסיות עם קול ברור ותמונות גדולות
