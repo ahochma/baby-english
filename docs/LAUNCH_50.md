@@ -17,6 +17,7 @@ Everything that can be prepared is already in the repo:
 ## Day by day
 
 ### Sun 22 – Mon 23: submit
+0. **Set the support email** in `ios/App/App/Feedback.swift` (`AppInfo.supportEmail`) and on the landing page's support section.
 1. **Turn on GitHub Pages** (Settings → Pages → Branch `main`, folder `/docs`) once the PR is merged. Your privacy URL becomes `https://ahochma.github.io/baby-english/privacy.html` (already filled in the metadata).
 2. **App Store Connect:** create the app (bundle `com.babyenglish.app`), Kids Category "5 and under", privacy label "Data Not Collected", and the IAP `com.babyenglish.app.fullunlock` (non-consumable, Family Sharing on).
 3. **Upload the listing in one command:**
@@ -37,7 +38,7 @@ Everything that can be prepared is already in the repo:
 - Check whether **Common Sense Media** accepts title suggestions, and suggest Pip English. Their reviews carry a lot of weight with parents.
 
 ### Thu 26: launch day (target 25 downloads)
-- As soon as it's "Ready for Sale": put the link in `docs/index.html` (`APP_STORE_URL` at the top of the generator, or just replace the "Coming soon" button) and send it to **everyone who said "me"**.
+- As soon as it's "Ready for Sale": put the link (with `ct=landing-he` / `ct=landing-en`) in `docs/index.html` and `docs/en.html` (replace the "Coming soon" button) and send a `ct=friends` link to **everyone who said "me"**.
 - Post the main launch post (below) in **3 groups**, staggered morning / noon / evening.
 - Personally message 20 friends with kids. Personal messages convert 5–10× better than posts.
 
@@ -50,6 +51,8 @@ Everything that can be prepared is already in the repo:
 - 5 English teachers / tutors for kids: offer a free unlock (App Store Connect → your in-app purchase → Offer Codes) in return for sharing with their parents.
 
 **Counting:** App Store Connect → Analytics → *First-time downloads* (updates once a day, about a day behind).
+
+**Use a campaign link in every post** (`ct=fb-<group>`, `wa-<group>`, `friends`, `ig-reel-1` …) so you can see which post brought downloads. Full guide and naming plan: [ANALYTICS.md](ANALYTICS.md).
 
 ---
 

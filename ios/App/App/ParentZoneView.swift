@@ -20,6 +20,7 @@ struct ParentZoneView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     progressCard
+                    card { FeedbackCard() }
                     if !store.isUnlocked { upgradeCard } else { unlockedCard }
                     settingsCard
                     tipsCard

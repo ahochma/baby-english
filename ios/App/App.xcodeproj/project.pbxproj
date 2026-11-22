@@ -167,6 +167,7 @@
 		629514086BAD556FFB8D4BB4 /* two.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8E28049E04158934491B2877 /* two.m4a */; };
 		A3AD2643A7C7D36D0998F8A1 /* where_are.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E6B7E30D5BE21E9ED3C0442C /* where_are.m4a */; };
 		D01097A01E950AEBB8BEE185 /* where_is_number.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 252036B1F23EDF4756ECC049 /* where_is_number.m4a */; };
+		99D77B8858D36F1C247EE190 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B457159B8624F8AB263ECA /* Feedback.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +344,7 @@
 		8E28049E04158934491B2877 /* two.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "two.m4a"; sourceTree = "<group>"; };
 		E6B7E30D5BE21E9ED3C0442C /* where_are.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "where_are.m4a"; sourceTree = "<group>"; };
 		252036B1F23EDF4756ECC049 /* where_is_number.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "where_is_number.m4a"; sourceTree = "<group>"; };
+		C1B457159B8624F8AB263ECA /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				504EC3071FED79650016851F /* AppDelegate.swift */,
+				C1B457159B8624F8AB263ECA /* Feedback.swift */,
 				221829FB876E020A4FC512F5 /* Mascot.swift */,
 				846A32C3BB81E3C29B621792 /* Models.swift */,
 				C826A6FCE48478DCB74F2134 /* Services.swift */,
@@ -807,6 +810,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
+				99D77B8858D36F1C247EE190 /* Feedback.swift in Sources */,
 				E302123B7000BFE42530F72E /* Mascot.swift in Sources */,
 				30877432D1026706D7E805DA /* Models.swift in Sources */,
 				73C8EB5BB682575EC87A171A /* Services.swift in Sources */,

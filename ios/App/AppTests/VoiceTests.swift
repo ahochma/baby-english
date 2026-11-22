@@ -112,3 +112,30 @@ final class SmartRepetitionTests: XCTestCase {
         XCTAssertGreaterThan(hardCount, 1600, "a struggling word should be asked far more often than a known one")
     }
 }
+
+final class FeedbackTests: XCTestCase {
+    func testFeedbackEmailCarriesOnlyTechnicalInfo() {
+        let body = FeedbackMail.body(.okay)
+        XCTAssertTrue(body.contains(AppInfo.version))
+        XCTAssertTrue(body.contains(UIDevice.current.systemVersion))
+        // nothing about the child: no words, stickers or progress
+        for w in ALL_WORDS.prefix(10) { XCTAssertFalse(body.contains(w.label)) }
+        XCTAssertFalse(body.lowercased().contains("sticker"))
+    }
+
+    func testMailtoNeedsAnAddress() {
+        if AppInfo.supportEmail.isEmpty {
+            XCTAssertNil(FeedbackMail.mailtoURL(.okay))
+        } else {
+            let url = FeedbackMail.mailtoURL(.notForUs)
+            XCTAssertEqual(url?.scheme, "mailto")
+            XCTAssertTrue(url?.absoluteString.contains("subject=") ?? false)
+        }
+    }
+
+    func testSupportEmailIsSetBeforeRelease() throws {
+        try XCTSkipIf(AppInfo.supportEmail.isEmpty,
+                      "Set AppInfo.supportEmail (Feedback.swift) before submitting, so unhappy parents can email instead of leaving a 1-star review")
+        XCTAssertTrue(AppInfo.supportEmail.contains("@"))
+    }
+}

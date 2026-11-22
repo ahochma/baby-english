@@ -74,6 +74,7 @@ ios/App/AppTests/               StoreKit purchase-flow tests
 docs/
 ├── APP_STORE.md                submission checklist, listing copy (EN/HE), review notes
 ├── GO_TO_MARKET.md             plan for the first 50 paying families
+├── ANALYTICS.md                where to see every number + campaign links (no SDK)
 └── privacy-policy.md           host this and use its URL in App Store Connect
 ```
 
