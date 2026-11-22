@@ -61,8 +61,7 @@ struct BubblePopView: View {
         GeometryReader { geo in
             let u = layoutUnit(geo.size)
             ZStack {
-                LinearGradient(colors: [Color(hex: "#E1F5FE"), Color(hex: "#B3E5FC"), Color(hex: "#E1BEE7")],
-                               startPoint: .top, endPoint: .bottom)
+                Scenery(skyTop: Color(hex: "#8ED8FF"), skyBottom: Color(hex: "#E6F7FF"), hillHeight: 0.11)
                     .ignoresSafeArea()
 
                 TimelineView(.animation) { tl in
@@ -105,7 +104,12 @@ struct BubblePopView: View {
                         }
                         .padding(.horizontal, 28 * u)
                         .padding(.vertical, 12 * u)
-                        .background(Capsule().fill(Color.white.opacity(0.92)))
+                        .background(
+                            ZStack {
+                                Capsule().fill(Color(hex: "#C9D9EE")).offset(y: 6 * u)
+                                Capsule().fill(Color.white)
+                            }
+                        )
                         .shadow(color: Color(hex: "#0277BD").opacity(0.25), radius: 14, y: 6)
                         .id(banner.id)
                         .transition(.scale(scale: 0.4).combined(with: .opacity))

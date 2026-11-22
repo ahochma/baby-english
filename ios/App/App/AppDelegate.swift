@@ -10,6 +10,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AudioManager.shared.configureSession()
+        AudioManager.shared.updateMusic()
         Task { @MainActor in _ = PurchaseManager.shared }
         return true
     }
@@ -36,7 +37,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
     }
 
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        AudioManager.shared.pauseMusic()
+    }
+
     func sceneWillEnterForeground(_ scene: UIScene) {
+        AudioManager.shared.updateMusic()
         StickerStore.shared.updateStreak()
         Task { @MainActor in await PurchaseManager.shared.refreshEntitlements() }
     }

@@ -138,6 +138,10 @@ App preview video (optional, big conversion win): a 15-second screen recording o
 
 ## 8. Final pre-flight
 
+- [ ] **Replace the temporary voice clips** (prompts + Hebrew words are macOS voices for now):
+      `ELEVENLABS_API_KEY=… ELEVENLABS_VOICE_EN=… ELEVENLABS_VOICE_HE=… python3 scripts/generate_voice.py --engine elevenlabs`
+      It overwrites the same files, so nothing changes in Xcode. Use the voice id of the original word clips for EN.
+
 - [ ] Bump `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` for each upload
 - [ ] Product → Archive (Any iOS Device) → Distribute → App Store Connect
 - [ ] Tested purchase + restore in TestFlight with a sandbox account

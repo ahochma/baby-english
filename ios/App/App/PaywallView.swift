@@ -75,20 +75,26 @@ struct PaywallView: View {
 
     private func hero(u: CGFloat) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(LinearGradient(colors: [Color(hex: "#B39DDB"), Color(hex: "#81D4FA"), Color(hex: "#A5D6A7")],
-                                     startPoint: .topLeading, endPoint: .bottomTrailing))
-            let emojis = ["🐶", "🚒", "🍓", "🎨", "🦁", "🚀", "🍌", "🫧", "🐸", "🚂", "🍇", "🔍"]
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 8 * u) {
-                ForEach(Array(emojis.enumerated()), id: \.offset) { i, e in
-                    Text(e)
-                        .font(.system(size: 38 * u))
-                        .frame(width: 60 * u, height: 60 * u)
-                        .background(Circle().fill(Color.white.opacity(0.55)))
-                        .offset(y: heroBob ? (i.isMultiple(of: 2) ? -4 : 4) : 0)
+            Scenery(hillHeight: 0.28)
+                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+            // the four worlds circle around Pip
+            let worlds = ALL_CATEGORIES.map(\.emoji)
+            HStack(spacing: 0) {
+                VStack(spacing: 14 * u) {
+                    CharacterBadge(emoji: worlds[0]).frame(width: 64 * u, height: 64 * u)
+                    CharacterBadge(emoji: worlds[2]).frame(width: 64 * u, height: 64 * u)
                 }
+                .offset(y: heroBob ? -4 : 4)
+                Mascot(mood: .cheer)
+                    .frame(width: 130 * u, height: 130 * u)
+                    .padding(.horizontal, 10 * u)
+                VStack(spacing: 14 * u) {
+                    CharacterBadge(emoji: worlds[1]).frame(width: 64 * u, height: 64 * u)
+                    CharacterBadge(emoji: worlds[3]).frame(width: 64 * u, height: 64 * u)
+                }
+                .offset(y: heroBob ? 4 : -4)
             }
-            .padding(18 * u)
+            .padding(.top, 10 * u)
         }
         .frame(height: 230 * u)
         .onAppear {
@@ -115,8 +121,8 @@ struct PaywallView: View {
                                  "כל \(ALL_CATEGORIES.count) העולמות — \(ALL_WORDS.count) מילים ראשונות"), u: u)
             benefit("🫧", L10n.t("Every word inside Bubbles and Find it!",
                                  "כל המילים בתוך משחקי הבועות ו-Find it!"), u: u)
-            benefit("🗣️", L10n.t("A clear, friendly English voice for every word",
-                                 "קול באנגלית ברור וחם לכל מילה"), u: u)
+            benefit("🗣️", L10n.t("A clear English voice for every word, with optional Hebrew hints",
+                                 "קול באנגלית ברור לכל מילה, עם רמז בעברית לבחירתכם"), u: u)
             benefit("🛡️", L10n.t("No ads. No tracking. No subscription.",
                                  "בלי פרסומות. בלי מעקב. בלי מנוי."), u: u)
             benefit("👨‍👩‍👧", L10n.t("Family Sharing — every device in your family",
@@ -142,9 +148,11 @@ struct PaywallView: View {
 
     private func purchaseBlock(u: CGFloat) -> some View {
         VStack(spacing: 10) {
-            Button {
+            ChunkyButton(colors: [Color(hex: "#8C6BFF"), Palette.accent], lip: Palette.accent,
+                         radius: 22, depth: 6, action: {
+                guard !store.isPurchasing, !(store.product == nil && store.loadState == .loading) else { return }
                 Task { await store.purchase() }
-            } label: {
+            }) {
                 ZStack {
                     if store.isPurchasing {
                         ProgressView().tint(.white)
@@ -158,17 +166,9 @@ struct PaywallView: View {
                 }
                 .font(.system(size: 19 * u, weight: .heavy, design: .rounded))
                 .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 60 * u)
-                .background(
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(LinearGradient(colors: [Color(hex: "#7C4DFF"), Palette.accent],
-                                             startPoint: .leading, endPoint: .trailing))
-                )
-                .shadow(color: Palette.accent.opacity(0.4), radius: 12, y: 6)
             }
-            .buttonStyle(SquishyButtonStyle(scale: 0.97))
-            .disabled(store.isPurchasing || (store.product == nil && store.loadState == .loading))
+            .frame(height: 66 * u)
+            .opacity(store.isPurchasing ? 0.8 : 1)
 
             Text(L10n.t("One-time purchase. No subscription, nothing renews.",
                         "רכישה חד-פעמית. ללא מנוי, שום דבר לא מתחדש."))

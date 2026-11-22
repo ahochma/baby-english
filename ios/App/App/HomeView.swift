@@ -139,7 +139,8 @@ struct HomeView: View {
 
     private func hopMascot() {
         Haptics.tap()
-        AudioManager.shared.play(.sparkle, volume: 0.5)
+        AudioManager.shared.play(.sparkle, volume: 0.4)
+        AudioManager.shared.play("hi_pip")
         withAnimation(.spring(response: 0.28, dampingFraction: 0.45)) {
             mascotHop = true
             mascotMood = .cheer

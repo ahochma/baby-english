@@ -128,6 +128,23 @@ struct ParentZoneView: View {
     private var settingsCard: some View {
         card {
             VStack(spacing: 0) {
+                Toggle(isOn: $settings.bilingualHebrew) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Label(L10n.t("Hebrew → English", "עברית ← אנגלית"), systemImage: "character.bubble.fill")
+                        Text(L10n.t("Says the Hebrew word first: “כלב… Dog!”", "אומר קודם את המילה בעברית: ״כלב… Dog!״"))
+                            .font(.system(size: 13, design: .rounded))
+                            .foregroundColor(Palette.parentInk.opacity(0.55))
+                    }
+                }
+                .tint(Palette.accent)
+                .padding(.vertical, 6)
+                Divider().padding(.vertical, 6)
+                Toggle(isOn: $settings.musicOn) {
+                    Label(L10n.t("Background music", "מוזיקת רקע"), systemImage: "music.note")
+                }
+                .tint(Palette.accent)
+                .padding(.vertical, 6)
+                Divider().padding(.vertical, 6)
                 Toggle(isOn: $settings.soundEffectsOn) {
                     Label(L10n.t("Sound effects", "אפקטים קוליים"), systemImage: "speaker.wave.2.fill")
                 }

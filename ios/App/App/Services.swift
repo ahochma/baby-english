@@ -14,21 +14,22 @@ enum SFX: String, CaseIterable {
     case tap = "sfx_tap"
 }
 
-/// Plays the bundled voice clips and synthesized sound effects.
-/// Voice clips are cached so playback starts instantly — toddlers expect the
-/// word the very moment they touch something.
+/// Plays the bundled voice clips, synthesized sound effects and background music.
+/// Voice clips are cached so playback starts the moment a finger lands.
 final class AudioManager {
     static let shared = AudioManager()
 
     private var voiceCache: [String: AVAudioPlayer] = [:]
     private var currentVoice: AVAudioPlayer?
+    private var sequenceToken = UUID()
     private var sfxPools: [SFX: [AVAudioPlayer]] = [:]
+    private var music: AVAudioPlayer?
 
     private init() {}
 
     /// `.playback` keeps sound on even when the ring/silent switch is on —
     /// parents almost always have their phone on silent, and a "broken" silent
-    /// app is the #1 complaint for baby apps. `mixWithOthers` avoids stopping
+    /// app is the #1 complaint for kids' apps. `mixWithOthers` avoids stopping
     /// a parent's podcast or music.
     func configureSession() {
         let session = AVAudioSession.sharedInstance()
@@ -37,15 +38,28 @@ final class AudioManager {
         preload()
     }
 
+    /// Final ElevenLabs clips are .mp3; temporary placeholders are .m4a.
+    /// The .mp3 always wins, so dropping in new clips needs no code change.
+    private static func url(for id: String) -> URL? {
+        for ext in ["mp3", "m4a", "wav"] {
+            if let u = Bundle.main.url(forResource: id, withExtension: ext) { return u }
+        }
+        return nil
+    }
+
+    func has(_ id: String) -> Bool { voiceCache[id] != nil || Self.url(for: id) != nil }
+
     private func preload() {
         DispatchQueue.global(qos: .userInitiated).async {
             var voices: [String: AVAudioPlayer] = [:]
-            for word in ALL_WORDS + [WordItem(id: "celebration", label: "", emoji: "", bg: .clear, textColor: .clear)] {
-                if let url = Bundle.main.url(forResource: word.id, withExtension: "mp3"),
-                   let p = try? AVAudioPlayer(contentsOf: url) {
-                    p.prepareToPlay()
-                    voices[word.id] = p
-                }
+            let urls = (Bundle.main.urls(forResourcesWithExtension: "mp3", subdirectory: nil) ?? [])
+                     + (Bundle.main.urls(forResourcesWithExtension: "m4a", subdirectory: nil) ?? [])
+            for url in urls {
+                let id = url.deletingPathExtension().lastPathComponent
+                guard id != "music_loop", voices[id] == nil || url.pathExtension == "mp3",
+                      let p = try? AVAudioPlayer(contentsOf: url) else { continue }
+                p.prepareToPlay()
+                voices[id] = p
             }
             var pools: [SFX: [AVAudioPlayer]] = [:]
             for sfx in SFX.allCases {
@@ -63,27 +77,53 @@ final class AudioManager {
         }
     }
 
-    /// Plays a spoken word. A new word always interrupts the previous one so
-    /// the voice matches what the child is looking at.
+    private func player(for id: String) -> AVAudioPlayer? {
+        if let cached = voiceCache[id] { return cached }
+        guard let url = Self.url(for: id), let p = try? AVAudioPlayer(contentsOf: url) else { return nil }
+        voiceCache[id] = p
+        return p
+    }
+
+    /// Plays one spoken clip. A new clip always interrupts the previous one
+    /// (and any running sequence) so the voice matches what's on screen.
     func play(_ audioId: String) {
+        say([audioId])
+    }
+
+    /// Speaks clips back to back, e.g. ["he_dog", "dog"] → "כלב… Dog!".
+    /// Missing clips are skipped silently. Returns the total duration.
+    @discardableResult
+    func say(_ ids: [String], gap: TimeInterval = 0.18) -> TimeInterval {
         currentVoice?.stop()
-        let player: AVAudioPlayer?
-        if let cached = voiceCache[audioId] {
-            player = cached
-        } else if let url = Bundle.main.url(forResource: audioId, withExtension: "mp3") {
-            player = try? AVAudioPlayer(contentsOf: url)
-            if let player { voiceCache[audioId] = player }
-        } else {
-            player = nil
+        let token = UUID()
+        sequenceToken = token
+        let clips = ids.compactMap { player(for: $0) }
+        var t: TimeInterval = 0
+        for (i, p) in clips.enumerated() {
+            let delay = t
+            if i == 0 {
+                start(p)
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                    guard let self, self.sequenceToken == token else { return }
+                    self.start(p)
+                }
+            }
+            t += p.duration + gap
         }
-        player?.currentTime = 0
-        player?.volume = 1.0
-        player?.play()
-        currentVoice = player
+        return max(0, t - gap)
+    }
+
+    private func start(_ p: AVAudioPlayer) {
+        currentVoice?.stop()
+        p.currentTime = 0
+        p.volume = 1.0
+        p.play()
+        currentVoice = p
     }
 
     func duration(of audioId: String) -> TimeInterval {
-        voiceCache[audioId]?.duration ?? 1.0
+        player(for: audioId)?.duration ?? 1.0
     }
 
     func play(_ sfx: SFX, volume: Float = 0.7) {
@@ -93,6 +133,48 @@ final class AudioManager {
         player.currentTime = 0
         player.volume = volume
         player.play()
+    }
+
+    // MARK: Background music
+
+    /// Soft music-box loop, kept quiet so every spoken word stays clear.
+    func updateMusic() {
+        guard SettingsStore.shared.musicOn else {
+            music?.pause()
+            return
+        }
+        if music == nil, let url = Bundle.main.url(forResource: "music_loop", withExtension: "m4a") {
+            music = try? AVAudioPlayer(contentsOf: url)
+            music?.numberOfLoops = -1
+            music?.volume = 0.13
+            music?.prepareToPlay()
+        }
+        if music?.isPlaying == false { music?.play() }
+    }
+
+    func pauseMusic() { music?.pause() }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Voice lines
+// ─────────────────────────────────────────────
+
+/// What the app says. Bilingual mode adds the Hebrew word first ("כלב… Dog!"),
+/// a bridge Israeli parents use naturally; the English word always comes last
+/// so it's the one that sticks.
+enum Voice {
+    static var bilingual: Bool { SettingsStore.shared.bilingualHebrew }
+
+    static func word(_ w: WordItem) -> [String] {
+        bilingual ? ["he_\(w.id)", w.id] : [w.id]
+    }
+
+    static func whereIs(_ w: WordItem) -> [String] {
+        bilingual ? ["he_where_is", w.id] : ["where_is", w.id]
+    }
+
+    static func praise() -> String {
+        ["great_job", "you_did_it", "yay_pip"].randomElement()!
     }
 }
 
@@ -120,9 +202,22 @@ final class SettingsStore: ObservableObject {
     @Published var soundEffectsOn: Bool {
         didSet { UserDefaults.standard.set(soundEffectsOn, forKey: "soundEffectsOn") }
     }
+    @Published var musicOn: Bool {
+        didSet {
+            UserDefaults.standard.set(musicOn, forKey: "musicOn")
+            AudioManager.shared.updateMusic()
+        }
+    }
+    /// Say the Hebrew word before the English one. On by default for Hebrew devices.
+    @Published var bilingualHebrew: Bool {
+        didSet { UserDefaults.standard.set(bilingualHebrew, forKey: "bilingualHebrew") }
+    }
 
     private init() {
-        soundEffectsOn = UserDefaults.standard.object(forKey: "soundEffectsOn") as? Bool ?? true
+        let d = UserDefaults.standard
+        soundEffectsOn = d.object(forKey: "soundEffectsOn") as? Bool ?? true
+        musicOn = d.object(forKey: "musicOn") as? Bool ?? true
+        bilingualHebrew = d.object(forKey: "bilingualHebrew") as? Bool ?? L10n.isHebrew
     }
 }
 

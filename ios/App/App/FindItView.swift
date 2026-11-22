@@ -200,9 +200,9 @@ struct FindItView: View {
                 if round == roundID, let t = self.target { choose(t) }
             }
         }
-        AudioManager.shared.play(target.id)
+        let length = AudioManager.shared.say(Voice.whereIs(target))
         listening = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + max(0.6, AudioManager.shared.duration(of: target.id))) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + max(0.6, length)) {
             listening = false
         }
         scheduleIdleRepeat()
@@ -225,7 +225,9 @@ struct FindItView: View {
             idleWork?.cancel()
             Haptics.success()
             AudioManager.shared.play(.chime, volume: 0.6)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { AudioManager.shared.play(target.id) }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                AudioManager.shared.say([target.id, Voice.praise()], gap: 0.3)
+            }
             stickerStore.markHeard(target.id)
             withAnimation(.spring(response: 0.4, dampingFraction: 0.55)) {
                 solved = true
@@ -239,7 +241,7 @@ struct FindItView: View {
                 firstTryStreak = 0
                 if missesThisRound >= 2 && choiceCount > 2 { choiceCount -= 1 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
                 if roundsWon >= roundsPerSticker {
                     roundsWon = 0
                     withAnimation { showCelebration = true }
@@ -252,7 +254,13 @@ struct FindItView: View {
             Haptics.tap()
             AudioManager.shared.play(.boing, volume: 0.35)
             withAnimation(.linear(duration: 0.45)) { shakes[w.id, default: 0] += 1 }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) { sayTarget() }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+                guard !solved else { return }
+                let length = AudioManager.shared.say(["try_again"] + Voice.whereIs(target), gap: 0.3)
+                listening = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + max(0.6, length)) { listening = false }
+                scheduleIdleRepeat()
+            }
         }
     }
 }

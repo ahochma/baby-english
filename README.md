@@ -27,6 +27,8 @@
 ### Built for little kids (3–6)
 - Chunky toy-style buttons that press down like real ones, soft rounded shapes, sky-and-hills scenery
 - **Pip**, an original mascot drawn in code: blinks, breathes, cheers when the child succeeds
+- **Spoken prompts** ("Where is the dog?", "Great job!", "Oops! Try again!") and a **Hebrew → English mode** ("כלב… Dog!") for Israeli families
+- Gentle original **background music** (parent toggle)
 - Multi-touch catcher: palms and several fingers register instantly
 - Debounced navigation: tap bursts never skip a card or open the wrong screen
 - Hold-to-exit house button; status bar and home indicator hidden; system edge gestures deferred

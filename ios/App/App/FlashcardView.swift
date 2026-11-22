@@ -165,7 +165,7 @@ struct FlashcardView: View {
         let w = word
         stickerStore.markHeard(w.id)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
-            AudioManager.shared.play(w.id)
+            AudioManager.shared.say(Voice.word(w))
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
             withAnimation(.spring(response: 0.25, dampingFraction: 0.35)) { emojiBounce = true }
@@ -182,7 +182,7 @@ struct FlashcardView: View {
         let current = index
         let work = DispatchWorkItem {
             guard current == index, !showCelebration else { return }
-            AudioManager.shared.play(word.id)
+            AudioManager.shared.say(Voice.word(word))
             withAnimation(.spring(response: 0.25, dampingFraction: 0.35)) { emojiBounce = true }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(.spring()) { emojiBounce = false }
