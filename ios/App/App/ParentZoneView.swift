@@ -21,7 +21,7 @@ struct ParentZoneView: View {
                 VStack(spacing: 16) {
                     progressCard
                     card { FeedbackCard() }
-                    if !store.isUnlocked { upgradeCard } else { unlockedCard }
+                    if !store.hasFullAccess { upgradeCard } else { unlockedCard }
                     settingsCard
                     tipsCard
                     aboutCard
@@ -224,11 +224,41 @@ struct ParentZoneView: View {
                     }
                 }
                 .padding(.vertical, 6)
+                if !store.isUnlocked {
+                    Divider().padding(.vertical, 6)
+                    Button {
+                        Task { await store.redeemCode() }
+                    } label: {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Label(L10n.t("Redeem a code", "מימוש קוד"), systemImage: "giftcard")
+                            Text(L10n.t("Got a gift code? Unlock every world with it.",
+                                        "קיבלתם קוד מתנה? פותחים איתו את כל העולמות."))
+                                .font(.parent(13))
+                                .foregroundColor(Palette.parentInk.opacity(0.55))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.vertical, 6)
+                }
+                #if DEBUG
+                Divider().padding(.vertical, 6)
+                Toggle(isOn: $store.developerUnlock) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Label(L10n.t("Developer: unlock everything", "מפתח: לפתוח הכול"), systemImage: "hammer.fill")
+                        Text(L10n.t("Only in builds installed from Xcode. Never in the App Store version.",
+                                    "רק בגרסה שמותקנת מ-Xcode. לא קיים בגרסת החנות."))
+                            .font(.parent(13))
+                            .foregroundColor(Palette.parentInk.opacity(0.55))
+                    }
+                }
+                .tint(Palette.accent)
+                .padding(.vertical, 6)
+                #endif
             }
             .font(.parent(16, .medium))
             .foregroundColor(Palette.parentInk)
         }
-        .alert(L10n.t("Restore", "שחזור"),
+        .alert("App Store",
                isPresented: Binding(get: { store.errorMessage != nil && !showPaywall },
                                     set: { if !$0 { store.errorMessage = nil } }),
                actions: { Button(L10n.t("OK", "אישור"), role: .cancel) {} },

@@ -44,6 +44,9 @@ final class PurchaseTests: XCTestCase {
 
     func testFreeTierShowsOnlyAnimals() {
         let store = PurchaseManager.shared
+        let savedDevUnlock = store.developerUnlock
+        store.developerUnlock = false
+        defer { store.developerUnlock = savedDevUnlock }
         XCTAssertFalse(store.isUnlocked)
         XCTAssertEqual(ALL_CATEGORIES.filter { store.isAvailable($0) }.map(\.id), [FREE_CATEGORY_ID])
         XCTAssertEqual(store.availableWords.count,

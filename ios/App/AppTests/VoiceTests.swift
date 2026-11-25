@@ -175,3 +175,19 @@ final class MusicTests: XCTestCase {
         XCTAssertFalse(a.musicShouldPlay, "parent switched it off")
     }
 }
+
+@MainActor
+final class DeveloperUnlockTests: XCTestCase {
+    func testDeveloperUnlockOpensEveryWorldInDebugBuilds() {
+        let store = PurchaseManager.shared
+        let saved = store.developerUnlock
+        defer { store.developerUnlock = saved }
+        store.developerUnlock = false
+        if !store.isUnlocked {
+            XCTAssertFalse(ALL_CATEGORIES.allSatisfy { store.isAvailable($0) })
+        }
+        store.developerUnlock = true
+        XCTAssertTrue(ALL_CATEGORIES.allSatisfy { store.isAvailable($0) })
+        XCTAssertEqual(store.availableWords.count, ALL_WORDS.count)
+    }
+}

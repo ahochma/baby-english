@@ -1,5 +1,6 @@
 import Foundation
 import StoreKit
+import UIKit
 
 /// One-time, non-consumable "Unlock Everything" purchase (StoreKit 2).
 ///
@@ -26,6 +27,13 @@ final class PurchaseManager: ObservableObject {
 
     private init() {
         isUnlocked = UserDefaults.standard.bool(forKey: unlockedKey)
+        #if DEBUG
+        // `-developerUnlock` at launch (from Xcode or devicectl) turns the dev unlock on and keeps it on.
+        if ProcessInfo.processInfo.arguments.contains("-developerUnlock") {
+            developerUnlock = true
+            UserDefaults.standard.set(true, forKey: "developerUnlock")
+        }
+        #endif
         updatesTask = Task { [weak self] in
             for await update in Transaction.updates {
                 await self?.handle(update)
@@ -41,8 +49,42 @@ final class PurchaseManager: ObservableObject {
 
     var displayPrice: String? { product?.displayPrice }
 
+    /// Everything is open: bought (or redeemed with a code), or a developer build with the dev unlock on.
+    var hasFullAccess: Bool { isUnlocked || developerUnlock }
+
     func isAvailable(_ category: Category) -> Bool {
-        isUnlocked || category.isFree
+        hasFullAccess || category.isFree
+    }
+
+    // MARK: Developer unlock (Debug builds only)
+
+    #if DEBUG
+    /// For the developer's own phone (installed from Xcode): open every world
+    /// without paying. Compiled out of App Store builds, so it can never ship.
+    @Published var developerUnlock: Bool = UserDefaults.standard.bool(forKey: "developerUnlock") {
+        didSet { UserDefaults.standard.set(developerUnlock, forKey: "developerUnlock") }
+    }
+    #else
+    let developerUnlock = false
+    #endif
+
+    // MARK: Offer codes
+
+    /// Free codes for friends and family, created in App Store Connect
+    /// ("Offer Codes" on the full-unlock purchase). Apple shows its own
+    /// redemption sheet; a redeemed code arrives through Transaction.updates
+    /// exactly like a purchase. Non-consumable codes redeem on iOS 16.3+.
+    func redeemCode() async {
+        guard let scene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }) else { return }
+        do {
+            try await AppStore.presentOfferCodeRedeemSheet(in: scene)
+        } catch {
+            errorMessage = L10n.t("The code screen couldn't open right now. Please try again in a moment.",
+                                  "מסך הקוד לא נפתח כרגע. נסו שוב בעוד רגע.")
+        }
+        await refreshEntitlements()
     }
 
     /// Words children can see in games right now.
