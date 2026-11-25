@@ -33,7 +33,7 @@ struct WordArt: View {
 }
 
 enum CharacterLibrary {
-    static let drawnIds: Set<String> = ["dog", "cat", "duck"]
+    static let drawnIds: Set<String> = ["dog", "cat", "duck", "bird", "fish", "cow", "elephant", "lion", "frog", "rabbit"]
 
     static func has(_ id: String) -> Bool { drawnIds.contains(id) }
 
@@ -42,6 +42,13 @@ enum CharacterLibrary {
         case "dog": return AnyView(DogCharacter(mood: mood))
         case "cat": return AnyView(CatCharacter(mood: mood))
         case "duck": return AnyView(DuckCharacter(mood: mood))
+        case "bird": return AnyView(BirdCharacter(mood: mood))
+        case "fish": return AnyView(FishCharacter(mood: mood))
+        case "cow": return AnyView(CowCharacter(mood: mood))
+        case "elephant": return AnyView(ElephantCharacter(mood: mood))
+        case "lion": return AnyView(LionCharacter(mood: mood))
+        case "frog": return AnyView(FrogCharacter(mood: mood))
+        case "rabbit": return AnyView(RabbitCharacter(mood: mood))
         default: return nil
         }
     }
@@ -379,6 +386,395 @@ struct DuckCharacter: View {
                     RoundedTriangle().fill(Color(hex: "#4FA8F7")).frame(width: 12 * s, height: 11 * s).rotationEffect(.degrees(90))
                 }
                 .offset(y: 36 * s)
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Bird: sky-blue songbird
+// ─────────────────────────────────────────────
+
+struct BirdCharacter: View {
+    var mood: CharacterMood = .idle
+    private let body1 = Color(hex: "#9ED8FF"), body2 = Color(hex: "#3E9BE6")
+    private let belly = Color(hex: "#E6F5FF")
+    private let beak = Color(hex: "#FFB341")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Ellipse().fill(body2)
+                        .frame(width: 20 * s, height: 30 * s)
+                        .rotationEffect(.degrees(side * (mood == .happy ? -75 : -20)), anchor: .top)
+                        .offset(x: side * 37 * s, y: 10 * s)
+                }
+                // tuft
+                HStack(spacing: -1 * s) {
+                    Capsule().fill(body2).frame(width: 6 * s, height: 13 * s).rotationEffect(.degrees(-25))
+                    Capsule().fill(body2).frame(width: 6 * s, height: 16 * s)
+                }
+                .offset(x: 2 * s, y: -40 * s)
+                Ellipse()
+                    .fill(RadialGradient(colors: [body1, body2], center: UnitPoint(x: 0.4, y: 0.3), startRadius: 4 * s, endRadius: 60 * s))
+                    .frame(width: 80 * s, height: 78 * s)
+                shine(s, x: -16, y: -24)
+                Ellipse().fill(belly).frame(width: 46 * s, height: 34 * s).offset(y: 20 * s)
+                HStack(spacing: 14 * s) {
+                    CuteEye(closed: closed, s: s)
+                    CuteEye(closed: closed, s: s)
+                }
+                .offset(y: -10 * s)
+                Cheeks(s: s, spread: 46, y: 5)
+                // beak: two triangles, opens when singing (happy)
+                VStack(spacing: 0) {
+                    RoundedTriangle().fill(beak).frame(width: 13 * s, height: 9 * s).rotationEffect(.degrees(180))
+                    if mood == .happy {
+                        RoundedTriangle().fill(Color(hex: "#F08A00")).frame(width: 10 * s, height: 6 * s)
+                    }
+                }
+                .offset(y: (mood == .happy ? 6 : 3) * s)
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Fish: round coral fish, front-facing like the others
+// ─────────────────────────────────────────────
+
+struct FishCharacter: View {
+    var mood: CharacterMood = .idle
+    private let body1 = Color(hex: "#FFB199"), body2 = Color(hex: "#FF6F61")
+    private let fin = Color(hex: "#FF8C7A"), finDark = Color(hex: "#F25A4D")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                // big tail on the right, wags when happy
+                RoundedTriangle()
+                    .fill(LinearGradient(colors: [fin, finDark], startPoint: .leading, endPoint: .trailing))
+                    .frame(width: 34 * s, height: 30 * s)
+                    .rotationEffect(.degrees(-90 + (mood == .happy ? 14 : 0)))
+                    .offset(x: 38 * s, y: 2 * s)
+                // top fin
+                RoundedTriangle().fill(fin).frame(width: 28 * s, height: 18 * s)
+                    .rotationEffect(.degrees(12)).offset(x: 4 * s, y: -34 * s)
+                // body
+                Ellipse()
+                    .fill(RadialGradient(colors: [body1, body2], center: UnitPoint(x: 0.35, y: 0.3), startRadius: 4 * s, endRadius: 58 * s))
+                    .frame(width: 76 * s, height: 64 * s)
+                    .offset(x: -6 * s)
+                shine(s, x: -20, y: -16)
+                // scales
+                VStack(spacing: 2 * s) {
+                    HStack(spacing: 3 * s) {
+                        ForEach(0..<2, id: \.self) { _ in
+                            ArcDown().stroke(Color.white.opacity(0.5), style: StrokeStyle(lineWidth: 2 * s, lineCap: .round))
+                                .frame(width: 8 * s, height: 3.5 * s)
+                        }
+                    }
+                    HStack(spacing: 3 * s) {
+                        ForEach(0..<3, id: \.self) { _ in
+                            ArcDown().stroke(Color.white.opacity(0.5), style: StrokeStyle(lineWidth: 2 * s, lineCap: .round))
+                                .frame(width: 8 * s, height: 3.5 * s)
+                        }
+                    }
+                }
+                .offset(x: 14 * s, y: 6 * s)
+                // side fin
+                Ellipse().fill(finDark.opacity(0.8)).frame(width: 14 * s, height: 9 * s)
+                    .rotationEffect(.degrees(mood == .happy ? -40 : 25)).offset(x: 2 * s, y: 20 * s)
+                // eyes toward the front (left)
+                HStack(spacing: 10 * s) {
+                    CuteEye(closed: closed, s: s, size: 16)
+                    CuteEye(closed: closed, s: s, size: 16)
+                }
+                .offset(x: -14 * s, y: -8 * s)
+                Ellipse().fill(Ink.blush.opacity(0.5)).frame(width: 11 * s, height: 6 * s).offset(x: -32 * s, y: 6 * s)
+                // mouth at the front, blowing bubbles when happy
+                Ellipse().stroke(Color(hex: "#C2453A"), lineWidth: 2.4 * s).frame(width: 7 * s, height: 7 * s)
+                    .offset(x: -40 * s, y: 6 * s)
+                if mood == .happy {
+                    Circle().fill(Color(hex: "#BDE9FF")).overlay(Circle().stroke(Color(hex: "#7CCBF2"), lineWidth: 1.4 * s))
+                        .frame(width: 9 * s).offset(x: -44 * s, y: -10 * s)
+                    Circle().fill(Color(hex: "#BDE9FF")).overlay(Circle().stroke(Color(hex: "#7CCBF2"), lineWidth: 1.2 * s))
+                        .frame(width: 6 * s).offset(x: -40 * s, y: -22 * s)
+                }
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Cow: spotted calf with a big pink snout
+// ─────────────────────────────────────────────
+
+struct CowCharacter: View {
+    var mood: CharacterMood = .idle
+    private let snout1 = Color(hex: "#FFC6D0"), snout2 = Color(hex: "#F79AAE")
+    private let spot = Color(hex: "#3B2A1E")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                // horns
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Capsule().fill(Color(hex: "#F3E2B8"))
+                        .frame(width: 8 * s, height: 16 * s)
+                        .rotationEffect(.degrees(side * 25))
+                        .offset(x: side * 20 * s, y: -38 * s)
+                }
+                // ears
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Ellipse().fill(Color(hex: "#E9E3E8"))
+                        .overlay(Ellipse().fill(Color(hex: "#FFB3C2")).padding(4 * s))
+                        .frame(width: 26 * s, height: 14 * s)
+                        .rotationEffect(.degrees(side * (mood == .happy ? -30 : -12)))
+                        .offset(x: side * 42 * s, y: -14 * s)
+                }
+                Ellipse()
+                    .fill(RadialGradient(colors: [.white, Color(hex: "#ECE7EE")], center: UnitPoint(x: 0.4, y: 0.3), startRadius: 4 * s, endRadius: 58 * s))
+                    .frame(width: 76 * s, height: 78 * s)
+                // spots
+                Ellipse().fill(spot.opacity(0.85)).frame(width: 22 * s, height: 18 * s).rotationEffect(.degrees(-20)).offset(x: -20 * s, y: -24 * s)
+                Ellipse().fill(spot.opacity(0.85)).frame(width: 14 * s, height: 12 * s).offset(x: 24 * s, y: -12 * s)
+                shine(s, x: -4, y: -30, w: 18, h: 8)
+                HStack(spacing: 14 * s) {
+                    CuteEye(closed: closed, s: s)
+                    CuteEye(closed: closed, s: s)
+                }
+                .offset(y: -8 * s)
+                // snout
+                Ellipse()
+                    .fill(LinearGradient(colors: [snout1, snout2], startPoint: .top, endPoint: .bottom))
+                    .frame(width: 50 * s, height: 30 * s)
+                    .offset(y: 20 * s)
+                HStack(spacing: 14 * s) {
+                    Ellipse().fill(Color(hex: "#C2566E")).frame(width: 6 * s, height: 8 * s)
+                    Ellipse().fill(Color(hex: "#C2566E")).frame(width: 6 * s, height: 8 * s)
+                }
+                .offset(y: 16 * s)
+                ArcDown().stroke(Color(hex: "#C2566E"), style: StrokeStyle(lineWidth: 2.2 * s, lineCap: .round))
+                    .frame(width: (mood == .happy ? 18 : 12) * s, height: 4 * s)
+                    .offset(y: 27 * s)
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Elephant: big ears and a curly trunk
+// ─────────────────────────────────────────────
+
+struct ElephantCharacter: View {
+    var mood: CharacterMood = .idle
+    private let skin1 = Color(hex: "#C9D5EA"), skin2 = Color(hex: "#93A4C8")
+    private let inner = Color(hex: "#F6C2D2")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Ellipse().fill(skin2)
+                        .overlay(Ellipse().fill(inner).padding(7 * s))
+                        .frame(width: 40 * s, height: 48 * s)
+                        .rotationEffect(.degrees(side * (mood == .happy ? 18 : 6)))
+                        .offset(x: side * 40 * s, y: -2 * s)
+                }
+                Ellipse()
+                    .fill(RadialGradient(colors: [skin1, skin2], center: UnitPoint(x: 0.4, y: 0.3), startRadius: 4 * s, endRadius: 58 * s))
+                    .frame(width: 70 * s, height: 70 * s)
+                    .offset(y: -4 * s)
+                shine(s, x: -12, y: -26, w: 22, h: 9)
+                HStack(spacing: 15 * s) {
+                    CuteEye(closed: closed, s: s, size: 15)
+                    CuteEye(closed: closed, s: s, size: 15)
+                }
+                .offset(y: -12 * s)
+                Cheeks(s: s, spread: 40, y: 2)
+                // trunk: hangs down and curls at the tip; lifts and toots when happy
+                ZStack(alignment: .top) {
+                    Capsule()
+                        .fill(LinearGradient(colors: [skin1, skin2], startPoint: .leading, endPoint: .trailing))
+                        .frame(width: 15 * s, height: 34 * s)
+                    Capsule()
+                        .fill(skin2)
+                        .frame(width: 13 * s, height: 14 * s)
+                        .rotationEffect(.degrees(-55), anchor: .top)
+                        .offset(x: 3 * s, y: 28 * s)
+                    HStack(spacing: 3 * s) {
+                        Circle().fill(Ink.dark.opacity(0.35)).frame(width: 2.6 * s)
+                        Circle().fill(Ink.dark.opacity(0.35)).frame(width: 2.6 * s)
+                    }
+                    .offset(x: 9 * s, y: 36 * s)
+                }
+                .frame(width: 30 * s, height: 48 * s, alignment: .top)
+                .rotationEffect(.degrees(mood == .happy ? -70 : 0), anchor: .top)
+                .offset(y: 26 * s)
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Lion: fluffy mane, golden face
+// ─────────────────────────────────────────────
+
+struct LionCharacter: View {
+    var mood: CharacterMood = .idle
+    private let mane1 = Color(hex: "#F6A23B"), mane2 = Color(hex: "#D9731C")
+    private let face1 = Color(hex: "#FFE3A0"), face2 = Color(hex: "#FFC75A")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                // mane: ring of fluffy puffs
+                ForEach(0..<12, id: \.self) { i in
+                    Circle()
+                        .fill(i.isMultiple(of: 2) ? mane1 : mane2)
+                        .frame(width: 30 * s)
+                        .offset(y: -36 * s)
+                        .rotationEffect(.degrees(Double(i) * 30 + (mood == .happy ? 6 : 0)))
+                }
+                Circle().fill(mane1).frame(width: 82 * s)
+                // ears
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Circle().fill(face2).frame(width: 15 * s)
+                        .overlay(Circle().fill(Color(hex: "#F7A8A0")).frame(width: 7 * s))
+                        .offset(x: side * 24 * s, y: -26 * s)
+                }
+                Ellipse()
+                    .fill(RadialGradient(colors: [face1, face2], center: UnitPoint(x: 0.4, y: 0.3), startRadius: 4 * s, endRadius: 46 * s))
+                    .frame(width: 64 * s, height: 60 * s)
+                    .offset(y: 3 * s)
+                shine(s, x: -12, y: -16, w: 18, h: 8)
+                HStack(spacing: 12 * s) {
+                    CuteEye(closed: closed, s: s, size: 15)
+                    CuteEye(closed: closed, s: s, size: 15)
+                }
+                .offset(y: -4 * s)
+                Cheeks(s: s, spread: 38, y: 11)
+                HStack(spacing: -3 * s) {
+                    Ellipse().fill(Color(hex: "#FFF4DE")).frame(width: 15 * s, height: 12 * s)
+                    Ellipse().fill(Color(hex: "#FFF4DE")).frame(width: 15 * s, height: 12 * s)
+                }
+                .offset(y: 15 * s)
+                RoundedTriangle().fill(Color(hex: "#8A4A2A")).frame(width: 11 * s, height: 8 * s)
+                    .rotationEffect(.degrees(180)).offset(y: 10 * s)
+                if mood == .happy {   // a friendly little roar
+                    Ellipse().fill(Ink.dark).frame(width: 10 * s, height: 8 * s).offset(y: 22 * s)
+                        .overlay(Ellipse().fill(Ink.tongue).frame(width: 6 * s, height: 3 * s).offset(y: 24.5 * s))
+                } else {
+                    HStack(spacing: 0) {
+                        ArcDown().stroke(Ink.dark, style: StrokeStyle(lineWidth: 2 * s, lineCap: .round)).frame(width: 6 * s, height: 3 * s)
+                        ArcDown().stroke(Ink.dark, style: StrokeStyle(lineWidth: 2 * s, lineCap: .round)).frame(width: 6 * s, height: 3 * s)
+                    }
+                    .offset(y: 18 * s)
+                }
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Frog: bulging eyes on top, wide smile
+// ─────────────────────────────────────────────
+
+struct FrogCharacter: View {
+    var mood: CharacterMood = .idle
+    private let skin1 = Color(hex: "#A8EA8E"), skin2 = Color(hex: "#4FBF4A")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                // eye domes
+                HStack(spacing: 10 * s) {
+                    Circle().fill(skin2).frame(width: 30 * s)
+                    Circle().fill(skin2).frame(width: 30 * s)
+                }
+                .offset(y: -28 * s)
+                Ellipse()
+                    .fill(RadialGradient(colors: [skin1, skin2], center: UnitPoint(x: 0.4, y: 0.3), startRadius: 4 * s, endRadius: 60 * s))
+                    .frame(width: 88 * s, height: 64 * s)
+                    .offset(y: 6 * s)
+                Ellipse().fill(Color(hex: "#DFF7C9")).frame(width: 56 * s, height: 26 * s).offset(y: 22 * s)
+                shine(s, x: -18, y: -6, w: 22, h: 8)
+                HStack(spacing: 18 * s) {
+                    CuteEye(closed: closed, s: s, size: 19)
+                    CuteEye(closed: closed, s: s, size: 19)
+                }
+                .offset(y: -28 * s)
+                Cheeks(s: s, spread: 58, y: 10)
+                // wide smile; opens into a big grin when happy
+                if mood == .happy {
+                    ArcDown().fill(Ink.dark).frame(width: 34 * s, height: 10 * s).offset(y: 12 * s)
+                        .overlay(Ellipse().fill(Ink.tongue).frame(width: 12 * s, height: 5 * s).offset(y: 17 * s))
+                } else {
+                    ArcDown().stroke(Ink.dark, style: StrokeStyle(lineWidth: 2.6 * s, lineCap: .round))
+                        .frame(width: 34 * s, height: 7 * s)
+                        .offset(y: 12 * s)
+                }
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Rabbit: tall ears, twitchy nose, buck teeth
+// ─────────────────────────────────────────────
+
+struct RabbitCharacter: View {
+    var mood: CharacterMood = .idle
+    private let fur1 = Color.white, fur2 = Color(hex: "#E3D9E8")
+    private let inner = Color(hex: "#FFB3C7")
+
+    var body: some View {
+        CharacterRig(mood: mood) { s, closed in
+            ZStack {
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Capsule().fill(fur2)
+                        .overlay(Capsule().fill(inner).padding(5 * s))
+                        .frame(width: 20 * s, height: 46 * s)
+                        .rotationEffect(.degrees(side * (mood == .happy ? 14 : 6) + (side > 0 && mood != .happy ? 18 : 0)), anchor: .bottom)
+                        .offset(x: side * 15 * s, y: -38 * s)
+                }
+                Ellipse()
+                    .fill(RadialGradient(colors: [fur1, fur2], center: UnitPoint(x: 0.4, y: 0.3), startRadius: 4 * s, endRadius: 58 * s))
+                    .frame(width: 76 * s, height: 70 * s)
+                    .offset(y: 6 * s)
+                Ellipse().stroke(Color(hex: "#D3C6DB"), lineWidth: 2 * s).frame(width: 76 * s, height: 70 * s).offset(y: 6 * s)
+                shine(s, x: -16, y: -14)
+                HStack(spacing: 15 * s) {
+                    CuteEye(closed: closed, s: s)
+                    CuteEye(closed: closed, s: s)
+                }
+                .offset(y: 0)
+                Cheeks(s: s, spread: 46, y: 15)
+                // nose + mouth
+                Ellipse().fill(Color(hex: "#FF8FA3")).frame(width: 9 * s, height: 6 * s).offset(y: 13 * s)
+                HStack(spacing: 0) {
+                    ArcDown().stroke(Ink.dark, style: StrokeStyle(lineWidth: 1.8 * s, lineCap: .round)).frame(width: 6 * s, height: 3 * s)
+                    ArcDown().stroke(Ink.dark, style: StrokeStyle(lineWidth: 1.8 * s, lineCap: .round)).frame(width: 6 * s, height: 3 * s)
+                }
+                .offset(y: 18 * s)
+                if mood == .happy {
+                    HStack(spacing: 1 * s) {
+                        RoundedRectangle(cornerRadius: 1 * s).fill(.white).frame(width: 4.5 * s, height: 6 * s)
+                        RoundedRectangle(cornerRadius: 1 * s).fill(.white).frame(width: 4.5 * s, height: 6 * s)
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 1 * s).stroke(Color(hex: "#D3C6DB"), lineWidth: 0.8 * s))
+                    .offset(y: 23 * s)
+                }
+                // whiskers
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    VStack(spacing: 3.5 * s) {
+                        Capsule().fill(Ink.dark.opacity(0.35)).frame(width: 13 * s, height: 1.2 * s).rotationEffect(.degrees(side * -8))
+                        Capsule().fill(Ink.dark.opacity(0.35)).frame(width: 13 * s, height: 1.2 * s).rotationEffect(.degrees(side * 8))
+                    }
+                    .offset(x: side * 22 * s, y: 15 * s)
+                }
             }
         }
     }
