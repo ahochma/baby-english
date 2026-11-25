@@ -75,9 +75,11 @@ struct CelebrationView: View {
         .accessibilityLabel(L10n.t("Great job! You earned a sticker.", "כל הכבוד! קיבלתם מדבקה."))
         .accessibilityAction { finish() }
         .onAppear(perform: start)
+        .onDisappear { AudioManager.shared.setCelebrating(false) }
     }
 
     private func start() {
+        AudioManager.shared.setCelebrating(true)
         if isDailyGift {
             sticker = stickerStore.claimDailyGift() ?? StickerStore.giftPool[0]
         } else {

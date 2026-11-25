@@ -146,3 +146,29 @@ final class FeedbackTests: XCTestCase {
         XCTAssertTrue(AppInfo.supportEmail.contains("@"))
     }
 }
+
+final class MusicTests: XCTestCase {
+    func testMusicPlaysOnlyWhereNothingIsTaught() {
+        let s = SettingsStore.shared, a = AudioManager.shared
+        let (wasOn, wasCalm) = (s.musicOn, s.calmMode)
+        defer {
+            s.musicOn = wasOn; s.calmMode = wasCalm
+            a.setCelebrating(false); a.setMusicScene(allowed: true); a.pauseMusic()
+        }
+        s.musicOn = true; s.calmMode = false
+        a.setMusicScene(allowed: Screen.home.allowsMusic)
+        XCTAssertTrue(a.musicShouldPlay, "home has music")
+        a.setMusicScene(allowed: Screen.findIt.allowsMusic)
+        XCTAssertFalse(a.musicShouldPlay, "learning games are quiet")
+        a.setMusicScene(allowed: Screen.bubbles.allowsMusic)
+        XCTAssertFalse(a.musicShouldPlay)
+        a.setCelebrating(true)
+        XCTAssertTrue(a.musicShouldPlay, "celebrations bring the music back")
+        a.setCelebrating(false)
+        a.setMusicScene(allowed: Screen.stickers.allowsMusic)
+        s.calmMode = true
+        XCTAssertFalse(a.musicShouldPlay, "calm mode is silent")
+        s.calmMode = false; s.musicOn = false
+        XCTAssertFalse(a.musicShouldPlay, "parent switched it off")
+    }
+}

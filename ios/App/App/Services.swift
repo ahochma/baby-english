@@ -137,22 +137,61 @@ final class AudioManager {
 
     // MARK: Background music
 
-    /// Soft music-box loop, kept quiet so every spoken word stays clear.
+    /// Soft music-box loop. It plays only where nothing is being taught (home,
+    /// sticker album, celebrations) and fades out as soon as a learning game
+    /// starts, so the child hears each word clean, with no background sound.
+    private static let musicVolume: Float = 0.13
+    private var sceneAllowsMusic = true
+    private var celebrating = false
+    private var musicGeneration = 0
+
+    /// Called by the root view whenever the screen changes.
+    func setMusicScene(allowed: Bool) {
+        sceneAllowsMusic = allowed
+        updateMusic()
+    }
+
+    /// Celebrations get the music back even in the middle of a game.
+    func setCelebrating(_ on: Bool) {
+        celebrating = on
+        updateMusic()
+    }
+
+    var musicShouldPlay: Bool {
+        let s = SettingsStore.shared
+        return s.musicOn && !s.calmMode && (sceneAllowsMusic || celebrating)
+    }
+
     func updateMusic() {
-        guard SettingsStore.shared.musicOn else {
-            music?.pause()
+        musicGeneration += 1
+        let generation = musicGeneration
+        guard musicShouldPlay else {
+            guard let music, music.isPlaying else { return }
+            music.setVolume(0, fadeDuration: 0.5)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) { [weak self] in
+                guard let self, self.musicGeneration == generation else { return }
+                self.music?.pause()
+            }
             return
         }
         if music == nil, let url = Bundle.main.url(forResource: "music_loop", withExtension: "m4a") {
             music = try? AVAudioPlayer(contentsOf: url)
             music?.numberOfLoops = -1
-            music?.volume = 0.13
+            music?.volume = 0
             music?.prepareToPlay()
         }
-        if music?.isPlaying == false { music?.play() }
+        guard let music else { return }
+        if !music.isPlaying {
+            music.volume = 0
+            music.play()
+        }
+        music.setVolume(Self.musicVolume, fadeDuration: 0.8)
     }
 
-    func pauseMusic() { music?.pause() }
+    func pauseMusic() {
+        musicGeneration += 1
+        music?.pause()
+    }
 }
 
 // ─────────────────────────────────────────────
@@ -217,7 +256,10 @@ final class SettingsStore: ObservableObject {
     /// Calm mode: no confetti, no spinning or bobbing decorations. For children
     /// who get over-excited, or for bedtime.
     @Published var calmMode: Bool {
-        didSet { UserDefaults.standard.set(calmMode, forKey: "calmMode") }
+        didSet {
+            UserDefaults.standard.set(calmMode, forKey: "calmMode")
+            AudioManager.shared.updateMusic()
+        }
     }
     /// Say the Hebrew word before the English one. On by default for Hebrew devices.
     @Published var bilingualHebrew: Bool {

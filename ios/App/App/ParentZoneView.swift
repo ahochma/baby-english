@@ -187,8 +187,8 @@ struct ParentZoneView: View {
                 Toggle(isOn: $settings.calmMode) {
                     VStack(alignment: .leading, spacing: 2) {
                         Label(L10n.t("Calm mode", "מצב רגוע"), systemImage: "leaf.fill")
-                        Text(L10n.t("No confetti or bouncing decorations. Good for bedtime.",
-                                    "בלי קונפטי ובלי קישוטים קופצים. מתאים גם לפני השינה."))
+                        Text(L10n.t("No confetti, bouncing decorations or music. Good for bedtime.",
+                                    "בלי קונפטי, בלי קישוטים קופצים ובלי מוזיקה. מתאים גם לפני השינה."))
                             .font(.parent(13))
                             .foregroundColor(Palette.parentInk.opacity(0.55))
                     }
@@ -197,7 +197,13 @@ struct ParentZoneView: View {
                 .padding(.vertical, 6)
                 Divider().padding(.vertical, 6)
                 Toggle(isOn: $settings.musicOn) {
-                    Label(L10n.t("Background music", "מוזיקת רקע"), systemImage: "music.note")
+                    VStack(alignment: .leading, spacing: 2) {
+                        Label(L10n.t("Background music", "מוזיקת רקע"), systemImage: "music.note")
+                        Text(L10n.t("Only on the home screen, stickers and celebrations. Games stay quiet so words are heard clearly.",
+                                    "רק במסך הבית, במדבקות ובחגיגות. במשחקים יש שקט, כדי שהמילים יישמעו ברור."))
+                            .font(.parent(13))
+                            .foregroundColor(Palette.parentInk.opacity(0.55))
+                    }
                 }
                 .tint(Palette.accent)
                 .padding(.vertical, 6)

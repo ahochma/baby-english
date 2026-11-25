@@ -11,6 +11,14 @@ enum Screen: Equatable {
     case findIt
     case stickers
 
+    /// Music plays only where nothing is being taught.
+    var allowsMusic: Bool {
+        switch self {
+        case .home, .stickers: return true
+        case .flashcards, .bubbles, .findIt: return false
+        }
+    }
+
     var key: String {
         switch self {
         case .home: return "home"
@@ -68,6 +76,8 @@ struct RootView: View {
                                         removal: .opacity))
         }
         .animation(.easeInOut(duration: 0.28), value: screen.key)
+        .onAppear { AudioManager.shared.setMusicScene(allowed: screen.allowsMusic) }
+        .onChange(of: screen.key) { _ in AudioManager.shared.setMusicScene(allowed: screen.allowsMusic) }
         // The child's world is English, so it always reads left-to-right even on
         // a Hebrew device. Grown-up screens set their own direction.
         .environment(\.layoutDirection, .leftToRight)
