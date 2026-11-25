@@ -11,7 +11,7 @@ final class PurchaseManager: ObservableObject {
     static let shared = PurchaseManager()
 
     /// Must match the product created in App Store Connect and in Products.storekit.
-    static let productID = "com.babyenglish.app.fullunlock"
+    static let productID = "com.pipenglish.app.fullunlock"
 
     enum LoadState: Equatable { case idle, loading, loaded, failed }
 

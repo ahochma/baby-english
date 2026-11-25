@@ -19,7 +19,7 @@ Everything that can be prepared is already in the repo:
 ### Sun 22 – Mon 23: submit
 0. **Set the support email** in `ios/App/App/Feedback.swift` (`AppInfo.supportEmail`) and on the landing page's support section.
 1. **Turn on GitHub Pages** (Settings → Pages → Branch `main`, folder `/docs`) once the PR is merged. Your privacy URL becomes `https://ahochma.github.io/baby-english/privacy.html` (already filled in the metadata).
-2. **App Store Connect:** create the app (bundle `com.babyenglish.app`), Kids Category "5 and under", privacy label "Data Not Collected", and the IAP `com.babyenglish.app.fullunlock` (non-consumable, Family Sharing on).
+2. **App Store Connect:** create the app (bundle `com.pipenglish.app`), Kids Category "5 and under", privacy label "Data Not Collected", and the IAP `com.pipenglish.app.fullunlock` (non-consumable, Family Sharing on).
 3. **Upload the listing in one command:**
    ```
    fastlane deliver
@@ -102,8 +102,8 @@ Hashtags: #אנגליתלילדים #אפליקציהלילדים #הורות #�
 
 Debug builds have a demo mode that plays the games by themselves:
 ```
-xcrun simctl launch booted com.babyenglish.app -startScreen bubbles -demoMode
-xcrun simctl launch booted com.babyenglish.app -startScreen findit -demoMode
+xcrun simctl launch booted com.pipenglish.app -startScreen bubbles -demoMode
+xcrun simctl launch booted com.pipenglish.app -startScreen findit -demoMode
 xcrun simctl io booted recordVideo bubbles.mov   # Ctrl+C to stop
 ```
 A 15–30 second recording makes a good App Preview video and a good Reel.

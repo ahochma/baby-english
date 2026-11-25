@@ -9,7 +9,7 @@ Work through the checklist top to bottom.
 
 | Step | Where | Value |
 |---|---|---|
-| Create the app | My Apps → + | Bundle ID `com.babyenglish.app`, SKU `babyenglish-ios` |
+| Create the app | My Apps → + | Bundle ID `com.pipenglish.app`, SKU `pipenglish-ios` |
 | Primary category | App Information | **Education** |
 | Kids Category | App Information → Kids | **Ages 5 and Under** |
 | Age rating | App Information → Age Rating | answer "None" to everything → **4+** |
@@ -23,7 +23,7 @@ Work through the checklist top to bottom.
 | Field | Value |
 |---|---|
 | Type | **Non-Consumable** |
-| Product ID | `com.babyenglish.app.fullunlock` (must match `PurchaseManager.productID`) |
+| Product ID | `com.pipenglish.app.fullunlock` (must match `PurchaseManager.productID`) |
 | Reference name | Full Unlock |
 | Family Sharing | **On** (the paywall promises it) |
 | Display name (EN) | Unlock Everything |
