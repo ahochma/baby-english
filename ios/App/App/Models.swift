@@ -83,7 +83,7 @@ let ALL_CATEGORIES: [Category] = [
                 WordItem(id:"strawberry",label:"Strawberry", emoji:"🍓", bg:Color(hex:"#FCE4EC"), textColor:Color(hex:"#880E4F")),
                 WordItem(id:"carrot",    label:"Carrot",     emoji:"🥕", bg:Color(hex:"#FFF3E0"), textColor:Color(hex:"#E65100")),
                 WordItem(id:"cake",      label:"Cake",       emoji:"🎂", bg:Color(hex:"#F8BBD0"), textColor:Color(hex:"#880E4F")),
-                WordItem(id:"grapes",    label:"Grapes",     emoji:"🍇", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#4A148C")),
+                WordItem(id:"grapes",    label:"Grapes",     emoji:"🍇", bg:Color(hex:"#EDE7F6"), textColor:Color(hex:"#4A148C"), prompt: .plural),
              ],
              stickerPool: ["🍎","🍌","🥛","🍞","🥚","🍊","🍓","🥕","🎂","🍇","🍕","🍪"]),
     Category(id: "colors", label: "Colors", emoji: "🎨",

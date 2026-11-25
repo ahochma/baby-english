@@ -12,9 +12,12 @@ final class VoiceTests: XCTestCase {
     }
 
     func testPromptClipsExist() {
-        for id in ["where_is", "where_are", "where_is_number", "he_where_is", "he_where_is_number",
-                   "great_job", "you_did_it", "yay_pip", "try_again", "hi_pip", "celebration", "music_loop"] {
+        for id in ["great_job", "you_did_it", "yay_pip", "try_again", "hi_pip", "celebration", "music_loop"] {
             XCTAssertTrue(AudioManager.shared.has(id), "missing prompt clip: \(id)")
+        }
+        for w in ALL_WORDS {
+            XCTAssertTrue(AudioManager.shared.has("ask_\(w.id)"), "missing question clip: ask_\(w.id)")
+            XCTAssertTrue(AudioManager.shared.has("he_ask_\(w.id)"), "missing Hebrew question clip: he_ask_\(w.id)")
         }
     }
 
@@ -25,11 +28,11 @@ final class VoiceTests: XCTestCase {
 
         SettingsStore.shared.bilingualHebrew = true
         XCTAssertEqual(Voice.word(dog), ["he_dog", "dog"])
-        XCTAssertEqual(Voice.whereIs(dog), ["he_where_is", "dog"])
+        XCTAssertEqual(Voice.whereIs(dog), ["he_ask_dog", "dog"])
 
         SettingsStore.shared.bilingualHebrew = false
         XCTAssertEqual(Voice.word(dog), ["dog"])
-        XCTAssertEqual(Voice.whereIs(dog), ["where_is", "dog"])
+        XCTAssertEqual(Voice.whereIs(dog), ["ask_dog"])
     }
 
     func testSequenceDurationCoversAllClips() {
@@ -46,10 +49,10 @@ final class PromptAndGiftTests: XCTestCase {
         SettingsStore.shared.bilingualHebrew = false
         let eyes = ALL_WORDS.first { $0.id == "eyes" }!
         let three = ALL_WORDS.first { $0.id == "three" }!
-        XCTAssertEqual(Voice.whereIs(eyes), ["where_are", "eyes"])
-        XCTAssertEqual(Voice.whereIs(three), ["where_is_number", "three"])
+        XCTAssertEqual(Voice.whereIs(eyes), ["ask_eyes"])
+        XCTAssertEqual(Voice.whereIs(three), ["ask_three"])
         SettingsStore.shared.bilingualHebrew = true
-        XCTAssertEqual(Voice.whereIs(three), ["he_where_is_number", "three"])
+        XCTAssertEqual(Voice.whereIs(three), ["he_ask_three", "three"])
     }
 
     func testWordIdsAreUnique() {

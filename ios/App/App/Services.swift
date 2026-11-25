@@ -208,14 +208,11 @@ enum Voice {
         bilingual ? ["he_\(w.id)", w.id] : [w.id]
     }
 
+    /// The question is one recorded sentence ("Where is the dog?"), never
+    /// stitched from pieces, so it sounds like a real person asking. In
+    /// bilingual mode the child hears "איפה הכלב?" and then "Dog!".
     static func whereIs(_ w: WordItem) -> [String] {
-        switch (w.prompt, bilingual) {
-        case (.number, false): return ["where_is_number", w.id]
-        case (.number, true):  return ["he_where_is_number", w.id]
-        case (.plural, false): return ["where_are", w.id]
-        case (_, true):        return ["he_where_is", w.id]   // "איפה ה…" works for both
-        case (.the, false):    return ["where_is", w.id]
-        }
+        bilingual ? ["he_ask_\(w.id)", w.id] : ["ask_\(w.id)"]
     }
 
     static func praise() -> String {
