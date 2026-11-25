@@ -37,6 +37,9 @@ struct RootView: View {
         case "findit": return .findIt
         case "stickers": return .stickers
         case "cards": return .flashcards(ALL_CATEGORIES[0])
+        case let s? where s.hasPrefix("cards:"):   // e.g. cards:vehicles
+            let id = String(s.dropFirst(6))
+            return .flashcards(ALL_CATEGORIES.first { $0.id == id } ?? ALL_CATEGORIES[0])
         default: return .home
         }
     }()

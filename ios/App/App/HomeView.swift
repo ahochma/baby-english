@@ -208,7 +208,7 @@ struct CategoryCard: View {
             GeometryReader { g in
                 VStack(spacing: 6 * unit) {
                     CharacterBadge(emoji: category.emoji, ring: .white,
-                                   word: category.words.first { $0.emoji == category.emoji })
+                                   word: coverWord(for: category))
                         .frame(height: g.size.height * 0.6)
                     Text(category.label)
                         .font(.system(size: min(25 * unit, g.size.height * 0.15), weight: .black, design: .rounded))
@@ -328,4 +328,11 @@ extension View {
     func appearPop(_ appeared: Bool, delay: Double) -> some View {
         modifier(AppearPop(appeared: appeared, delay: delay))
     }
+}
+
+/// The drawn character that represents a world on its home card.
+private func coverWord(for category: Category) -> WordItem? {
+    let fallback = ["colors": "purple", "numbers": "three"]
+    return category.words.first { $0.emoji == category.emoji }
+        ?? category.words.first { $0.id == fallback[category.id] }
 }

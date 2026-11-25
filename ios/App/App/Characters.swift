@@ -35,7 +35,7 @@ struct WordArt: View {
 enum CharacterLibrary {
     static let drawnIds: Set<String> = ["dog", "cat", "duck", "bird", "fish", "cow", "elephant", "lion", "frog", "rabbit"]
 
-    static func has(_ id: String) -> Bool { drawnIds.contains(id) }
+    static func has(_ id: String) -> Bool { drawnIds.contains(id) || WorldCharacters.ids.contains(id) }
 
     static func view(for id: String, mood: CharacterMood) -> AnyView? {
         switch id {
@@ -49,7 +49,7 @@ enum CharacterLibrary {
         case "lion": return AnyView(LionCharacter(mood: mood))
         case "frog": return AnyView(FrogCharacter(mood: mood))
         case "rabbit": return AnyView(RabbitCharacter(mood: mood))
-        default: return nil
+        default: return WorldCharacters.view(for: id, mood: mood)
         }
     }
 }
@@ -179,7 +179,7 @@ private struct Cheeks: View {
     }
 }
 
-private func shine(_ s: CGFloat, x: CGFloat, y: CGFloat, w: CGFloat = 26, h: CGFloat = 11) -> some View {
+func shine(_ s: CGFloat, x: CGFloat, y: CGFloat, w: CGFloat = 26, h: CGFloat = 11) -> some View {
     Ellipse()
         .fill(Color.white.opacity(0.4))
         .frame(width: w * s, height: h * s)

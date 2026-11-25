@@ -57,6 +57,13 @@ final class PromptAndGiftTests: XCTestCase {
         XCTAssertEqual(ids.count, Set(ids).count)
     }
 
+    func testEveryWordHasADrawnCharacter() {
+        for word in ALL_WORDS {
+            XCTAssertTrue(CharacterLibrary.has(word.id), "\(word.id) has no drawn character (falls back to emoji)")
+            XCTAssertNotNil(CharacterLibrary.view(for: word.id, mood: .idle), word.id)
+        }
+    }
+
     func testDailyGiftOnlyOncePerDay() {
         let store = StickerStore.shared
         if store.giftAvailable {

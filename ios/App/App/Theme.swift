@@ -19,7 +19,7 @@ enum L10n {
 // MARK: - Demo mode (DEBUG only: store screenshots & preview video)
 // ─────────────────────────────────────────────
 
-/// `-startScreen bubbles|findit|stickers|cards` opens a screen directly and
+/// `-startScreen bubbles|findit|stickers|cards|cards:<categoryId>` opens a screen directly and
 /// `-demoMode` lets the games play themselves. Compiled out of Release builds.
 enum DemoMode {
     #if DEBUG
