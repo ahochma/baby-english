@@ -143,8 +143,7 @@ struct StickerBoardView: View {
                 .fill(owned ? Color.white : Color.white.opacity(0.5))
                 .shadow(color: Color.black.opacity(owned ? 0.07 : 0), radius: 4, y: 2)
             if owned {
-                Text(sticker)
-                    .font(.system(size: 40 * u))
+                StickerArt(sticker: sticker, size: 40 * u)
                     .scaleEffect(appeared ? (bounced == sticker ? 1.35 : 1.0) : 0.3)
                     .rotationEffect(.degrees(bounced == sticker ? 12 : 0))
                     .animation(.spring(response: 0.4, dampingFraction: 0.45)
@@ -162,8 +161,7 @@ struct StickerBoardView: View {
                 }
             } else {
                 // silhouette of the sticker still to win
-                Text(sticker)
-                    .font(.system(size: 34 * u))
+                StickerArt(sticker: sticker, size: 34 * u, animated: false)
                     .saturation(0)
                     .colorMultiply(Color(hex: "#5D4037"))
                     .opacity(0.13)
@@ -181,5 +179,38 @@ struct StickerBoardView: View {
             }
         }
         .accessibilityLabel(owned ? sticker : L10n.t("Not collected yet", "עוד לא נאסף"))
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Sticker art
+// ─────────────────────────────────────────────
+
+/// A sticker shows the word's drawn character when it is one of the words
+/// (🐶 → the puppy), otherwise the emoji itself (gift stickers like 🦄).
+/// Stickers are still stored as emoji, so existing collections carry over.
+struct StickerArt: View {
+    let sticker: String
+    var size: CGFloat
+    var mood: CharacterMood = .idle
+    var animated = true
+
+    private static let wordsByEmoji: [String: WordItem] =
+        Dictionary(ALL_WORDS.map { ($0.emoji, $0) }, uniquingKeysWith: { first, _ in first })
+
+    var body: some View {
+        if let word = Self.wordsByEmoji[sticker], CharacterLibrary.has(word.id) {
+            Group {
+                if animated {
+                    WordArt(word: word, mood: mood)
+                } else {
+                    CharacterLibrary.view(for: word.id, mood: .idle)   // silhouettes stay still
+                        .transaction { $0.animation = nil }
+                }
+            }
+            .frame(width: size * 1.2, height: size * 1.2)
+        } else {
+            Text(sticker).font(.system(size: size))
+        }
     }
 }

@@ -57,8 +57,7 @@ struct CelebrationView: View {
                         Circle()
                             .strokeBorder(Color(hex: "#FFCA28"), style: StrokeStyle(lineWidth: 6 * u, dash: [14 * u, 10 * u]))
                             .frame(width: 152 * u, height: 152 * u)
-                        Text(sticker)
-                            .font(.system(size: 96 * u))
+                        StickerArt(sticker: sticker, size: 96 * u, mood: stickerIn ? .happy : .idle)
                     }
                     .scaleEffect(stickerIn ? 1 : 0.01)
                     .rotationEffect(.degrees(stickerIn ? 0 : 180))
