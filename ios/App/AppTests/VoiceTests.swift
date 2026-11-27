@@ -178,6 +178,16 @@ final class MusicTests: XCTestCase {
 
 @MainActor
 final class DeveloperUnlockTests: XCTestCase {
+    override func setUp() async throws {
+        try await super.setUp()
+        PurchaseManager.paywallEnabled = true
+    }
+
+    override func tearDown() async throws {
+        PurchaseManager.paywallEnabled = false
+        try await super.tearDown()
+    }
+
     func testDeveloperUnlockOpensEveryWorldInDebugBuilds() {
         let store = PurchaseManager.shared
         let saved = store.developerUnlock

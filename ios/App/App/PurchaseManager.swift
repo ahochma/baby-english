@@ -14,6 +14,10 @@ final class PurchaseManager: ObservableObject {
     /// Must match the product created in App Store Connect and in Products.storekit.
     static let productID = "com.pipenglish.app.fullunlock"
 
+    /// Paywall switch. Off for now: every world is free for everyone and no
+    /// purchase UI is shown. Set to true to bring back the one-time unlock.
+    static var paywallEnabled = false
+
     enum LoadState: Equatable { case idle, loading, loaded, failed }
 
     @Published private(set) var product: Product?
@@ -50,7 +54,7 @@ final class PurchaseManager: ObservableObject {
     var displayPrice: String? { product?.displayPrice }
 
     /// Everything is open: bought (or redeemed with a code), or a developer build with the dev unlock on.
-    var hasFullAccess: Bool { isUnlocked || developerUnlock }
+    var hasFullAccess: Bool { !Self.paywallEnabled || isUnlocked || developerUnlock }
 
     func isAvailable(_ category: Category) -> Bool {
         hasFullAccess || category.isFree

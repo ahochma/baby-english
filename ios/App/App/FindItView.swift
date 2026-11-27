@@ -27,6 +27,8 @@ struct FindItView: View {
     @State private var listening = false
     @State private var roundID = UUID()
     @State private var idleWork: DispatchWorkItem?
+    /// Off once the game closes, so delayed callbacks can't keep asking "Where's the dog?".
+    @State private var live = LiveFlag()
 
     private let roundsPerSticker = 5
 
@@ -83,8 +85,14 @@ struct FindItView: View {
             }
             .ignoresSafeArea()
         }
-        .onAppear { if target == nil { newRound() } }
-        .onDisappear { idleWork?.cancel() }
+        .onAppear {
+            live.on = true
+            if target == nil { newRound() } else { scheduleIdleRepeat() }
+        }
+        .onDisappear {
+            live.on = false
+            idleWork?.cancel()
+        }
     }
 
     // MARK: Pieces
@@ -170,6 +178,7 @@ struct FindItView: View {
 
     private func newRound() {
         idleWork?.cancel()
+        guard live.on else { return }
         guard words.count >= 2 else { return }
         let fresh = words.filter { !recentTargets.contains($0.id) }
         let t = stickerStore.pickForPractice(from: fresh.isEmpty ? words : fresh)!
@@ -193,7 +202,7 @@ struct FindItView: View {
     }
 
     private func sayTarget() {
-        guard let target else { return }
+        guard live.on, let target else { return }
         if DemoMode.isOn && !solved {
             let round = roundID
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
@@ -210,9 +219,11 @@ struct FindItView: View {
 
     private func scheduleIdleRepeat() {
         idleWork?.cancel()
+        guard live.on else { return }
         let round = roundID
         let work = DispatchWorkItem {
-            guard round == roundID, !solved, !showCelebration else { return }
+            guard live.on, AudioManager.shared.inForeground,
+                  round == roundID, !solved, !showCelebration else { return }
             sayTarget()
         }
         idleWork = work
@@ -243,6 +254,7 @@ struct FindItView: View {
                 if missesThisRound >= 2 && choiceCount > 2 { choiceCount -= 1 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
+                guard live.on else { return }
                 if roundsWon >= roundsPerSticker {
                     roundsWon = 0
                     withAnimation { showCelebration = true }
@@ -257,7 +269,7 @@ struct FindItView: View {
             AudioManager.shared.play(.boing, volume: 0.35)
             withAnimation(.linear(duration: 0.45)) { shakes[w.id, default: 0] += 1 }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
-                guard !solved else { return }
+                guard live.on, !solved else { return }
                 let length = AudioManager.shared.say(["try_again"] + Voice.whereIs(target), gap: 0.3)
                 listening = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + max(0.6, length)) { listening = false }

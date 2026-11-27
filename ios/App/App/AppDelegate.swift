@@ -37,12 +37,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
     }
 
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        AudioManager.shared.pauseMusic()
+    func sceneWillResignActive(_ scene: UIScene) {
+        AudioManager.shared.enterBackground()
+    }
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        AudioManager.shared.enterForeground()
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        AudioManager.shared.updateMusic()
         StickerStore.shared.updateStreak()
         Task { @MainActor in await PurchaseManager.shared.refreshEntitlements() }
     }

@@ -6,6 +6,10 @@ import AVFoundation
 // MARK: - Audio
 // ─────────────────────────────────────────────
 
+/// A screen's "still open" switch. Delayed callbacks check it, so a game that
+/// has closed can't keep talking (a class, so callbacks share one value).
+final class LiveFlag { var on = true }
+
 enum SFX: String, CaseIterable {
     case pop = "sfx_pop"
     case chime = "sfx_chime"
@@ -24,8 +28,23 @@ final class AudioManager {
     private var sequenceToken = UUID()
     private var sfxPools: [SFX: [AVAudioPlayer]] = [:]
     private var music: AVAudioPlayer?
+    /// False while the app is in the background: no voice may start then.
+    private(set) var inForeground = true
 
     private init() {}
+
+    /// Leaving the app cuts the voice and music at once.
+    func enterBackground() {
+        inForeground = false
+        sequenceToken = UUID()
+        currentVoice?.stop()
+        pauseMusic()
+    }
+
+    func enterForeground() {
+        inForeground = true
+        updateMusic()
+    }
 
     /// `.playback` keeps sound on even when the ring/silent switch is on —
     /// parents almost always have their phone on silent, and a "broken" silent
@@ -97,6 +116,7 @@ final class AudioManager {
         currentVoice?.stop()
         let token = UUID()
         sequenceToken = token
+        guard inForeground else { return 0 }
         let clips = ids.compactMap { player(for: $0) }
         var t: TimeInterval = 0
         for (i, p) in clips.enumerated() {
@@ -115,6 +135,7 @@ final class AudioManager {
     }
 
     private func start(_ p: AVAudioPlayer) {
+        guard inForeground else { return }
         currentVoice?.stop()
         p.currentTime = 0
         p.volume = 1.0

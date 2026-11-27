@@ -21,7 +21,9 @@ struct ParentZoneView: View {
                 VStack(spacing: 16) {
                     progressCard
                     card { FeedbackCard() }
-                    if !store.hasFullAccess { upgradeCard } else { unlockedCard }
+                    if PurchaseManager.paywallEnabled {
+                        if !store.hasFullAccess { upgradeCard } else { unlockedCard }
+                    }
                     settingsCard
                     tipsCard
                     aboutCard
@@ -213,6 +215,7 @@ struct ParentZoneView: View {
                 }
                 .tint(Palette.accent)
                 .padding(.vertical, 6)
+                if PurchaseManager.paywallEnabled {
                 Divider().padding(.vertical, 6)
                 Button {
                     Task { await store.restore() }
@@ -254,6 +257,7 @@ struct ParentZoneView: View {
                 .tint(Palette.accent)
                 .padding(.vertical, 6)
                 #endif
+                }
             }
             .font(.parent(16, .medium))
             .foregroundColor(Palette.parentInk)

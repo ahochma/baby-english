@@ -10,6 +10,7 @@ final class PurchaseTests: XCTestCase {
     private var session: SKTestSession!
 
     override func setUp() async throws {
+        PurchaseManager.paywallEnabled = true
         session = try SKTestSession(configurationFileNamed: "Products")
         session.resetToDefaultState()
         session.clearTransactions()
@@ -17,6 +18,10 @@ final class PurchaseTests: XCTestCase {
         session.askToBuyEnabled = false
         await waitForStoreIdle()
         await PurchaseManager.shared.refreshEntitlements()
+    }
+
+    override func tearDown() async throws {
+        PurchaseManager.paywallEnabled = false
     }
 
     /// The singleton starts loading at app launch; wait so tests don't race it.
@@ -83,5 +88,15 @@ final class PurchaseTests: XCTestCase {
         UserDefaults.standard.removeObject(forKey: "isUnlocked")
         await store.refreshEntitlements()
         XCTAssertTrue(store.isUnlocked)
+    }
+}
+
+@MainActor
+final class PaywallOffTests: XCTestCase {
+    func testWithPaywallOffEveryWorldIsOpen() {
+        XCTAssertFalse(PurchaseManager.paywallEnabled, "Paywall is meant to be off for now")
+        let store = PurchaseManager.shared
+        XCTAssertTrue(ALL_CATEGORIES.allSatisfy { store.isAvailable($0) })
+        XCTAssertEqual(store.availableWords.count, ALL_WORDS.count)
     }
 }
