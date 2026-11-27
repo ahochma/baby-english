@@ -1,4 +1,6 @@
 import XCTest
+import SwiftUI
+import UIKit
 @testable import App
 
 /// Guards the voice content: every word must have its English clip and its
@@ -199,5 +201,19 @@ final class DeveloperUnlockTests: XCTestCase {
         store.developerUnlock = true
         XCTAssertTrue(ALL_CATEGORIES.allSatisfy { store.isAvailable($0) })
         XCTAssertEqual(store.availableWords.count, ALL_WORDS.count)
+    }
+}
+
+/// The flashcard word is white text on a pill filled with `textColor`,
+/// so every textColor must be dark enough to read white on (WCAG ≥ 3 for big text).
+final class WordPillTests: XCTestCase {
+    func testEveryWordPillIsDarkEnoughForWhiteText() {
+        for w in ALL_WORDS {
+            var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+            UIColor(w.textColor).getRed(&r, green: &g, blue: &b, alpha: &a)
+            func lin(_ c: CGFloat) -> CGFloat { c <= 0.03928 ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4) }
+            let lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+            XCTAssertGreaterThanOrEqual(1.05 / (lum + 0.05), 3, "\(w.id): white word on its pill is hard to read")
+        }
     }
 }
