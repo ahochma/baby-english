@@ -9,10 +9,7 @@ struct HomeView: View {
     @ObservedObject var store: PurchaseManager
     @ObservedObject private var settings = SettingsStore.shared
     let onSelectCategory: (Category) -> Void
-    let onBubbles: () -> Void
-    let onFindIt: () -> Void
-    let onFeedPip: () -> Void
-    let onPeekaboo: () -> Void
+    let onGames: () -> Void
     let onStickers: () -> Void
     let onParents: () -> Void
 
@@ -32,8 +29,7 @@ struct HomeView: View {
             let stickerH = 62 * u
             let fullH = geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom
             let rest = max(200, fullH - topPad - bottomPad - headerH - stickerH - spacing * 3)
-            // Four games: one row when wide, two rows of two on a tall phone.
-            let gamesH = wide ? min(rest * 0.3, 170 * u) : min(rest * 0.36, 250 * u)
+            let gamesH = min(84 * u, rest * 0.16)
             let catsH = rest - gamesH
 
             ZStack {
@@ -64,19 +60,10 @@ struct HomeView: View {
                     }
                     .frame(height: catsH)
 
-                    // Games
-                    let games = gameCards(u: u)
-                    let gameRows = games.chunked(wide ? 4 : 2)
-                    VStack(spacing: spacing * 0.75) {
-                        ForEach(Array(gameRows.enumerated()), id: \.offset) { r, row in
-                            HStack(spacing: spacing) {
-                                ForEach(Array(row.enumerated()), id: \.offset) { c, game in
-                                    game.appearPop(appeared, delay: 0.32 + Double(r * 2 + c) * 0.05)
-                                }
-                            }
-                        }
-                    }
-                    .frame(height: gamesH)
+                    // All the games live one tap away, so Home stays calm: worlds + play + stickers.
+                    playButton(u: u)
+                        .frame(width: min(geo.size.width - 36 * u, 520 * u), height: gamesH)
+                        .appearPop(appeared, delay: 0.36)
 
                     stickerButton(u: u)
                         .frame(width: min(geo.size.width - 60, 340 * u), height: stickerH)
@@ -177,17 +164,30 @@ struct HomeView: View {
         }
     }
 
-    private func gameCards(u: CGFloat) -> [GameCard] {
-        [
-            GameCard(title: "Bubbles", subtitle: "Pop!", emoji: "🫧",
-                     colors: [Color(hex: "#5CCBFF"), Color(hex: "#2E9BF0")], unit: u, onTap: onBubbles),
-            GameCard(title: "Find it!", subtitle: "Listen!", emoji: "🔍",
-                     colors: [Color(hex: "#FFCF4A"), Color(hex: "#FF9F1C")], unit: u, onTap: onFindIt),
-            GameCard(title: "Feed Pip", subtitle: "Yum!", emoji: "🍓",
-                     colors: [Color(hex: "#FF8A80"), Color(hex: "#F4511E")], unit: u, onTap: onFeedPip),
-            GameCard(title: "Peekaboo", subtitle: "Knock!", emoji: "🚪",
-                     colors: [Color(hex: "#B388FF"), Color(hex: "#7C4DFF")], unit: u, onTap: onPeekaboo),
-        ]
+    private func playButton(u: CGFloat) -> some View {
+        ChunkyButton(colors: [Color(hex: "#7CE38B"), Color(hex: "#2DB84C")],
+                     lip: Color(hex: "#1E9A3C"),
+                     radius: 34 * u, depth: 7 * u,
+                     action: onGames) {
+            HStack(spacing: 12 * u) {
+                Text("🎮").font(.system(size: 32 * u))
+                Text("Let's play!")
+                    .font(.system(size: 28 * u, weight: .black, design: .rounded))
+                    .foregroundColor(.white)
+                    .shadow(color: Color(hex: "#1E9A3C").opacity(0.7), radius: 0, y: 2)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                HStack(spacing: -6 * u) {
+                    ForEach(["🫧", "🔍", "🍓", "🚪"], id: \.self) { e in
+                        Text(e).font(.system(size: 18 * u))
+                            .frame(width: 30 * u, height: 30 * u)
+                            .background(Circle().fill(Color.white.opacity(0.9)))
+                    }
+                }
+            }
+            .padding(.horizontal, 14 * u)
+        }
+        .accessibilityLabel("Let's play!")
     }
 
     private func hopMascot() {

@@ -61,6 +61,7 @@
 		B97706CA828BCA0385813DBA /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C681D06BD2AA399DAC946D /* CelebrationView.swift */; };
 		C59C0996DAEEE6F529A27976 /* BubblePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4017F2ED6CFC7403D75E173E /* BubblePopView.swift */; };
 		4EAEDE5FE878F78E2978AA24 /* FindItView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C462DDAED16DC0CF0B9CD7 /* FindItView.swift */; };
+		F74C582B8247F223080C10F1 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65FF6CC448905C37C74AF9A /* GamesView.swift */; };
 		A4FB95A2A28AA7A3C957B07A /* FeedPipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EBA668851A219A57A01CE8 /* FeedPipView.swift */; };
 		87267BB89AFC5F20BBFCADC4 /* PeekabooView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E7092CE1888C2E0B20BA7 /* PeekabooView.swift */; };
 		F78DF0CAC5E40C02D4E518CA /* StickerBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAC8D82F01B7210760474F /* StickerBoardView.swift */; };
@@ -379,6 +380,7 @@
 		D3C681D06BD2AA399DAC946D /* CelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationView.swift; sourceTree = "<group>"; };
 		4017F2ED6CFC7403D75E173E /* BubblePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblePopView.swift; sourceTree = "<group>"; };
 		47C462DDAED16DC0CF0B9CD7 /* FindItView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindItView.swift; sourceTree = "<group>"; };
+		B65FF6CC448905C37C74AF9A /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		F2EBA668851A219A57A01CE8 /* FeedPipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPipView.swift; sourceTree = "<group>"; };
 		317E7092CE1888C2E0B20BA7 /* PeekabooView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekabooView.swift; sourceTree = "<group>"; };
 		6EAAC8D82F01B7210760474F /* StickerBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBoardView.swift; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 				D3C681D06BD2AA399DAC946D /* CelebrationView.swift */,
 				4017F2ED6CFC7403D75E173E /* BubblePopView.swift */,
 				47C462DDAED16DC0CF0B9CD7 /* FindItView.swift */,
+				B65FF6CC448905C37C74AF9A /* GamesView.swift */,
 				F2EBA668851A219A57A01CE8 /* FeedPipView.swift */,
 				317E7092CE1888C2E0B20BA7 /* PeekabooView.swift */,
 				6EAAC8D82F01B7210760474F /* StickerBoardView.swift */,
@@ -1388,6 +1391,7 @@
 				B97706CA828BCA0385813DBA /* CelebrationView.swift in Sources */,
 				C59C0996DAEEE6F529A27976 /* BubblePopView.swift in Sources */,
 				4EAEDE5FE878F78E2978AA24 /* FindItView.swift in Sources */,
+				F74C582B8247F223080C10F1 /* GamesView.swift in Sources */,
 				A4FB95A2A28AA7A3C957B07A /* FeedPipView.swift in Sources */,
 				87267BB89AFC5F20BBFCADC4 /* PeekabooView.swift in Sources */,
 				F78DF0CAC5E40C02D4E518CA /* StickerBoardView.swift in Sources */,

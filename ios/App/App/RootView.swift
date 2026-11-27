@@ -6,6 +6,7 @@ import SwiftUI
 
 enum Screen: Equatable {
     case home
+    case games
     case flashcards(Category)
     case bubbles
     case findIt
@@ -16,14 +17,23 @@ enum Screen: Equatable {
     /// Music plays only where nothing is being taught.
     var allowsMusic: Bool {
         switch self {
-        case .home, .stickers: return true
+        case .home, .games, .stickers: return true
         case .flashcards, .bubbles, .findIt, .feedPip, .peekaboo: return false
+        }
+    }
+
+    /// A screen where the child is playing or learning (counts toward the parent tip).
+    var isPlay: Bool {
+        switch self {
+        case .home, .games, .stickers: return false
+        default: return true
         }
     }
 
     var key: String {
         switch self {
         case .home: return "home"
+        case .games: return "games"
         case .flashcards(let c): return "cards-\(c.id)"
         case .bubbles: return "bubbles"
         case .findIt: return "findit"
@@ -50,6 +60,7 @@ struct RootView: View {
         case "feedpip": return .feedPip
         case "peekaboo": return .peekaboo
         case "stickers": return .stickers
+        case "games": return .games
         case "cards": return .flashcards(ALL_CATEGORIES[0])
         case let s? where s.hasPrefix("cards:"):   // e.g. cards:vehicles
             let id = String(s.dropFirst(6))
@@ -67,10 +78,10 @@ struct RootView: View {
         guard Date().timeIntervalSince(lastNavigation) > 0.6 else { return }
         lastNavigation = Date()
         // A game counts once the child really played it (not a quick open-and-close).
-        if next == .home, let start = gameStartedAt, Date().timeIntervalSince(start) > 20 {
+        if let start = gameStartedAt, Date().timeIntervalSince(start) > 20 {
             SettingsStore.shared.recordGamePlayed()
         }
-        gameStartedAt = next == .home || next == .stickers ? nil : Date()
+        gameStartedAt = next.isPlay ? Date() : nil
         screen = next
     }
 
@@ -108,24 +119,27 @@ struct RootView: View {
                 onSelectCategory: { cat in
                     if store.isAvailable(cat) { go(.flashcards(cat)) } else { openParent(.paywall) }
                 },
-                onBubbles: { go(.bubbles) },
-                onFindIt: { go(.findIt) },
-                onFeedPip: { go(.feedPip) },
-                onPeekaboo: { go(.peekaboo) },
+                onGames: { go(.games) },
                 onStickers: { go(.stickers) },
                 onParents: { openParent(.parentZone) }
             )
+        case .games:
+            GamesView(onBubbles: { go(.bubbles) },
+                      onFindIt: { go(.findIt) },
+                      onFeedPip: { go(.feedPip) },
+                      onPeekaboo: { go(.peekaboo) },
+                      onBack: { go(.home) })
         case .flashcards(let cat):
             FlashcardView(category: cat, stickerStore: stickers, onBack: { go(.home) })
         case .bubbles:
-            BubblePopView(words: store.availableWords, stickerStore: stickers, onBack: { go(.home) })
+            BubblePopView(words: store.availableWords, stickerStore: stickers, onBack: { go(.games) })
         case .findIt:
-            FindItView(words: store.availableWords, stickerStore: stickers, onBack: { go(.home) })
+            FindItView(words: store.availableWords, stickerStore: stickers, onBack: { go(.games) })
         case .feedPip:
             FeedPipView(foods: store.availableWords.filter { FeedPipView.foodIDs.contains($0.id) },
-                        stickerStore: stickers, onBack: { go(.home) })
+                        stickerStore: stickers, onBack: { go(.games) })
         case .peekaboo:
-            PeekabooView(words: store.availableWords, stickerStore: stickers, onBack: { go(.home) })
+            PeekabooView(words: store.availableWords, stickerStore: stickers, onBack: { go(.games) })
         case .stickers:
             StickerBoardView(stickerStore: stickers, onBack: { go(.home) })
         }
