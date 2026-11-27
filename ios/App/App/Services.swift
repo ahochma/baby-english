@@ -241,6 +241,14 @@ enum Voice {
         bilingual ? ["he_want_\(w.id)", w.id] : ["want_\(w.id)"]
     }
 
+    /// Balloons: "Pop the blue balloon!"
+    static func pop(_ w: WordItem) -> [String] {
+        bilingual ? ["he_pop_\(w.id)", w.id] : ["pop_\(w.id)"]
+    }
+
+    /// Shadows: "Who's hiding in the shadow?"
+    static var whoseShadow: [String] { bilingual ? ["he_whose_shadow"] : ["whose_shadow"] }
+
     static func praise() -> String {
         ["great_job", "you_did_it", "yay_pip"].randomElement()!
     }

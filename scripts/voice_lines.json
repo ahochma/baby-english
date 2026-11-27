@@ -140,7 +140,18 @@
     "yum": "[delighted] Mmm! Yummy!",
     "not_that": "[playfully] Hmm... not that one!",
     "peekaboo": "[excited] Peekaboo! You found it!",
-    "want_orange2": "[cheerfully] I'm hungry! Can I have the orange, please?"
+    "want_orange2": "[cheerfully] I'm hungry! Can I have the orange, please?",
+    "pop_red": "[excited] Pop the red balloon!",
+    "pop_blue": "[excited] Pop the blue balloon!",
+    "pop_green": "[excited] Pop the green balloon!",
+    "pop_yellow": "[excited] Pop the yellow balloon!",
+    "pop_orange": "[excited] Pop the orange balloon!",
+    "pop_purple": "[excited] Pop the purple balloon!",
+    "pop_pink": "[excited] Pop the pink balloon!",
+    "pop_white": "[excited] Pop the white balloon!",
+    "pop_black": "[excited] Pop the black balloon!",
+    "pop_brown": "[excited] Pop the brown balloon!",
+    "whose_shadow": "[curious] Who's hiding in the shadow?"
   },
   "he": {
     "he_dog": "[excited] כלב!",
@@ -272,6 +283,17 @@
     "he_want_carrot": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַגֶּזֶר?",
     "he_want_cake": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הָעוּגָה?",
     "he_want_grapes": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הָעֲנָבִים?",
-    "he_want_orange2": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַתַּפּוּז?"
+    "he_want_orange2": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַתַּפּוּז?",
+    "he_pop_red": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הָאָדֹם!",
+    "he_pop_blue": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַכָּחֹל!",
+    "he_pop_green": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַיָּרֹק!",
+    "he_pop_yellow": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַצָּהֹב!",
+    "he_pop_orange": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַכָּתֹם!",
+    "he_pop_purple": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַסָּגֹל!",
+    "he_pop_pink": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַוָּרֹד!",
+    "he_pop_white": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַלָּבָן!",
+    "he_pop_black": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַשָּׁחֹר!",
+    "he_pop_brown": "[excited] פּוֹצְצוּ אֶת הַבַּלּוֹן הַחוּם!",
+    "he_whose_shadow": "[curious] מִי מִתְחַבֵּא בַּצֵּל?"
   }
 }

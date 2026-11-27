@@ -12,13 +12,15 @@ enum Screen: Equatable {
     case findIt
     case feedPip
     case peekaboo
+    case balloons
+    case shadows
     case stickers
 
     /// Music plays only where nothing is being taught.
     var allowsMusic: Bool {
         switch self {
         case .home, .games, .stickers: return true
-        case .flashcards, .bubbles, .findIt, .feedPip, .peekaboo: return false
+        case .flashcards, .bubbles, .findIt, .feedPip, .peekaboo, .balloons, .shadows: return false
         }
     }
 
@@ -39,6 +41,8 @@ enum Screen: Equatable {
         case .findIt: return "findit"
         case .feedPip: return "feedpip"
         case .peekaboo: return "peekaboo"
+        case .balloons: return "balloons"
+        case .shadows: return "shadows"
         case .stickers: return "stickers"
         }
     }
@@ -59,6 +63,8 @@ struct RootView: View {
         case "findit": return .findIt
         case "feedpip": return .feedPip
         case "peekaboo": return .peekaboo
+        case "balloons": return .balloons
+        case "shadows": return .shadows
         case "stickers": return .stickers
         case "games": return .games
         case "cards": return .flashcards(ALL_CATEGORIES[0])
@@ -128,6 +134,8 @@ struct RootView: View {
                       onFindIt: { go(.findIt) },
                       onFeedPip: { go(.feedPip) },
                       onPeekaboo: { go(.peekaboo) },
+                      onBalloons: { go(.balloons) },
+                      onShadows: { go(.shadows) },
                       onBack: { go(.home) })
         case .flashcards(let cat):
             FlashcardView(category: cat, stickerStore: stickers, onBack: { go(.home) })
@@ -140,6 +148,12 @@ struct RootView: View {
                         stickerStore: stickers, onBack: { go(.games) })
         case .peekaboo:
             PeekabooView(words: store.availableWords, stickerStore: stickers, onBack: { go(.games) })
+        case .balloons:
+            BalloonsView(colors: store.availableWords.filter { BalloonsView.colorIDs.contains($0.id) },
+                         stickerStore: stickers, onBack: { go(.games) })
+        case .shadows:
+            ShadowsView(words: store.availableWords.filter { !BalloonsView.colorIDs.contains($0.id) },
+                        stickerStore: stickers, onBack: { go(.games) })
         case .stickers:
             StickerBoardView(stickerStore: stickers, onBack: { go(.home) })
         }

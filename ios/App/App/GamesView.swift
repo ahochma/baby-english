@@ -5,7 +5,7 @@ import SwiftUI
 // ─────────────────────────────────────────────
 //
 // Home shows only the six word worlds, a "Let's play!" button and the
-// stickers. The games live here, one tap away, as four big tiles, so
+// stickers. The games live here, one tap away, as six big tiles, so
 // Home stays calm and new games have room to arrive.
 
 struct GamesView: View {
@@ -13,6 +13,8 @@ struct GamesView: View {
     let onFindIt: () -> Void
     let onFeedPip: () -> Void
     let onPeekaboo: () -> Void
+    let onBalloons: () -> Void
+    let onShadows: () -> Void
     let onBack: () -> Void
 
     @State private var appeared = false
@@ -37,6 +39,10 @@ struct GamesView: View {
                  colors: [Color(hex: "#FF8A80"), Color(hex: "#F4511E")], action: onFeedPip),
             Game(id: "peekaboo", title: "Peekaboo", subtitle: "Knock!", emoji: "🚪",
                  colors: [Color(hex: "#B388FF"), Color(hex: "#7C4DFF")], action: onPeekaboo),
+            Game(id: "balloons", title: "Balloons", subtitle: "Pop it!", emoji: "🎈",
+                 colors: [Color(hex: "#F48FB1"), Color(hex: "#EC407A")], action: onBalloons),
+            Game(id: "shadows", title: "Shadows", subtitle: "Who's that?", emoji: "👤",
+                 colors: [Color(hex: "#9FA8DA"), Color(hex: "#5C6BC0")], action: onShadows),
         ]
     }
 
@@ -48,7 +54,7 @@ struct GamesView: View {
             let topPad = max(geo.safeAreaInsets.top, 12) + 4
             let bottomPad = max(geo.safeAreaInsets.bottom, 12) + 12
             let headerH = 86 * u
-            let columns = wide ? 4 : 2
+            let columns = wide ? 3 : 2
             let rows = games.chunked(columns)
 
             ZStack {

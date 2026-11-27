@@ -259,3 +259,30 @@ final class ParentTipTests: XCTestCase {
         XCTAssertFalse(s.parentTipPending)
     }
 }
+
+/// Balloons and Shadows speak whole recorded sentences too.
+final class BalloonsAndShadowsVoiceTests: XCTestCase {
+    func testEveryColourHasItsBalloonLine() {
+        let colors = ALL_CATEGORIES.first { $0.id == "colors" }!.words
+        XCTAssertEqual(Set(colors.map(\.id)), BalloonsView.colorIDs)
+        for c in colors {
+            XCTAssertTrue(AudioManager.shared.has("pop_\(c.id)"), "missing pop_\(c.id)")
+            XCTAssertTrue(AudioManager.shared.has("he_pop_\(c.id)"), "missing he_pop_\(c.id)")
+        }
+        XCTAssertTrue(AudioManager.shared.has("whose_shadow"))
+        XCTAssertTrue(AudioManager.shared.has("he_whose_shadow"))
+    }
+
+    func testPopAndShadowFollowTheBilingualSetting() {
+        let s = SettingsStore.shared
+        let saved = s.bilingualHebrew
+        defer { s.bilingualHebrew = saved }
+        let blue = ALL_WORDS.first { $0.id == "blue" }!
+        s.bilingualHebrew = false
+        XCTAssertEqual(Voice.pop(blue), ["pop_blue"])
+        XCTAssertEqual(Voice.whoseShadow, ["whose_shadow"])
+        s.bilingualHebrew = true
+        XCTAssertEqual(Voice.pop(blue), ["he_pop_blue", "blue"])
+        XCTAssertEqual(Voice.whoseShadow, ["he_whose_shadow"])
+    }
+}
