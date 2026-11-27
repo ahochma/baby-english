@@ -1,0 +1,7 @@
+# Upload with:  fastlane deliver
+# (sign in with your Apple ID when asked; nothing is submitted for review unless you add --submit_for_review)
+app_identifier("com.pipenglish.app")
+metadata_path("./fastlane/metadata")
+screenshots_path("./fastlane/screenshots")
+skip_binary_upload(true)
+force(false)

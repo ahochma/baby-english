@@ -4,3 +4,11 @@
 ios/App/App.xcodeproj/xcuserdata/
 ios/App/App.xcodeproj/project.xcworkspace/xcuserdata/
 ios/.xcode.env.local
+
+# raw simulator captures (regenerate with demo mode)
+marketing/raw/
+__pycache__/
+scripts/.env
+ios/App/build/
+ios/App/xcodebuild.log
+scripts/brand/out/
