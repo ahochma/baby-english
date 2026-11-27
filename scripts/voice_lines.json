@@ -127,7 +127,20 @@
     "nine": "[excited] Nine!",
     "ask_nine": "[curious] Where is number nine?",
     "ten": "[excited] Ten!",
-    "ask_ten": "[curious] Where is number ten?"
+    "ask_ten": "[curious] Where is number ten?",
+    "want_apple": "[cheerfully] I'm hungry! Can I have the apple, please?",
+    "want_banana": "[cheerfully] I'm hungry! Can I have the banana, please?",
+    "want_milk": "[cheerfully] I'm hungry! Can I have the milk, please?",
+    "want_bread": "[cheerfully] I'm hungry! Can I have the bread, please?",
+    "want_egg": "[cheerfully] I'm hungry! Can I have the egg, please?",
+    "want_strawberry": "[cheerfully] I'm hungry! Can I have the strawberry, please?",
+    "want_carrot": "[cheerfully] I'm hungry! Can I have the carrot, please?",
+    "want_cake": "[cheerfully] I'm hungry! Can I have the cake, please?",
+    "want_grapes": "[cheerfully] I'm hungry! Can I have the grapes, please?",
+    "yum": "[delighted] Mmm! Yummy!",
+    "not_that": "[playfully] Hmm... not that one!",
+    "peekaboo": "[excited] Peekaboo! You found it!",
+    "want_orange2": "[cheerfully] I'm hungry! Can I have the orange, please?"
   },
   "he": {
     "he_dog": "[excited] כלב!",
@@ -249,6 +262,16 @@
     "he_nine": "[excited] תֵּשַׁע!",
     "he_ask_nine": "[curious] אֵיפֹה הַמִּסְפָּר תֵּשַׁע?",
     "he_ten": "[excited] עֶשֶׂר!",
-    "he_ask_ten": "[curious] אֵיפֹה הַמִּסְפָּר עֶשֶׂר?"
+    "he_ask_ten": "[curious] אֵיפֹה הַמִּסְפָּר עֶשֶׂר?",
+    "he_want_apple": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַתַּפּוּחַ?",
+    "he_want_banana": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַבָּנָנָה?",
+    "he_want_milk": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הֶחָלָב?",
+    "he_want_bread": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַלֶּחֶם?",
+    "he_want_egg": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַבֵּיצָה?",
+    "he_want_strawberry": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַתּוּת?",
+    "he_want_carrot": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַגֶּזֶר?",
+    "he_want_cake": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הָעוּגָה?",
+    "he_want_grapes": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הָעֲנָבִים?",
+    "he_want_orange2": "[cheerfully] אֲנִי רָעֵב! אֶפְשָׁר אֶת הַתַּפּוּז?"
   }
 }

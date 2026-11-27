@@ -236,6 +236,11 @@ enum Voice {
         bilingual ? ["he_ask_\(w.id)", w.id] : ["ask_\(w.id)"]
     }
 
+    /// Feed Pip: "I'm hungry! Can I have the banana, please?" (one recorded sentence).
+    static func want(_ w: WordItem) -> [String] {
+        bilingual ? ["he_want_\(w.id)", w.id] : ["want_\(w.id)"]
+    }
+
     static func praise() -> String {
         ["great_job", "you_did_it", "yay_pip"].randomElement()!
     }
@@ -284,8 +289,30 @@ final class SettingsStore: ObservableObject {
         didSet { UserDefaults.standard.set(bilingualHebrew, forKey: "bilingualHebrew") }
     }
 
+    /// Games the child has really played (stayed at least a few seconds).
+    @Published private(set) var gamesPlayed: Int {
+        didSet { UserDefaults.standard.set(gamesPlayed, forKey: "gamesPlayed") }
+    }
+    /// The parent has seen the "Did you know?" card in the Parent Zone.
+    @Published var parentTipSeen: Bool {
+        didSet { UserDefaults.standard.set(parentTipSeen, forKey: "parentTipSeen") }
+    }
+
+    /// After a few games, a soft dot on the Parents button invites the parent
+    /// to discover Hebrew → English, music and calm mode. The child sees only the dot.
+    static let gamesBeforeParentTip = 3
+    var parentTipPending: Bool { !parentTipSeen && gamesPlayed >= Self.gamesBeforeParentTip }
+
+    func recordGamePlayed() { gamesPlayed += 1 }
+
+    #if DEBUG
+    func resetParentTipForTests() { gamesPlayed = 0; parentTipSeen = false }
+    #endif
+
     private init() {
         let d = UserDefaults.standard
+        gamesPlayed = d.integer(forKey: "gamesPlayed")
+        parentTipSeen = d.bool(forKey: "parentTipSeen")
         soundEffectsOn = d.object(forKey: "soundEffectsOn") as? Bool ?? true
         musicOn = d.object(forKey: "musicOn") as? Bool ?? true
         calmMode = d.bool(forKey: "calmMode")

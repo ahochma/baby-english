@@ -9,13 +9,15 @@ enum Screen: Equatable {
     case flashcards(Category)
     case bubbles
     case findIt
+    case feedPip
+    case peekaboo
     case stickers
 
     /// Music plays only where nothing is being taught.
     var allowsMusic: Bool {
         switch self {
         case .home, .stickers: return true
-        case .flashcards, .bubbles, .findIt: return false
+        case .flashcards, .bubbles, .findIt, .feedPip, .peekaboo: return false
         }
     }
 
@@ -25,6 +27,8 @@ enum Screen: Equatable {
         case .flashcards(let c): return "cards-\(c.id)"
         case .bubbles: return "bubbles"
         case .findIt: return "findit"
+        case .feedPip: return "feedpip"
+        case .peekaboo: return "peekaboo"
         case .stickers: return "stickers"
         }
     }
@@ -43,6 +47,8 @@ struct RootView: View {
         switch DemoMode.startScreen {
         case "bubbles": return .bubbles
         case "findit": return .findIt
+        case "feedpip": return .feedPip
+        case "peekaboo": return .peekaboo
         case "stickers": return .stickers
         case "cards": return .flashcards(ALL_CATEGORIES[0])
         case let s? where s.hasPrefix("cards:"):   // e.g. cards:vehicles
@@ -53,12 +59,18 @@ struct RootView: View {
     }()
     @State private var parentRoute: ParentRoute?
     @State private var lastNavigation = Date.distantPast
+    @State private var gameStartedAt: Date?
 
     /// Toddlers tap in bursts. While a screen is fading out it still receives
     /// touches, so ignore navigation requests that arrive mid-transition.
     private func go(_ next: Screen) {
         guard Date().timeIntervalSince(lastNavigation) > 0.6 else { return }
         lastNavigation = Date()
+        // A game counts once the child really played it (not a quick open-and-close).
+        if next == .home, let start = gameStartedAt, Date().timeIntervalSince(start) > 20 {
+            SettingsStore.shared.recordGamePlayed()
+        }
+        gameStartedAt = next == .home || next == .stickers ? nil : Date()
         screen = next
     }
 
@@ -98,6 +110,8 @@ struct RootView: View {
                 },
                 onBubbles: { go(.bubbles) },
                 onFindIt: { go(.findIt) },
+                onFeedPip: { go(.feedPip) },
+                onPeekaboo: { go(.peekaboo) },
                 onStickers: { go(.stickers) },
                 onParents: { openParent(.parentZone) }
             )
@@ -107,6 +121,11 @@ struct RootView: View {
             BubblePopView(words: store.availableWords, stickerStore: stickers, onBack: { go(.home) })
         case .findIt:
             FindItView(words: store.availableWords, stickerStore: stickers, onBack: { go(.home) })
+        case .feedPip:
+            FeedPipView(foods: store.availableWords.filter { FeedPipView.foodIDs.contains($0.id) },
+                        stickerStore: stickers, onBack: { go(.home) })
+        case .peekaboo:
+            PeekabooView(words: store.availableWords, stickerStore: stickers, onBack: { go(.home) })
         case .stickers:
             StickerBoardView(stickerStore: stickers, onBack: { go(.home) })
         }

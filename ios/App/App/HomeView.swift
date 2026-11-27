@@ -7,9 +7,12 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var stickers: StickerStore
     @ObservedObject var store: PurchaseManager
+    @ObservedObject private var settings = SettingsStore.shared
     let onSelectCategory: (Category) -> Void
     let onBubbles: () -> Void
     let onFindIt: () -> Void
+    let onFeedPip: () -> Void
+    let onPeekaboo: () -> Void
     let onStickers: () -> Void
     let onParents: () -> Void
 
@@ -29,7 +32,8 @@ struct HomeView: View {
             let stickerH = 62 * u
             let fullH = geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom
             let rest = max(200, fullH - topPad - bottomPad - headerH - stickerH - spacing * 3)
-            let gamesH = min(rest * (wide ? 0.3 : 0.22), 170 * u)
+            // Four games: one row when wide, two rows of two on a tall phone.
+            let gamesH = wide ? min(rest * 0.3, 170 * u) : min(rest * 0.36, 250 * u)
             let catsH = rest - gamesH
 
             ZStack {
@@ -61,15 +65,16 @@ struct HomeView: View {
                     .frame(height: catsH)
 
                     // Games
-                    HStack(spacing: spacing) {
-                        GameCard(title: "Bubbles", subtitle: "Pop!", emoji: "🫧",
-                                 colors: [Color(hex: "#5CCBFF"), Color(hex: "#2E9BF0")],
-                                 unit: u, onTap: onBubbles)
-                            .appearPop(appeared, delay: 0.32)
-                        GameCard(title: "Find it!", subtitle: "Listen!", emoji: "🔍",
-                                 colors: [Color(hex: "#FFCF4A"), Color(hex: "#FF9F1C")],
-                                 unit: u, onTap: onFindIt)
-                            .appearPop(appeared, delay: 0.38)
+                    let games = gameCards(u: u)
+                    let gameRows = games.chunked(wide ? 4 : 2)
+                    VStack(spacing: spacing * 0.75) {
+                        ForEach(Array(gameRows.enumerated()), id: \.offset) { r, row in
+                            HStack(spacing: spacing) {
+                                ForEach(Array(row.enumerated()), id: \.offset) { c, game in
+                                    game.appearPop(appeared, delay: 0.32 + Double(r * 2 + c) * 0.05)
+                                }
+                            }
+                        }
                     }
                     .frame(height: gamesH)
 
@@ -118,7 +123,7 @@ struct HomeView: View {
                     Color.clear
                 }
             }
-            .frame(width: 64 * u, height: 40, alignment: .leading)
+            .frame(width: 60 * u, height: 40, alignment: .leading)
 
             Spacer(minLength: 0)
             HStack(spacing: 6 * u) {
@@ -131,23 +136,58 @@ struct HomeView: View {
                     .foregroundColor(Palette.ink)
                     .shadow(color: .white.opacity(0.9), radius: 0, x: 0, y: 2.5)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.6)
+                    .minimumScaleFactor(0.5)
+                    .layoutPriority(1)
             }
             .accessibilityElement(children: .combine)
             .accessibilityAddTraits(.isHeader)
             Spacer(minLength: 0)
 
-            // Grown-ups (gated) — small and quiet on purpose
+            // Grown-ups (gated). Labelled so parents find it; after a few games a
+            // soft dot invites them to discover Hebrew → English, music and calm mode.
             Button(action: onParents) {
-                Image(systemName: "lock.fill")
-                    .font(.system(size: 15 * u, weight: .bold))
-                    .foregroundColor(Palette.ink.opacity(0.5))
-                    .frame(width: 40 * u, height: 40 * u)
-                    .background(Circle().fill(Color.white.opacity(0.8)))
+                HStack(spacing: 5 * u) {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 12 * u, weight: .bold))
+                    Text(L10n.t("Parents", "הורים"))
+                        .font(.system(size: 14 * u, weight: .heavy, design: .rounded))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                }
+                .foregroundColor(Palette.ink.opacity(0.75))
+                .padding(.horizontal, 11 * u)
+                .frame(height: 38 * u)
+                .background(Capsule().fill(Color.white.opacity(0.92)))
+                .shadow(color: .black.opacity(0.08), radius: 3, y: 2)
+                .overlay(alignment: .topTrailing) {
+                    if settings.parentTipPending {
+                        Circle()
+                            .fill(Color(hex: "#FF5252"))
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .frame(width: 13 * u, height: 13 * u)
+                            .modifier(Pulse())
+                            .offset(x: 3 * u, y: -3 * u)
+                    }
+                }
             }
-            .frame(width: 64 * u, alignment: .trailing)
-            .accessibilityLabel(L10n.t("For parents", "להורים"))
+            .fixedSize()
+            .accessibilityLabel(settings.parentTipPending
+                                ? L10n.t("For parents, new tip", "להורים, יש טיפ חדש")
+                                : L10n.t("For parents", "להורים"))
         }
+    }
+
+    private func gameCards(u: CGFloat) -> [GameCard] {
+        [
+            GameCard(title: "Bubbles", subtitle: "Pop!", emoji: "🫧",
+                     colors: [Color(hex: "#5CCBFF"), Color(hex: "#2E9BF0")], unit: u, onTap: onBubbles),
+            GameCard(title: "Find it!", subtitle: "Listen!", emoji: "🔍",
+                     colors: [Color(hex: "#FFCF4A"), Color(hex: "#FF9F1C")], unit: u, onTap: onFindIt),
+            GameCard(title: "Feed Pip", subtitle: "Yum!", emoji: "🍓",
+                     colors: [Color(hex: "#FF8A80"), Color(hex: "#F4511E")], unit: u, onTap: onFeedPip),
+            GameCard(title: "Peekaboo", subtitle: "Knock!", emoji: "🚪",
+                     colors: [Color(hex: "#B388FF"), Color(hex: "#7C4DFF")], unit: u, onTap: onPeekaboo),
+        ]
     }
 
     private func hopMascot() {

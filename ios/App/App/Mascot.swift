@@ -10,7 +10,8 @@ import SwiftUI
 // screen and costs nothing in app size.
 
 enum MascotMood: Equatable {
-    case idle, happy, cheer
+    /// hungry: eyes open, beak wide open (Feed Pip). yum: happy eyes, cheeks puffed.
+    case idle, happy, cheer, hungry, yum
 }
 
 struct Mascot: View {
@@ -84,21 +85,23 @@ struct Mascot: View {
 
                     // cheeks
                     HStack(spacing: 40 * s) {
-                        Ellipse().fill(blush.opacity(0.55)).frame(width: 13 * s, height: 8 * s)
-                        Ellipse().fill(blush.opacity(0.55)).frame(width: 13 * s, height: 8 * s)
+                        Ellipse().fill(blush.opacity(mood == .yum ? 0.85 : 0.55))
+                            .frame(width: (mood == .yum ? 17 : 13) * s, height: (mood == .yum ? 11 : 8) * s)
+                        Ellipse().fill(blush.opacity(mood == .yum ? 0.85 : 0.55))
+                            .frame(width: (mood == .yum ? 17 : 13) * s, height: (mood == .yum ? 11 : 8) * s)
                     }
                     .offset(y: 6 * s)
 
                     // beak (opens when cheering)
                     VStack(spacing: 0) {
                         BeakShape().fill(beak).frame(width: 14 * s, height: 8 * s)
-                        if mood == .cheer {
+                        if mood == .cheer || mood == .hungry {
                             BeakShape().fill(Color(hex: "#E8682A"))
-                                .frame(width: 11 * s, height: 6 * s)
+                                .frame(width: (mood == .hungry ? 13 : 11) * s, height: (mood == .hungry ? 10 : 6) * s)
                                 .rotationEffect(.degrees(180))
                         }
                     }
-                    .offset(y: mood == .cheer ? 7 * s : 4 * s)
+                    .offset(y: mood == .cheer || mood == .hungry ? 7 * s : 4 * s)
                 }
                 .scaleEffect(x: breathe ? 1.03 : 0.98, y: breathe ? 0.97 : 1.02, anchor: .bottom)
                 .offset(y: breathe ? 1 * s : -2 * s)
@@ -146,7 +149,7 @@ struct Mascot: View {
 
     @ViewBuilder
     private func eye(s: CGFloat) -> some View {
-        if mood != .idle || blink {
+        if (mood != .idle && mood != .hungry) || blink {
             // happy / closed eye: a smiling arc
             HappyEyeShape()
                 .stroke(ink, style: StrokeStyle(lineWidth: 3.5 * s, lineCap: .round))

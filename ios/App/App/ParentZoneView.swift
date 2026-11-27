@@ -19,6 +19,7 @@ struct ParentZoneView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
+                    if !settings.parentTipSeen { tipCard }
                     progressCard
                     card { FeedbackCard() }
                     if PurchaseManager.paywallEnabled {
@@ -48,6 +49,8 @@ struct ParentZoneView: View {
         }
         .sheet(isPresented: $showPrivacy) { PrivacyPolicyView() }
         .onAppear(perform: maybeAskForReview)
+        // The parent has now seen the tip; the dot on the Parents button goes away.
+        .onDisappear { if !settings.parentTipSeen { settings.parentTipSeen = true } }
     }
 
     // MARK: Cards
@@ -169,6 +172,50 @@ struct ParentZoneView: View {
                 Spacer()
             }
         }
+    }
+
+    /// Shown once: the three settings parents most often miss, right where
+    /// they can switch them on. "Got it" (or closing the Parent Zone) retires it.
+    private var tipCard: some View {
+        card {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 10) {
+                    Text("💡").font(.system(size: 26))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(L10n.t("Did you know?", "ידעתם?"))
+                            .font(.parent(18, .bold))
+                        Text(L10n.t("Three settings parents love:", "שלוש הגדרות שהורים אוהבים:"))
+                            .font(.parent(13)).foregroundColor(Palette.parentInk.opacity(0.6))
+                    }
+                }
+                Toggle(isOn: $settings.bilingualHebrew) {
+                    Label(L10n.t("Hebrew → English: “כלב… Dog!”", "עברית ← אנגלית: ״כלב… Dog!״"), systemImage: "character.bubble.fill")
+                }
+                .tint(Palette.accent)
+                Toggle(isOn: $settings.musicOn) {
+                    Label(L10n.t("Background music", "מוזיקת רקע"), systemImage: "music.note")
+                }
+                .tint(Palette.accent)
+                Toggle(isOn: $settings.calmMode) {
+                    Label(L10n.t("Calm mode (also before bedtime)", "מצב רגוע (גם לפני השינה)"), systemImage: "leaf.fill")
+                }
+                .tint(Palette.accent)
+                Button {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) { settings.parentTipSeen = true }
+                } label: {
+                    Text(L10n.t("Got it", "הבנתי"))
+                        .font(.parent(16, .bold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(RoundedRectangle(cornerRadius: 12).fill(Palette.accent.opacity(0.12)))
+                }
+                .padding(.top, 4)
+            }
+            .font(.parent(15, .medium))
+            .foregroundColor(Palette.parentInk)
+        }
+        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Palette.accent.opacity(0.45), lineWidth: 2))
+        .transition(.move(edge: .top).combined(with: .opacity))
     }
 
     private var settingsCard: some View {

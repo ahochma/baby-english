@@ -217,3 +217,45 @@ final class WordPillTests: XCTestCase {
         }
     }
 }
+
+/// Feed Pip and Peekaboo speak whole recorded sentences; a missing clip would mean silence.
+final class NewGamesVoiceTests: XCTestCase {
+    func testEveryFoodHasItsFeedPipQuestion() {
+        let foods = ALL_CATEGORIES.first { $0.id == "food" }!.words
+        XCTAssertEqual(Set(foods.map(\.id)), FeedPipView.foodIDs)
+        for f in foods {
+            XCTAssertTrue(AudioManager.shared.has("want_\(f.id)"), "missing want_\(f.id)")
+            XCTAssertTrue(AudioManager.shared.has("he_want_\(f.id)"), "missing he_want_\(f.id)")
+        }
+        for id in ["yum", "not_that", "peekaboo"] {
+            XCTAssertTrue(AudioManager.shared.has(id), "missing \(id)")
+        }
+    }
+
+    func testWantFollowsTheBilingualSetting() {
+        let s = SettingsStore.shared
+        let saved = s.bilingualHebrew
+        defer { s.bilingualHebrew = saved }
+        let banana = ALL_WORDS.first { $0.id == "banana" }!
+        s.bilingualHebrew = false
+        XCTAssertEqual(Voice.want(banana), ["want_banana"])
+        s.bilingualHebrew = true
+        XCTAssertEqual(Voice.want(banana), ["he_want_banana", "banana"])
+    }
+}
+
+/// After a few real games, a dot invites the parent to the Parent Zone tip, once.
+final class ParentTipTests: XCTestCase {
+    func testTipAppearsAfterThreeGamesAndGoesAwayOnceSeen() {
+        let s = SettingsStore.shared
+        s.resetParentTipForTests()
+        defer { s.resetParentTipForTests() }
+        XCTAssertFalse(s.parentTipPending)
+        for _ in 0..<SettingsStore.gamesBeforeParentTip - 1 { s.recordGamePlayed() }
+        XCTAssertFalse(s.parentTipPending)
+        s.recordGamePlayed()
+        XCTAssertTrue(s.parentTipPending)
+        s.parentTipSeen = true
+        XCTAssertFalse(s.parentTipPending)
+    }
+}

@@ -61,6 +61,8 @@
 		B97706CA828BCA0385813DBA /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C681D06BD2AA399DAC946D /* CelebrationView.swift */; };
 		C59C0996DAEEE6F529A27976 /* BubblePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4017F2ED6CFC7403D75E173E /* BubblePopView.swift */; };
 		4EAEDE5FE878F78E2978AA24 /* FindItView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C462DDAED16DC0CF0B9CD7 /* FindItView.swift */; };
+		A4FB95A2A28AA7A3C957B07A /* FeedPipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EBA668851A219A57A01CE8 /* FeedPipView.swift */; };
+		87267BB89AFC5F20BBFCADC4 /* PeekabooView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317E7092CE1888C2E0B20BA7 /* PeekabooView.swift */; };
 		F78DF0CAC5E40C02D4E518CA /* StickerBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAC8D82F01B7210760474F /* StickerBoardView.swift */; };
 		36E8B5359309CC6273931BDB /* ParentalGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DF3DBE4D58FED8A728E7E /* ParentalGateView.swift */; };
 		CA0FA5F6B8A880627DF7FFE0 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C79BFBDABE898736A3566 /* PaywallView.swift */; };
@@ -127,6 +129,29 @@
 		C04D72539A28CC209F85864F /* eight.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 167BD00AC6A0F230E7349DC3 /* eight.m4a */; };
 		05F4D3989BD20DF6912929F9 /* eyes.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4A97D5AD29CCFC0FEFF05B1A /* eyes.m4a */; };
 		67BBC6D27DFC9E8B8D701EE8 /* ask_dog.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8952CA6420E1F1A7A31E3 /* ask_dog.m4a */; };
+		6A8E7596A75E91DDB58F522A /* want_orange2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 08B76C713FA02D179213ECDC /* want_orange2.m4a */; };
+		AE0651CAAA62D8466303E001 /* he_want_orange2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6AF0224578A98928DEEE5715 /* he_want_orange2.m4a */; };
+		6B0867F3AA0173460CBE9A56 /* want_apple.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FB1ED4C013C2AB5793CFF8BC /* want_apple.m4a */; };
+		F6CB530652DC330810531ECD /* want_banana.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 9950BB38DA5BF11CB7C4F63E /* want_banana.m4a */; };
+		DCAF9002CBC69199396A2B93 /* want_milk.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 811EAD3E21FBDF9161620EA0 /* want_milk.m4a */; };
+		561E3300E3509AC2D8EA684C /* want_bread.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EB200C64FCA2A73547515B21 /* want_bread.m4a */; };
+		F8EE79ED47162AC6A9DD5A5C /* want_egg.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A5D068B7D11BF7D0AE300510 /* want_egg.m4a */; };
+		2EEFDB922CD0C69BF72664B9 /* want_strawberry.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6E2C28B972953A848924BECC /* want_strawberry.m4a */; };
+		3CEDF3064ED51DFBD3F35CCC /* want_carrot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22CBC707894E5F22BF9F8BE1 /* want_carrot.m4a */; };
+		87AF81A3EF2A4920535E8FA8 /* want_cake.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F97CC18BBBCB4657145A7CE1 /* want_cake.m4a */; };
+		EB91183B7811317FF9BC285A /* want_grapes.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8BF4CABC1C5424B5B083110B /* want_grapes.m4a */; };
+		B3B3603AD82E8439E27583E2 /* he_want_apple.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A9DD4E8404C29688BF094800 /* he_want_apple.m4a */; };
+		75D41DBB9BC668F8A829E9D8 /* he_want_banana.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 11BFAB8FD8144C4F38603287 /* he_want_banana.m4a */; };
+		50E058D09CB29B63F44B0327 /* he_want_milk.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C30054E684B138528C298C13 /* he_want_milk.m4a */; };
+		9048D39398B1B0B2793263A7 /* he_want_bread.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A08CE195D847EAB9CEE2447A /* he_want_bread.m4a */; };
+		44014D428B8A55712D23B376 /* he_want_egg.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 9C9E0F32A2771751EFF7048B /* he_want_egg.m4a */; };
+		B47B60E01A70C10AEE5266A0 /* he_want_strawberry.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B23545309367266FAEA05B42 /* he_want_strawberry.m4a */; };
+		FD0EF1E8152EF20165E50A9E /* he_want_carrot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 622A7A347C9DFD9FAC2BFDC4 /* he_want_carrot.m4a */; };
+		BCA89555605ADC6FE4825F0C /* he_want_cake.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2189F2D48AF175C87F875F7D /* he_want_cake.m4a */; };
+		771CA58B086C052E4251B4E1 /* he_want_grapes.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A1B62599BAF25E5A4393B3F5 /* he_want_grapes.m4a */; };
+		B491D3320AFC316E856D5C1C /* yum.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0C63593FF19BD2B2246A3F57 /* yum.m4a */; };
+		B86FCE92E75B4FF1ECBF8B07 /* not_that.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B89C8B7F1E87C426006F540 /* not_that.m4a */; };
+		75A3BE3C0168145C5FDBBE80 /* peekaboo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E77BE82C03F5B8FC454CA887 /* peekaboo.m4a */; };
 		8B3F090DBC8C81BA7F047036 /* ask_cat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5D5875A795ABB10FA7265133 /* ask_cat.m4a */; };
 		E9A143B18DC4D759DC527C9E /* ask_bird.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C9845117522851E7551F46C2 /* ask_bird.m4a */; };
 		68718572D384382849A1466D /* ask_fish.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 23C240508FCCEFDAF6AA5C07 /* ask_fish.m4a */; };
@@ -354,6 +379,8 @@
 		D3C681D06BD2AA399DAC946D /* CelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationView.swift; sourceTree = "<group>"; };
 		4017F2ED6CFC7403D75E173E /* BubblePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblePopView.swift; sourceTree = "<group>"; };
 		47C462DDAED16DC0CF0B9CD7 /* FindItView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindItView.swift; sourceTree = "<group>"; };
+		F2EBA668851A219A57A01CE8 /* FeedPipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPipView.swift; sourceTree = "<group>"; };
+		317E7092CE1888C2E0B20BA7 /* PeekabooView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekabooView.swift; sourceTree = "<group>"; };
 		6EAAC8D82F01B7210760474F /* StickerBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBoardView.swift; sourceTree = "<group>"; };
 		2A0DF3DBE4D58FED8A728E7E /* ParentalGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalGateView.swift; sourceTree = "<group>"; };
 		297C79BFBDABE898736A3566 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
@@ -421,6 +448,29 @@
 		167BD00AC6A0F230E7349DC3 /* eight.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "eight.m4a"; sourceTree = "<group>"; };
 		4A97D5AD29CCFC0FEFF05B1A /* eyes.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "eyes.m4a"; sourceTree = "<group>"; };
 		7AE8952CA6420E1F1A7A31E3 /* ask_dog.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ask_dog.m4a"; sourceTree = "<group>"; };
+		08B76C713FA02D179213ECDC /* want_orange2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_orange2.m4a"; sourceTree = "<group>"; };
+		6AF0224578A98928DEEE5715 /* he_want_orange2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_orange2.m4a"; sourceTree = "<group>"; };
+		FB1ED4C013C2AB5793CFF8BC /* want_apple.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_apple.m4a"; sourceTree = "<group>"; };
+		9950BB38DA5BF11CB7C4F63E /* want_banana.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_banana.m4a"; sourceTree = "<group>"; };
+		811EAD3E21FBDF9161620EA0 /* want_milk.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_milk.m4a"; sourceTree = "<group>"; };
+		EB200C64FCA2A73547515B21 /* want_bread.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_bread.m4a"; sourceTree = "<group>"; };
+		A5D068B7D11BF7D0AE300510 /* want_egg.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_egg.m4a"; sourceTree = "<group>"; };
+		6E2C28B972953A848924BECC /* want_strawberry.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_strawberry.m4a"; sourceTree = "<group>"; };
+		22CBC707894E5F22BF9F8BE1 /* want_carrot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_carrot.m4a"; sourceTree = "<group>"; };
+		F97CC18BBBCB4657145A7CE1 /* want_cake.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_cake.m4a"; sourceTree = "<group>"; };
+		8BF4CABC1C5424B5B083110B /* want_grapes.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "want_grapes.m4a"; sourceTree = "<group>"; };
+		A9DD4E8404C29688BF094800 /* he_want_apple.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_apple.m4a"; sourceTree = "<group>"; };
+		11BFAB8FD8144C4F38603287 /* he_want_banana.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_banana.m4a"; sourceTree = "<group>"; };
+		C30054E684B138528C298C13 /* he_want_milk.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_milk.m4a"; sourceTree = "<group>"; };
+		A08CE195D847EAB9CEE2447A /* he_want_bread.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_bread.m4a"; sourceTree = "<group>"; };
+		9C9E0F32A2771751EFF7048B /* he_want_egg.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_egg.m4a"; sourceTree = "<group>"; };
+		B23545309367266FAEA05B42 /* he_want_strawberry.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_strawberry.m4a"; sourceTree = "<group>"; };
+		622A7A347C9DFD9FAC2BFDC4 /* he_want_carrot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_carrot.m4a"; sourceTree = "<group>"; };
+		2189F2D48AF175C87F875F7D /* he_want_cake.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_cake.m4a"; sourceTree = "<group>"; };
+		A1B62599BAF25E5A4393B3F5 /* he_want_grapes.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "he_want_grapes.m4a"; sourceTree = "<group>"; };
+		0C63593FF19BD2B2246A3F57 /* yum.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "yum.m4a"; sourceTree = "<group>"; };
+		4B89C8B7F1E87C426006F540 /* not_that.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "not_that.m4a"; sourceTree = "<group>"; };
+		E77BE82C03F5B8FC454CA887 /* peekaboo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "peekaboo.m4a"; sourceTree = "<group>"; };
 		5D5875A795ABB10FA7265133 /* ask_cat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ask_cat.m4a"; sourceTree = "<group>"; };
 		C9845117522851E7551F46C2 /* ask_bird.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ask_bird.m4a"; sourceTree = "<group>"; };
 		23C240508FCCEFDAF6AA5C07 /* ask_fish.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ask_fish.m4a"; sourceTree = "<group>"; };
@@ -635,6 +685,8 @@
 				D3C681D06BD2AA399DAC946D /* CelebrationView.swift */,
 				4017F2ED6CFC7403D75E173E /* BubblePopView.swift */,
 				47C462DDAED16DC0CF0B9CD7 /* FindItView.swift */,
+				F2EBA668851A219A57A01CE8 /* FeedPipView.swift */,
+				317E7092CE1888C2E0B20BA7 /* PeekabooView.swift */,
 				6EAAC8D82F01B7210760474F /* StickerBoardView.swift */,
 				2A0DF3DBE4D58FED8A728E7E /* ParentalGateView.swift */,
 				297C79BFBDABE898736A3566 /* PaywallView.swift */,
@@ -698,6 +750,29 @@
 				167BD00AC6A0F230E7349DC3 /* eight.m4a */,
 				4A97D5AD29CCFC0FEFF05B1A /* eyes.m4a */,
 				7AE8952CA6420E1F1A7A31E3 /* ask_dog.m4a */,
+				08B76C713FA02D179213ECDC /* want_orange2.m4a */,
+				6AF0224578A98928DEEE5715 /* he_want_orange2.m4a */,
+				FB1ED4C013C2AB5793CFF8BC /* want_apple.m4a */,
+				9950BB38DA5BF11CB7C4F63E /* want_banana.m4a */,
+				811EAD3E21FBDF9161620EA0 /* want_milk.m4a */,
+				EB200C64FCA2A73547515B21 /* want_bread.m4a */,
+				A5D068B7D11BF7D0AE300510 /* want_egg.m4a */,
+				6E2C28B972953A848924BECC /* want_strawberry.m4a */,
+				22CBC707894E5F22BF9F8BE1 /* want_carrot.m4a */,
+				F97CC18BBBCB4657145A7CE1 /* want_cake.m4a */,
+				8BF4CABC1C5424B5B083110B /* want_grapes.m4a */,
+				A9DD4E8404C29688BF094800 /* he_want_apple.m4a */,
+				11BFAB8FD8144C4F38603287 /* he_want_banana.m4a */,
+				C30054E684B138528C298C13 /* he_want_milk.m4a */,
+				A08CE195D847EAB9CEE2447A /* he_want_bread.m4a */,
+				9C9E0F32A2771751EFF7048B /* he_want_egg.m4a */,
+				B23545309367266FAEA05B42 /* he_want_strawberry.m4a */,
+				622A7A347C9DFD9FAC2BFDC4 /* he_want_carrot.m4a */,
+				2189F2D48AF175C87F875F7D /* he_want_cake.m4a */,
+				A1B62599BAF25E5A4393B3F5 /* he_want_grapes.m4a */,
+				0C63593FF19BD2B2246A3F57 /* yum.m4a */,
+				4B89C8B7F1E87C426006F540 /* not_that.m4a */,
+				E77BE82C03F5B8FC454CA887 /* peekaboo.m4a */,
 				5D5875A795ABB10FA7265133 /* ask_cat.m4a */,
 				C9845117522851E7551F46C2 /* ask_bird.m4a */,
 				23C240508FCCEFDAF6AA5C07 /* ask_fish.m4a */,
@@ -1049,6 +1124,29 @@
 				C04D72539A28CC209F85864F /* eight.m4a in Resources */,
 				05F4D3989BD20DF6912929F9 /* eyes.m4a in Resources */,
 				67BBC6D27DFC9E8B8D701EE8 /* ask_dog.m4a in Resources */,
+				6A8E7596A75E91DDB58F522A /* want_orange2.m4a in Resources */,
+				AE0651CAAA62D8466303E001 /* he_want_orange2.m4a in Resources */,
+				6B0867F3AA0173460CBE9A56 /* want_apple.m4a in Resources */,
+				F6CB530652DC330810531ECD /* want_banana.m4a in Resources */,
+				DCAF9002CBC69199396A2B93 /* want_milk.m4a in Resources */,
+				561E3300E3509AC2D8EA684C /* want_bread.m4a in Resources */,
+				F8EE79ED47162AC6A9DD5A5C /* want_egg.m4a in Resources */,
+				2EEFDB922CD0C69BF72664B9 /* want_strawberry.m4a in Resources */,
+				3CEDF3064ED51DFBD3F35CCC /* want_carrot.m4a in Resources */,
+				87AF81A3EF2A4920535E8FA8 /* want_cake.m4a in Resources */,
+				EB91183B7811317FF9BC285A /* want_grapes.m4a in Resources */,
+				B3B3603AD82E8439E27583E2 /* he_want_apple.m4a in Resources */,
+				75D41DBB9BC668F8A829E9D8 /* he_want_banana.m4a in Resources */,
+				50E058D09CB29B63F44B0327 /* he_want_milk.m4a in Resources */,
+				9048D39398B1B0B2793263A7 /* he_want_bread.m4a in Resources */,
+				44014D428B8A55712D23B376 /* he_want_egg.m4a in Resources */,
+				B47B60E01A70C10AEE5266A0 /* he_want_strawberry.m4a in Resources */,
+				FD0EF1E8152EF20165E50A9E /* he_want_carrot.m4a in Resources */,
+				BCA89555605ADC6FE4825F0C /* he_want_cake.m4a in Resources */,
+				771CA58B086C052E4251B4E1 /* he_want_grapes.m4a in Resources */,
+				B491D3320AFC316E856D5C1C /* yum.m4a in Resources */,
+				B86FCE92E75B4FF1ECBF8B07 /* not_that.m4a in Resources */,
+				75A3BE3C0168145C5FDBBE80 /* peekaboo.m4a in Resources */,
 				8B3F090DBC8C81BA7F047036 /* ask_cat.m4a in Resources */,
 				E9A143B18DC4D759DC527C9E /* ask_bird.m4a in Resources */,
 				68718572D384382849A1466D /* ask_fish.m4a in Resources */,
@@ -1290,6 +1388,8 @@
 				B97706CA828BCA0385813DBA /* CelebrationView.swift in Sources */,
 				C59C0996DAEEE6F529A27976 /* BubblePopView.swift in Sources */,
 				4EAEDE5FE878F78E2978AA24 /* FindItView.swift in Sources */,
+				A4FB95A2A28AA7A3C957B07A /* FeedPipView.swift in Sources */,
+				87267BB89AFC5F20BBFCADC4 /* PeekabooView.swift in Sources */,
 				F78DF0CAC5E40C02D4E518CA /* StickerBoardView.swift in Sources */,
 				36E8B5359309CC6273931BDB /* ParentalGateView.swift in Sources */,
 				CA0FA5F6B8A880627DF7FFE0 /* PaywallView.swift in Sources */,
